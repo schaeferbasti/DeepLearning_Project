@@ -1,9 +1,6 @@
-import preprocessing as pre
-import attention_based_ae as ab_ae
-import pandas as pd
+from source.preprocessing import preprocessing as pre
+from source.autoencoders import attention_based_ae as ab_ae
 import tensorfow as tf
-import tensorflow_addons as tfa
-
 
 # preprocessing
 original_translation_dataset = pre.load_data()
