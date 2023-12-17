@@ -37,7 +37,7 @@ def remove_punctuation(text):
         return punctuation_free
 
 
-def save_punct_free(df:pd.Dataframe):
+def save_punct_free(df:pd.DataFrame):
         """
         storing the puntuation free text
         Args:
@@ -65,8 +65,8 @@ def tokenize_data(df):
         Args:
             df - df to update
         """  
-        df['en'] = df['en'].apply(lambda row: nltk.word_tokenize(row['en']), axis=1)
-        df['fr'] = df['fr'].apply(lambda row: nltk.word_tokenize(row['fr']), axis=1)
+        df['en'] = df['en'].apply(lambda row: nltk.word_tokenize(row[0]))#, axis=1)
+        df['fr'] = df['fr'].apply(lambda row: nltk.word_tokenize(row[1]))#, axis=1)
         return df
   
 
@@ -99,8 +99,7 @@ def add_padding(column, sequences):
         Args: column - column to be padded
               sequences - encoded word sequence
         '''
-        lengths_of_rows = [len(row) for row in column.tolist()]
-        max_len = max(lengths_of_rows)
-        padded_seqs = pad_sequences(sequences, maxlen=max_len, padding='post',)
+        lengths_of_rows = len(column.tolist())
+        padded_seqs = pad_sequences(sequences, maxlen=lengths_of_rows, padding='post',)
         # print(f'Padded sequences: {padded_seqs}')
-        return padded_seqs, max_len
+        return padded_seqs, lengths_of_rows

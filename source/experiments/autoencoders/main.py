@@ -1,10 +1,9 @@
-import preprocessing as pre
-import attention_based_ae as ab_ae
+from source.preprocessing import preprocessing as pre
+from source.autoencoders import attention_based_ae as ab_ae
+import tensorfow as tf
 import pandas as pd
+import source.autoencoder as ae
 import pickle
-import autoencoder as ae
-# import tensorfow as tf
-# import tensorflow_addons as tfa
 
 # make constants
 MODEL_NAME = 'distilbert-base-uncased'
