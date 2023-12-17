@@ -8,8 +8,8 @@ from nltk.stem.porter import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import CountVectorizer
 import string
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
 
 
 
@@ -61,7 +61,7 @@ def lower_case(df):
 
 def tokenize_data(df):
         """
-        tokenize text
+        tokenize text i.e splits text in to words in a list
         Args:
             df - df to update
         """  
