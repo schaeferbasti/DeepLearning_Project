@@ -23,15 +23,9 @@ translation_dataset.head()
 - generation techniques.
 
 ## Models we want to implement:
-- Transformer Models
-  - T5
-  - BERT -> BASTIAN
-- Seq2Seq Models (RNNs) -> FELIPE
-  - LSTM-based
-  - GRU-based
-  - Seq2Sqe with Attention
-- CNNs
-- Bidirectional -> GLORIA
+- CNNs -> Bastian
+- RNNs -> Felipe
+- SANs -> Gloria
 
 ## For each experiment, we need to document the following:
 - Context
@@ -42,4 +36,4 @@ translation_dataset.head()
 - Results
 - References
 
-## Deadline 11.12.
+## Deadline 18.12.
