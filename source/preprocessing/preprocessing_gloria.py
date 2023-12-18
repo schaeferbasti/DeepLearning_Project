@@ -65,8 +65,8 @@ def tokenize_data(df):
         Args:
             df - df to update
         """  
-        df['en'] = df['en'].apply(lambda row: nltk.word_tokenize(row[0]))#, axis=1)
-        df['fr'] = df['fr'].apply(lambda row: nltk.word_tokenize(row[1]))#, axis=1)
+        df['en'] = df.apply(lambda row: nltk.word_tokenize(row['en']))#, axis=1)
+        df['fr'] = df.apply(lambda row: nltk.word_tokenize(row['fr']))#, axis=1)
         return df
   
 
