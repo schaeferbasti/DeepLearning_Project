@@ -96,7 +96,7 @@ if __name__ == '__main__':
     
     EPOCHS = 1
     BATCH_SIZE = 32
-    MAX_VOCAB_SIZE_FR = 20500
+    MAX_VOCAB_SIZE_FR = 40500
 
     # --- 3. We open the data and apply tokenization ---
 
