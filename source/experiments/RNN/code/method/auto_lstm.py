@@ -10,17 +10,17 @@ class EncoderDecoderLSTMModel:
     def build_model(self):
         # Encoder
         encoder_inputs = Input(shape=(None,))
-        enc_emb = Embedding(input_dim=len(self.tokenizer_en.word_index) + 1, output_dim=64)(encoder_inputs)
+        enc_emb = Embedding(input_dim=len(self.tokenizer_en.word_index) + 1, output_dim=32)(encoder_inputs)
 
         # Adding four LSTM layers in the encoder
-        encoder_lstm1 = LSTM(64, return_sequences=True)(enc_emb)
+        encoder_lstm1 = LSTM(32, return_sequences=True)(enc_emb)
         encoder_lstm2 = LSTM(32, return_sequences=True)(encoder_lstm1)
         _, state_h, state_c = LSTM(32, return_state=True)(encoder_lstm2)
         encoder_states = [state_h, state_c]
 
         # Decoder
         decoder_inputs = Input(shape=(None,))
-        dec_emb_layer = Embedding(input_dim=len(self.tokenizer_fr.word_index) + 1, output_dim=64)
+        dec_emb_layer = Embedding(input_dim=len(self.tokenizer_fr.word_index) + 1, output_dim=32)
         dec_emb = dec_emb_layer(decoder_inputs)
 
         # Adding four LSTM layers in the decoder

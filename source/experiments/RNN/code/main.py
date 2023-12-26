@@ -96,7 +96,7 @@ if __name__ == '__main__':
     
     EPOCHS = 1
     BATCH_SIZE = 32
-    MAX_VOCAB_SIZE_FR = 10000
+    MAX_VOCAB_SIZE_FR = 20500
 
     # --- 3. We open the data and apply tokenization ---
 
@@ -135,6 +135,9 @@ if __name__ == '__main__':
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
+    print("HEEEEE")
+    print(len(tokenizer_fr.word_index))
+    print("HEEEEE")
     #csv_logger = CSVLogger('./results/training_log.csv', append=True)
 
     for i in range(len(method_name)):
