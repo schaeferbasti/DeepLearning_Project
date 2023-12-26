@@ -2,9 +2,10 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Embedding, LSTM, Dense
 
 class EncoderDecoderLSTMModel:
-    def __init__(self, tokenizer_en, tokenizer_fr):
+    def __init__(self, tokenizer_en, tokenizer_fr, max_vocab_fr_len):
         self.tokenizer_en = tokenizer_en
         self.tokenizer_fr = tokenizer_fr
+        self.max_vocab_fr_len = max_vocab_fr_len
 
     def build_model(self):
         # Encoder
@@ -13,8 +14,8 @@ class EncoderDecoderLSTMModel:
 
         # Adding four LSTM layers in the encoder
         encoder_lstm1 = LSTM(64, return_sequences=True)(enc_emb)
-        encoder_lstm2 = LSTM(64, return_sequences=True)(encoder_lstm1)
-        _, state_h, state_c = LSTM(64, return_state=True)(encoder_lstm2)
+        encoder_lstm2 = LSTM(32, return_sequences=True)(encoder_lstm1)
+        _, state_h, state_c = LSTM(32, return_state=True)(encoder_lstm2)
         encoder_states = [state_h, state_c]
 
         # Decoder
@@ -23,11 +24,11 @@ class EncoderDecoderLSTMModel:
         dec_emb = dec_emb_layer(decoder_inputs)
 
         # Adding four LSTM layers in the decoder
-        decoder_lstm1 = LSTM(64, return_sequences=True, return_state=True)(dec_emb, initial_state=encoder_states)
-        decoder_lstm2 = LSTM(64, return_sequences=True)(decoder_lstm1[0])
-        decoder_lstm3 = LSTM(64, return_sequences=True)(decoder_lstm2)
+        decoder_lstm1 = LSTM(32, return_sequences=True, return_state=True)(dec_emb, initial_state=encoder_states)
+        decoder_lstm2 = LSTM(32, return_sequences=True)(decoder_lstm1[0])
+        decoder_lstm3 = LSTM(16, return_sequences=True)(decoder_lstm2)
 
-        decoder_dense = Dense(len(self.tokenizer_fr.word_index) + 1, activation='softmax')
+        decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='softmax')
         decoder_outputs = decoder_dense(decoder_lstm3)
 
         # Build Final Model

@@ -95,7 +95,8 @@ if __name__ == '__main__':
     # --- 4. We define global variables ---
     
     EPOCHS = 1
-    BATCH_SIZE = 64
+    BATCH_SIZE = 32
+    MAX_VOCAB_SIZE_FR = 10000
 
     # --- 3. We open the data and apply tokenization ---
 
@@ -103,7 +104,7 @@ if __name__ == '__main__':
 
     tokenizer_en = Tokenizer()
     tokenizer_en.fit_on_texts(df['en_tokens'])
-    tokenizer_fr = Tokenizer()
+    tokenizer_fr = Tokenizer(num_words=MAX_VOCAB_SIZE_FR + 1)
     tokenizer_fr.fit_on_texts(df['fr_tokens'])
 
     # Convert text to sequences
@@ -128,8 +129,8 @@ if __name__ == '__main__':
 
     #method_name = ['SimpleRNN', 'SimpleLSTM', 'SimpleGRU', 'BiRNN', 'BiLSTM', 'BiGRU', 'EncoderDecoderRNN', 'EncoderDecoderLSTM', 'EncoderDecoderGRU']
     #method_instance = [SimpleRNNModel(tokenizer_en, tokenizer_fr, max_len), SimpleLSTMModel(tokenizer_en, tokenizer_fr, max_len), SimpleGRUModel(tokenizer_en, tokenizer_fr, max_len), BidirectionalRNNModel(tokenizer_en, tokenizer_fr, max_len), BidirectionalLSTMModel(tokenizer_en, tokenizer_fr, max_len), BidirectionalGRUModel(tokenizer_en, tokenizer_fr, max_len), EncoderDecoderRNNModel(tokenizer_en, tokenizer_fr), EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr)]
-    method_name = ['EncoderDecoderRNN', 'EncoderDecoderLSTM', 'EncoderDecoderGRU']
-    method_instance = [EncoderDecoderRNNModel(tokenizer_en, tokenizer_fr), EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr)]
+    method_name = ['EncoderDecoderGRU']
+    method_instance = [EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
 
 
     # Shared Callbacks

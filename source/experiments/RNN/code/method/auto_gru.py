@@ -2,9 +2,10 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Embedding, GRU, Dense
 
 class EncoderDecoderGRUModel:
-    def __init__(self, tokenizer_en, tokenizer_fr):
+    def __init__(self, tokenizer_en, tokenizer_fr, max_vocab_fr_len):
         self.tokenizer_en = tokenizer_en
         self.tokenizer_fr = tokenizer_fr
+        self.max_vocab_fr_len = max_vocab_fr_len
 
     def build_model(self):
         # Encoder
@@ -13,8 +14,8 @@ class EncoderDecoderGRUModel:
         
         # Adding three GRU layers in the encoder
         encoder_gru1 = GRU(64, return_sequences=True)(enc_emb)
-        encoder_gru2 = GRU(64, return_sequences=True)(encoder_gru1)
-        _, state = GRU(64, return_state=True)(encoder_gru2)
+        encoder_gru2 = GRU(32, return_sequences=True)(encoder_gru1)
+        _, state = GRU(32, return_state=True)(encoder_gru2)
 
         # Decoder
         decoder_inputs = Input(shape=(None,))
@@ -22,11 +23,11 @@ class EncoderDecoderGRUModel:
         dec_emb = dec_emb_layer(decoder_inputs)
         
         # Adding three GRU layers in the decoder
-        decoder_gru1 = GRU(64, return_sequences=True, return_state=True)(dec_emb, initial_state=state)
-        decoder_gru2 = GRU(64, return_sequences=True)(decoder_gru1[0])
-        decoder_gru3 = GRU(64, return_sequences=True)(decoder_gru2)
+        decoder_gru1 = GRU(32, return_sequences=True, return_state=True)(dec_emb, initial_state=state)
+        decoder_gru2 = GRU(32, return_sequences=True)(decoder_gru1[0])
+        decoder_gru3 = GRU(16, return_sequences=True)(decoder_gru2)
         
-        decoder_dense = Dense(len(self.tokenizer_fr.word_index) + 1, activation='softmax')
+        decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='softmax')
         decoder_outputs = decoder_dense(decoder_gru3)
 
         # Build Final Model
