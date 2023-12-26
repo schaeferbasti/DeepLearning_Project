@@ -2,10 +2,11 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, SimpleRNN, Dense, Dropout, Bidirectional
 
 class BidirectionalRNNModel:
-    def __init__(self, tokenizer_en, tokenizer_fr, max_len):
+    def __init__(self, tokenizer_en, tokenizer_fr, max_len, max_vocab_fr_len):
         self.tokenizer_en = tokenizer_en
         self.tokenizer_fr = tokenizer_fr
         self.max_len = max_len
+        self.max_vocab_fr_len = max_vocab_fr_len
 
     def build_model(self):
         # Define structure of the model
@@ -16,8 +17,7 @@ class BidirectionalRNNModel:
         model.add(Bidirectional(SimpleRNN(32, return_sequences=True)))
         model.add(Dropout(0.5))
         model.add(Dense(32, activation='relu'))
-        
-        model.add(Dense(len(self.tokenizer_fr.word_index) + 1, activation='softmax'))
+        model.add(Dense(self.max_vocab_fr_len + 1, activation='softmax'))
 
         # Compile the model
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])

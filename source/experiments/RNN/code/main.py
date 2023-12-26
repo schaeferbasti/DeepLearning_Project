@@ -94,9 +94,9 @@ if __name__ == '__main__':
     
     # --- 4. We define global variables ---
     
-    EPOCHS = 1
+    EPOCHS = 100
     BATCH_SIZE = 32
-    MAX_VOCAB_SIZE_FR = 30500
+    MAX_VOCAB_SIZE_FR = 20500
 
     # --- 3. We open the data and apply tokenization ---
 
@@ -127,18 +127,11 @@ if __name__ == '__main__':
 
     # --- 4. We load the model ---
 
-    #method_name = ['SimpleRNN', 'SimpleLSTM', 'SimpleGRU', 'BiRNN', 'BiLSTM', 'BiGRU', 'EncoderDecoderRNN', 'EncoderDecoderLSTM', 'EncoderDecoderGRU']
-    #method_instance = [SimpleRNNModel(tokenizer_en, tokenizer_fr, max_len), SimpleLSTMModel(tokenizer_en, tokenizer_fr, max_len), SimpleGRUModel(tokenizer_en, tokenizer_fr, max_len), BidirectionalRNNModel(tokenizer_en, tokenizer_fr, max_len), BidirectionalLSTMModel(tokenizer_en, tokenizer_fr, max_len), BidirectionalGRUModel(tokenizer_en, tokenizer_fr, max_len), EncoderDecoderRNNModel(tokenizer_en, tokenizer_fr), EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr)]
-    method_name = ['EncoderDecoderGRU']
-    method_instance = [EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
-
+    method_name = ['SimpleRNN', 'SimpleLSTM', 'SimpleGRU', 'BiRNN', 'BiLSTM', 'BiGRU', 'EncoderDecoderRNN', 'EncoderDecoderLSTM', 'EncoderDecoderGRU']
+    method_instance = [SimpleRNNModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), SimpleLSTMModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), SimpleGRUModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalRNNModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalLSTMModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalGRUModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), EncoderDecoderRNNModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
-    print("HEEEEE")
-    print(len(tokenizer_fr.word_index))
-    print("HEEEEE")
-    #csv_logger = CSVLogger('./results/training_log.csv', append=True)
 
     for i in range(len(method_name)):
         current_model = method_instance[i].build_model()
