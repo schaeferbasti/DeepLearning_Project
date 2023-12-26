@@ -1,21 +1,11 @@
-import pandas as pd
-import numpy as np
 from datasets import load_dataset
-
 import nltk
 from cleantext import clean
 from nltk.tokenize import word_tokenize
 
-import tensorflow as tf
-from keras.models import Sequential, Model
-from keras.layers import Embedding, SimpleRNN, Dense, GRU, LSTM, Bidirectional, Dropout, Input, Dense
-from keras.preprocessing.text import Tokenizer
-from keras_preprocessing.sequence import pad_sequences
-
 # Extract dataset
 translation_dataset = load_dataset('Nicolas-BZRD/Parallel_Global_Voices_English_French',
                                    split='train').to_pandas()
-translation_dataset.head(5)
 
 df = translation_dataset.copy()
 
