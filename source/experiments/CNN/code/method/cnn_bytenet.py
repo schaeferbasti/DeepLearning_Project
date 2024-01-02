@@ -13,14 +13,14 @@ class CNN_ByteNet:
         }
         options = self.options
         embedding_channels = 2 * options['residual_channels']
+        with tf.variable_scope(tf.get_variable_scope(), reuse=tf.AUTO_REUSE):
+            self.w_source_embedding = tf.get_variable('w_source_embedding',
+                                                      [options['vocab_size'], embedding_channels],
+                                                      initializer=tf.truncated_normal_initializer(stddev=0.02))
 
-        self.w_source_embedding = tf.get_variable('w_source_embedding',
-                                                  [options['vocab_size'], embedding_channels],
-                                                  initializer=tf.truncated_normal_initializer(stddev=0.02))
-
-        self.w_target_embedding = tf.get_variable('w_target_embedding',
-                                                  [options['vocab_size'], embedding_channels],
-                                                  initializer=tf.truncated_normal_initializer(stddev=0.02))
+            self.w_target_embedding = tf.get_variable('w_target_embedding',
+                                                      [options['vocab_size'], embedding_channels],
+                                                      initializer=tf.truncated_normal_initializer(stddev=0.02))
 
     def build_options(self):
         options = self.options
