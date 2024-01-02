@@ -1,17 +1,25 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 import math
 
 class CNN_ByteNet:
-    def __init__(self, options):
-        self.options = options
+    def __init__(self, max_vocab_size):
+        self.options = {
+            'vocab_size': max_vocab_size,
+            'residual_channels': config['residual_channels'],
+            'dilations': predictor_config['dilations'],
+            'filter_width': predictor_config['filter_width'],
+        }
+        options = self.options
         embedding_channels = 2 * options['residual_channels']
 
         self.w_source_embedding = tf.get_variable('w_source_embedding',
-                                                  [options['source_vocab_size'], embedding_channels],
+                                                  [options['vocab_size'], embedding_channels],
                                                   initializer=tf.truncated_normal_initializer(stddev=0.02))
 
         self.w_target_embedding = tf.get_variable('w_target_embedding',
-                                                  [options['target_vocab_size'], embedding_channels],
+                                                  [options['vocab_size'], embedding_channels],
                                                   initializer=tf.truncated_normal_initializer(stddev=0.02))
 
     def build_options(self):
@@ -30,24 +38,23 @@ class CNN_ByteNet:
                                                     target_1, name="target_1_embedding")
 
         curr_input = source_embedding
-        for layer_no, dilation in enumerate(options['encoder_dilations']):
+        for layer_no, dilation in enumerate(config['encoder_dilations']):
             curr_input = byetenet_residual_block(curr_input, dilation,
                                                      layer_no, options['residual_channels'],
-                                                     options['encoder_filter_width'], causal=False, train=True)
+                                                     config['encoder_filter_width'], causal=False, train=True)
 
         encoder_output = curr_input
         combined_embedding = target_1_embedding + encoder_output
         curr_input = combined_embedding
-        for layer_no, dilation in enumerate(options['decoder_dilations']):
+        for layer_no, dilation in enumerate(config['decoder_dilations']):
             curr_input = byetenet_residual_block(curr_input, dilation,
                                                      layer_no, options['residual_channels'],
-                                                     options['decoder_filter_width'], causal=True, train=True)
+                                                     config['decoder_filter_width'], causal=True, train=True)
 
         logits = conv1d(tf.nn.relu(curr_input),
-                            options['target_vocab_size'], name='logits')
-        print
-        "logits", logits
-        logits_flat = tf.reshape(logits, [-1, options['target_vocab_size']])
+                            options['vocab_size'], name='logits')
+        print("logits: " + str(logits))
+        logits_flat = tf.reshape(logits, [-1, options['vocab_size']])
         target_flat = tf.reshape(target_2, [-1])
         loss = tf.nn.sparse_softmax_cross_entropy_with_logits(
             labels=target_flat, logits=logits_flat)
@@ -70,32 +77,31 @@ class CNN_ByteNet:
                                                   self.t_source_sentence, name="source_embedding")
         target_embedding = tf.nn.embedding_lookup(self.w_target_embedding,
                                                   self.t_target_sentence, name="target_embedding")
-
+        # Encoder
         curr_input = source_embedding
-        for layer_no, dilation in enumerate(options['encoder_dilations']):
+        for layer_no, dilation in enumerate(config['encoder_dilations']):
             curr_input = byetenet_residual_block(curr_input, dilation,
                                                      layer_no, options['residual_channels'],
-                                                     options['encoder_filter_width'], causal=False, train=False)
-
+                                                     config['encoder_filter_width'], causal=False, train=False)
         encoder_output = curr_input[:, 0:tf.shape(self.t_target_sentence)[1], :]
-
+        # Decoder
         combined_embedding = target_embedding + encoder_output
         curr_input = combined_embedding
-        for layer_no, dilation in enumerate(options['decoder_dilations']):
+        for layer_no, dilation in enumerate(config['decoder_dilations']):
             curr_input = byetenet_residual_block(curr_input, dilation,
                                                      layer_no, options['residual_channels'],
-                                                     options['decoder_filter_width'], causal=True, train=False)
+                                                     config['decoder_filter_width'], causal=True, train=False)
 
         logits = conv1d(tf.nn.relu(curr_input),
-                            options['target_vocab_size'], name='logits')
-        logits_flat = tf.reshape(logits, [-1, options['target_vocab_size']])
+                            options['vocab_size'], name='logits')
+        logits_flat = tf.reshape(logits, [-1, options['vocab_size']])
         probs_flat = tf.nn.softmax(logits_flat)
 
         self.t_probs = tf.reshape(probs_flat,
-                                  [-1, tf.shape(logits)[1], options['target_vocab_size']])
+                                  [-1, tf.shape(logits)[1], options['vocab_size']])
 
 
-    def build_model(self):
+    def build_model(self, max_vocab_size):
         options = {
             'source_vocab_size': 250,
             'target_vocab_size': 250,
@@ -109,7 +115,7 @@ class CNN_ByteNet:
             'encoder_filter_width': 3,
             'decoder_filter_width': 3
         }
-        model = ByteNet_Translator(options)
+        model = CNN_ByteNet(max_vocab_size)
         model.build_options()
         model.build_translator(reuse=True)
         return model
@@ -196,3 +202,32 @@ def init_weight(dim_in, dim_out, name=None, stddev=1.0):
 
 def init_bias(dim_out, name=None):
     return tf.Variable(tf.zeros([dim_out]), name=name)
+
+
+predictor_config = {
+	"filter_width": 3,
+	"dilations": [1, 2, 4, 8, 16,
+				  1, 2, 4, 8, 16,
+				  1, 2, 4, 8, 16,
+				  1, 2, 4, 8, 16,
+				  1, 2, 4, 8, 16,
+				  ],
+	"residual_channels": 512,
+	"n_target_quant": 256,
+	"n_source_quant": 256,
+	"sample_size" : 1000
+}
+
+config = {
+	"decoder_filter_width": 3,
+	"encoder_filter_width" : 5,
+	"encoder_dilations": [1, 2, 4, 8, 16,
+						  1, 2, 4, 8, 16,
+						  1, 2, 4, 8, 16,
+						  ],
+	"decoder_dilations": [1, 2, 4, 8, 16,
+						  1, 2, 4, 8, 16,
+						  1, 2, 4, 8, 16,
+						  ],
+	"residual_channels": 512,
+}
