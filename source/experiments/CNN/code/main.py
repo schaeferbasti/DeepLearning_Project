@@ -8,16 +8,8 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
 from method.cnn_bytenet import CNN_ByteNet
-
-"""
-import tensorflow as tf
-import numpy as np
-import argparse
-import model_config
-from ByteNet import translator
-import shutil
-import time
-"""
+from source.experiments.CNN.code.method.cnn_auto_basic import CNN_Auto_Basic
+from source.experiments.CNN.code.method.cnn_basic import CNN_Basic
 
 
 # --- 2. We define testing modules ---
@@ -131,112 +123,23 @@ if __name__ == '__main__':
 
     # --- 4. We load the model ---
 
-    method_name = ['CNN_ByteNet']
-    method_instance = [CNN_ByteNet(MAX_VOCAB_SIZE_FR)]
-
+    # method_name = ['CNN_ByteNet']
+    # method_instance = [CNN_ByteNet(MAX_VOCAB_SIZE_FR)]
+    method_name = ['CNN_Basic'] #, 'CNN_Auto_Basic']
+    method_instance = [CNN_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)] #, CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
 
     for i in range(len(method_name)):
-        current_model = method_instance[i].build_model(MAX_VOCAB_SIZE_FR)
+        current_model = method_instance[i].build_model()
 
         # --- 5. We train the model ---
         checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
         csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
 
         if method_name[i] == 'CNN_ByteNet':
-            parser = argparse.ArgumentParser()
-            parser.add_argument('--learning_rate', type=float, default=0.001,
-                                help='Learning Rate')
-            parser.add_argument('--bucket_quant', type=int, default=50,
-                                help='Bucket Quant')
-            parser.add_argument('--beta1', type=float, default=0.5,
-                                help='Momentum for Adam Update')
-            parser.add_argument('--resume_model', type=str, default=None,
-                                help='Pre-Trained Model Path, to resume from')
-            parser.add_argument('--sample_every', type=int, default=500,
-                                help='Sample generator output every x steps')
-            parser.add_argument('--summary_every', type=int, default=50,
-                                help='Sample generator output every x steps')
-            parser.add_argument('--top_k', type=int, default=5,
-                                help='Sample from top k predictions')
-            args = parser.parse_args()
-
-            translator_model = CNN_ByteNet(MAX_VOCAB_SIZE_FR)
-            translator_model.build_options()
-
-            optim = tf.keras.optimizers.Adam(args.learning_rate)
-
-            translator_model.build_translator(reuse=True)
-            merged_summary = tf.compat.v1.summary.merge_all()
-
-            sess = tf.compat.v1.InteractiveSession()
-            tf.compat.v1.initialize_all_variables().run()
-            saver = tf.compat.v1.train.Saver()
-
-            if args.resume_model:
-                saver.restore(sess, args.resume_model)
-
-            step = 0
-            for epoch in range(EPOCHS):
-                batch_no = 0
-                start = time.process_time()
-
-                _, loss, prediction = sess.run(
-                    [optim, translator_model.loss, translator_model.arg_max_prediction],
-
-                    feed_dict={
-                        translator_model.source_sentence: trainX,
-                        translator_model.target_sentence: trainY,
-                    })
-                end = time.process_time()
-
-                print
-                "LOSS: {}\tEPOCH: {}\tBATCH_NO: {}\t STEP:{}\t total_batches:{}\t bucket_size:{}".format(
-                    loss, epoch, batch_no, step)
-                print
-                "TIME FOR BATCH", end - start
-
-                batch_no += 1
-                step += 1
-                if step % args.summary_every == 0:
-                    [summary] = sess.run([merged_summary], feed_dict={
-                        translator_model.source_sentence: trainX,
-                        translator_model.target_sentence: trainY,
-                    })
-                    print
-                    "******"
-                    print
-                    "Source ", trainX
-                    print
-                    "---------"
-                    print
-                    "Target ", trainY
-                    print
-                    "----------"
-                    print
-                    "Prediction ", prediction
-                    print
-                    "******"
-
-                if step % args.sample_every == 0:
-                    log_file = open('Data/translator_sample.txt', 'wb')
-                    generated_target = trainY[:, 0:1]
-                    for col in range(batch_no):
-                        [probs] = sess.run([translator_model.t_probs],
-                                           feed_dict={
-                                               translator_model.t_source_sentence: trainX,
-                                               translator_model.t_target_sentence: generated_target,
-                                           })
-
-                        curr_preds = []
-                        for bi in range(probs.shape[0]):
-                            pred_word = sample_top(probs[bi][-1], top_k=args.top_k)
-                            curr_preds.append(pred_word)
-
-                        generated_target = np.insert(generated_target, generated_target.shape[1],
-                                                     curr_preds, axis=1)
+            run_CNN_ByteNet()
         else:
             current_model.fit(trainX, trainY, epochs=EPOCHS, validation_data=(testX, testY), batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
 
@@ -267,3 +170,97 @@ def sample_top(a=[], top_k=10):
     probs = probs / np.sum(probs)
     choice = np.random.choice(idx, p=probs)
     return choice
+
+def run_CNN_ByteNet():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--learning_rate', type=float, default=0.001,
+                        help='Learning Rate')
+    parser.add_argument('--bucket_quant', type=int, default=50,
+                        help='Bucket Quant')
+    parser.add_argument('--beta1', type=float, default=0.5,
+                        help='Momentum for Adam Update')
+    parser.add_argument('--resume_model', type=str, default=None,
+                        help='Pre-Trained Model Path, to resume from')
+    parser.add_argument('--sample_every', type=int, default=500,
+                        help='Sample generator output every x steps')
+    parser.add_argument('--summary_every', type=int, default=50,
+                        help='Sample generator output every x steps')
+    parser.add_argument('--top_k', type=int, default=5,
+                        help='Sample from top k predictions')
+    args = parser.parse_args()
+
+    translator_model = CNN_ByteNet(MAX_VOCAB_SIZE_FR)
+    translator_model.build_options()
+
+    optim = tf.keras.optimizers.Adam(args.learning_rate)
+
+    translator_model.build_translator(reuse=True)
+    translator_model.build_model(MAX_VOCAB_SIZE_FR)
+    merged_summary = tf.compat.v1.summary.merge_all()
+
+    sess = tf.compat.v1.InteractiveSession()
+    tf.compat.v1.initialize_all_variables().run()
+    saver = tf.compat.v1.train.Saver()
+
+    if args.resume_model:
+        saver.restore(sess, args.resume_model)
+
+    step = 0
+    for epoch in range(EPOCHS):
+        batch_no = 0
+        start = time.process_time()
+
+        _, loss, prediction = sess.run(
+            [optim, translator_model.loss, translator_model.arg_max_prediction],
+
+            feed_dict={
+                translator_model.source_sentence: trainX,
+                translator_model.target_sentence: trainY,
+            })
+        end = time.process_time()
+
+        print
+        "LOSS: {}\tEPOCH: {}\tBATCH_NO: {}\t STEP:{}\t total_batches:{}\t bucket_size:{}".format(
+            loss, epoch, batch_no, step)
+        print
+        "TIME FOR BATCH", end - start
+
+        batch_no += 1
+        step += 1
+        if step % args.summary_every == 0:
+            [summary] = sess.run([merged_summary], feed_dict={
+                translator_model.source_sentence: trainX,
+                translator_model.target_sentence: trainY,
+            })
+            print
+            "******"
+            print
+            "Source ", trainX
+            print
+            "---------"
+            print
+            "Target ", trainY
+            print
+            "----------"
+            print
+            "Prediction ", prediction
+            print
+            "******"
+
+        if step % args.sample_every == 0:
+            log_file = open('translator_sample.txt', 'wb')
+            generated_target = trainY[:, 0:1]
+            for col in range(batch_no):
+                [probs] = sess.run([translator_model.t_probs],
+                                   feed_dict={
+                                       translator_model.t_source_sentence: trainX,
+                                       translator_model.t_target_sentence: generated_target,
+                                   })
+
+                curr_preds = []
+                for bi in range(probs.shape[0]):
+                    pred_word = sample_top(probs[bi][-1], top_k=args.top_k)
+                    curr_preds.append(pred_word)
+
+                generated_target = np.insert(generated_target, generated_target.shape[1],
+                                             curr_preds, axis=1)
