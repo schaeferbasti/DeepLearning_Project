@@ -16,8 +16,8 @@ class CNN_Auto_Basic:
         enc_emb_layer = Embedding(input_dim=len(self.tokenizer_en.word_index) + 1, output_dim=32)
         enc_emb = enc_emb_layer(encoder_inputs)
         # Adding conv and pool layers in the encoder
-        encoder_cnn1 = Conv1D(32, kernel_size=5, padding='same', activation='relu')(enc_emb)
-        encoder_cnn2 = Conv1D(32, kernel_size=3, padding='same', activation='relu')(encoder_cnn1)
+        encoder_cnn1 = Conv1D(128, kernel_size=5, padding='same', activation='relu')(enc_emb)
+        encoder_cnn2 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(encoder_cnn1)
         encoder_cnn3 = Conv1D(32, kernel_size=3, padding='same', activation='relu')(encoder_cnn2)
 
         # Decoder
@@ -27,10 +27,10 @@ class CNN_Auto_Basic:
 
         # Adding conv and pool layers + encoder in the decoder
         decoder_cnn1 = Conv1D(128, kernel_size=5, padding='same', activation='relu')(dec_emb)
-        encoder_output_repeated = RepeatVector(32)(Flatten()(encoder_cnn3))
-        encoder_output_repeated = Reshape((32, 64))(encoder_output_repeated)
-        merged_input = Concatenate(axis=-1)([decoder_cnn1, encoder_output_repeated])
-        decoder_cnn2 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(merged_input)
+        #encoder_output_repeated = RepeatVector(32)(Flatten()(encoder_cnn3))
+        #encoder_output_repeated = Reshape((32, 64))(encoder_output_repeated)
+        #merged_input = Concatenate(axis=-1)([decoder_cnn1, encoder_output_repeated])
+        decoder_cnn2 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(decoder_cnn1)
         decoder_cnn3 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(decoder_cnn2)
         decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='softmax')
         decoder_outputs = decoder_dense(decoder_cnn3)

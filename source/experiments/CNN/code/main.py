@@ -144,11 +144,18 @@ if __name__ == '__main__':
         if method_name[i] == 'CNN_ByteNet':
             run_CNN_ByteNet()
         elif method_name[i] == 'CNN_Auto_Basic':
-            current_model.fit([trainX, np.squeeze(trainY, axis=-1)], np.expand_dims(trainY, -1), epochs=EPOCHS,
+            trainY = np.squeeze(trainY, axis=-1)
+            testY = np.squeeze(testY, axis=-1)
+            current_model.fit([trainX, trainY], np.expand_dims(trainY, -1),
+                              epochs=EPOCHS,
                               validation_split=0.2,
-                              batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
+                              batch_size=BATCH_SIZE,
+                              callbacks=[checkpoint, csv_logger, early_stopping])
         else:
-            current_model.fit(trainX, trainY, epochs=EPOCHS, validation_data=(testX, testY), batch_size=BATCH_SIZE,
+            current_model.fit(trainX, trainY,
+                              epochs=EPOCHS,
+                              validation_data=(testX, testY),
+                              batch_size=BATCH_SIZE,
                               callbacks=[checkpoint, csv_logger, early_stopping])
 
         # --- 6. We test the model (Change for more meaningful metrics like BLEU) ---
