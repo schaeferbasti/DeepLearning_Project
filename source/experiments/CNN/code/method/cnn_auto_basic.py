@@ -30,13 +30,10 @@ class CNN_Auto_Basic:
         encoder_output_repeated = RepeatVector(32)(Flatten()(encoder_cnn3))
         encoder_output_repeated = Reshape((32, 64))(encoder_output_repeated)
         merged_input = Concatenate(axis=-1)([decoder_cnn1, encoder_output_repeated])
-
         decoder_cnn2 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(merged_input)
         decoder_cnn3 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(decoder_cnn2)
-
         decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='softmax')
         decoder_outputs = decoder_dense(decoder_cnn3)
-
         # Add to a model
         model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
 

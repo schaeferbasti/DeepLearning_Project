@@ -19,9 +19,10 @@ def translate_sequence(seq, tokenizer):
     words = [tokenizer.index_word.get(idx, '') for idx in seq]
     return ' '.join(words).strip()
 
+
 def predict_and_compare(index, testX, model, tokenizer_en, tokenizer_fr):
     """ Predicts translation for a given index in the test set and compares with the ground truth. """
-    input_seq = testX[index:index+1]
+    input_seq = testX[index:index + 1]
     prediction = model.predict(input_seq)
 
     # Converting the prediction to a sequence of integers
@@ -35,10 +36,11 @@ def predict_and_compare(index, testX, model, tokenizer_en, tokenizer_fr):
     # Return results
     return input_text, predicted_text, ground_truth_text
 
+
 def predict_and_compare_auto_en(index, testX, testY, model, tokenizer_en, tokenizer_fr):
     """ Predicts translation for a given index in the test set and compares with the ground truth. """
-    input_seq_X = testX[index:index+1]
-    input_seq_Y = testY[index:index+1]
+    input_seq_X = testX[index:index + 1]
+    input_seq_Y = testY[index:index + 1]
     prediction = model.predict([input_seq_X, input_seq_Y])
 
     # Converting the prediction to a sequence of integers
@@ -68,8 +70,9 @@ class TimedCSVLogger(CSVLogger):
         logs['total_time'] = end_time - self.start_time
         super().on_epoch_end(epoch, logs)
 
+
 # --- 3. We check the gpus available ---
-    
+
 if __name__ == '__main__':
 
     gpus = tf.config.experimental.list_physical_devices('GPU')
@@ -85,11 +88,11 @@ if __name__ == '__main__':
         except RuntimeError as e:
             # Memory growth must be set at program startup
             print("RuntimeError:", e)
-    #else:
-        #raise SystemError("GPU device not found")
-    
+    # else:
+    # raise SystemError("GPU device not found")
+
     # --- 4. We define global variables ---
-    
+
     EPOCHS = 100
     BATCH_SIZE = 32
     MAX_VOCAB_SIZE_FR = 20500
@@ -122,11 +125,10 @@ if __name__ == '__main__':
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
     # --- 4. We load the model ---
-
-    # method_name = ['CNN_ByteNet']
-    # method_instance = [CNN_ByteNet(MAX_VOCAB_SIZE_FR)]
-    method_name = ['CNN_Basic'] #, 'CNN_Auto_Basic']
-    method_instance = [CNN_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)] #, CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
+    method_name = ['CNN_Auto_Basic', 'CNN_Basic']  # , 'CNN_ByteNet']
+    method_instance = [CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Basic(tokenizer_en, tokenizer_fr, max_len,
+                                 MAX_VOCAB_SIZE_FR)]  # , CNN_ByteNet(MAX_VOCAB_SIZE_FR)]
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
@@ -135,22 +137,35 @@ if __name__ == '__main__':
         current_model = method_instance[i].build_model()
 
         # --- 5. We train the model ---
-        checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
+        checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy',
+                                     verbose=1, save_best_only=True, mode='max')
         csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
 
         if method_name[i] == 'CNN_ByteNet':
             run_CNN_ByteNet()
+        elif method_name[i] == 'CNN_Auto_Basic':
+            current_model.fit([trainX, np.squeeze(trainY, axis=-1)], np.expand_dims(trainY, -1), epochs=EPOCHS,
+                              validation_split=0.2,
+                              batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
         else:
-            current_model.fit(trainX, trainY, epochs=EPOCHS, validation_data=(testX, testY), batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
+            current_model.fit(trainX, trainY, epochs=EPOCHS, validation_data=(testX, testY), batch_size=BATCH_SIZE,
+                              callbacks=[checkpoint, csv_logger, early_stopping])
 
         # --- 6. We test the model (Change for more meaningful metrics like BLEU) ---
 
         all_predictions = []
         for j in range(5):
-            if method_name[i] == 'EncoderDecoderRNN' or method_name[i] == 'EncoderDecoderLSTM' or method_name[i] == 'EncoderDecoderGRU':
-                input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX, testY=testY,model=current_model, tokenizer_en=tokenizer_en, tokenizer_fr=tokenizer_fr)
+            if method_name[i] == 'CNN_Auto_Basic':
+                input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
+                                                                                            testY=testY,
+                                                                                            model=current_model,
+                                                                                            tokenizer_en=tokenizer_en,
+                                                                                            tokenizer_fr=tokenizer_fr)
             else:
-                input_text, predicted_text, ground_truth_text = predict_and_compare(index=j, testX=testX, model=current_model, tokenizer_en=tokenizer_en, tokenizer_fr=tokenizer_fr)
+                input_text, predicted_text, ground_truth_text = predict_and_compare(index=j, testX=testX,
+                                                                                    model=current_model,
+                                                                                    tokenizer_en=tokenizer_en,
+                                                                                    tokenizer_fr=tokenizer_fr)
             all_predictions.append((input_text, predicted_text, ground_truth_text))
 
         # Writing predictions to a text file
@@ -162,7 +177,6 @@ if __name__ == '__main__':
                 file.write("----------\n")
 
 
-
 def sample_top(a=[], top_k=10):
     idx = np.argsort(a)[::-1]
     idx = idx[:top_k]
@@ -170,6 +184,7 @@ def sample_top(a=[], top_k=10):
     probs = probs / np.sum(probs)
     choice = np.random.choice(idx, p=probs)
     return choice
+
 
 def run_CNN_ByteNet():
     parser = argparse.ArgumentParser()
