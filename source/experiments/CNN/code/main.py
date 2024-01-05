@@ -9,7 +9,9 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
 from method.cnn_bytenet import CNN_ByteNet
 from source.experiments.CNN.code.method.cnn_auto_basic import CNN_Auto_Basic
+from source.experiments.CNN.code.method.cnn_auto_bigger import CNN_Auto_Bigger
 from source.experiments.CNN.code.method.cnn_basic import CNN_Basic
+
 
 
 # --- 2. We define testing modules ---
@@ -125,13 +127,13 @@ if __name__ == '__main__':
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
     # --- 4. We load the model ---
-    method_name = ['CNN_Auto_Basic', 'CNN_Basic']  # , 'CNN_ByteNet']
-    method_instance = [CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-                       CNN_Basic(tokenizer_en, tokenizer_fr, max_len,
-                                 MAX_VOCAB_SIZE_FR)]  # , CNN_ByteNet(MAX_VOCAB_SIZE_FR)]
+    method_name = ['CNN_Auto_Bigger', 'CNN_Basic', 'CNN_Auto_Basic']  # , 'CNN_ByteNet']
+    method_instance = [CNN_Auto_Bigger(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Basic(tokenizer_en, tokenizer_fr, max_len,MAX_VOCAB_SIZE_FR),
+                       CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]  # , CNN_ByteNet(MAX_VOCAB_SIZE_FR)]
 
     # Shared Callbacks
-    early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
+    early_stopping = EarlyStopping(monitor='val_acc', patience=5, mode='max', verbose=1)
 
     for i in range(len(method_name)):
         current_model = method_instance[i].build_model()
@@ -143,9 +145,8 @@ if __name__ == '__main__':
 
         if method_name[i] == 'CNN_ByteNet':
             run_CNN_ByteNet()
-        elif method_name[i] == 'CNN_Auto_Basic':
+        elif method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Bigger':
             trainY = np.squeeze(trainY, axis=-1)
-            testY = np.squeeze(testY, axis=-1)
             current_model.fit([trainX, trainY], np.expand_dims(trainY, -1),
                               epochs=EPOCHS,
                               validation_split=0.2,
