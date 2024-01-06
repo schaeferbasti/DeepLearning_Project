@@ -127,9 +127,9 @@ if __name__ == '__main__':
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
     # --- 4. We load the model ---
-    method_name = ['CNN_Auto_Bigger', 'CNN_Basic', 'CNN_Auto_Basic']  # , 'CNN_ByteNet']
-    method_instance = [CNN_Auto_Bigger(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-                       CNN_Basic(tokenizer_en, tokenizer_fr, max_len,MAX_VOCAB_SIZE_FR),
+    method_name = ['CNN_Basic', 'CNN_Auto_Bigger', 'CNN_Auto_Basic']  # , 'CNN_ByteNet']
+    method_instance = [CNN_Basic(tokenizer_en, tokenizer_fr, max_len,MAX_VOCAB_SIZE_FR),
+                       CNN_Auto_Bigger(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
                        CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]  # , CNN_ByteNet(MAX_VOCAB_SIZE_FR)]
 
     # Shared Callbacks
@@ -146,8 +146,7 @@ if __name__ == '__main__':
         if method_name[i] == 'CNN_ByteNet':
             run_CNN_ByteNet()
         elif method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Bigger':
-            trainY = np.squeeze(trainY, axis=-1)
-            current_model.fit([trainX, trainY], np.expand_dims(trainY, -1),
+            current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY,
                               epochs=EPOCHS,
                               validation_split=0.2,
                               batch_size=BATCH_SIZE,
@@ -163,9 +162,9 @@ if __name__ == '__main__':
 
         all_predictions = []
         for j in range(5):
-            if method_name[i] == 'CNN_Auto_Basic':
+            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Bigger':
                 input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
-                                                                                            testY=testY,
+                                                                                            testY=np.squeeze(testY, axis=-1),
                                                                                             model=current_model,
                                                                                             tokenizer_en=tokenizer_en,
                                                                                             tokenizer_fr=tokenizer_fr)

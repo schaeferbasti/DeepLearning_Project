@@ -1,0 +1,20 @@
+Input (English): 'do' 'you' 'believe' 'uganda' 'has' 'a' 'free' 'press'
+Predicted (French): 'sbg' 'que' 'rediger' 'a' 'une' 'presse' 'libre'
+Ground Truth (French): 'croyezvous' 'que' 'louganda' 'a' 'une' 'presse' 'libre'
+----------
+Input (English): 'a' 'for' 'the' 'moment' 'the' 'traditional' 'media' 'are' 'basically' 'safe' 'at' 'least' 'until' 'the' 'end' 'of' 'the' 'commonwealth' 'heads' 'of' 'government' 'meeting' 'in' 'november'
+Predicted (French): 'a' 'pour' 'le' 'moment' 'les' 'donnees' 'traditionnels' 'sont' 'partageons' 'au' 'moins' 'jusqua' 'la' 'fin' 'de' 'la' 'reunion' 'des' 'chefs' 'de' 'gouvernement' 'du' 'temoigne' 'en' 'terrible'
+Ground Truth (French): 'a' 'pour' 'le' 'moment' 'les' 'media' 'traditionnels' 'sont' 'saufs' 'au' 'moins' 'jusqua' 'la' 'fin' 'de' 'la' 'reunion' 'des' 'chefs' 'de' 'gouvernement' 'du' 'commonwealth' 'en' 'novembre'
+----------
+Input (English): 'but' 'the' 'cracks' 'have' 'already' 'started' 'to' 'appear' 'with' 'upcountry' 'radio' 'stations' 'in' 'places' 'like' 'the' 'toro' 'region' 'in' 'western' 'uganda' 'being' 'harassed' 'for' 'all' 'kinds' 'of' 'things'
+Predicted (French): 'mais' 'les' 'pollution' 'ont' 'deja' 'commence' 'a' 'glissement' 'les' 'stations' 'de' 'radio' 'en' 'place' 'dans' 'la' 'region' 'de' 'representer' 'dans' 'rentrer' 'de' 'inversion' 'sont' 'rassemblees' 'pour' 'toutes' 'decidant' 'de' 'choses'
+Ground Truth (French): 'mais' 'les' 'failles' 'ont' 'deja' 'commence' 'a' 'apparaitre' 'les' 'stations' 'de' 'radio' 'en' 'place' 'dans' 'la' 'region' 'de' 'toro' 'dans' 'louest' 'de' 'louganda' 'sont' 'harcelees' 'pour' 'toutes' 'sortes' 'de' 'choses'
+----------
+Input (English): 'the' 'other' 'element' 'in' 'the' 'temporary' 'safety' 'of' 'the' 'traditional' 'media' 'is' 'in' 'the' 'fact' 'that' 'there' 'is' 'not' 'a' 'single' 'institution' 'capable' 'of' 'managing' 'the' 'rapidly' 'expanding' 'and' 'basically' 'free' 'media'
+Predicted (French): 'lautre' 'acquiert' 'dans' 'la' 'securite' 'grandit' 'des' 'media' 'traditionnels' 'est' 'le' 'fait' 'quil' 'ny' 'ait' 'aucune' 'gouverneurs' 'legislatives' 'de' 'fonctionne' 'les' 'fierte' 'choisit' 'travaillant' 'qui' 'se' 'cadavre' 'tres' 'commente'
+Ground Truth (French): 'lautre' 'element' 'dans' 'la' 'securite' 'temporaire' 'des' 'media' 'traditionnels' 'est' 'le' 'fait' 'quil' 'ny' 'ait' 'aucune' 'institution' 'capable' 'de' 'gerer' 'les' 'media' 'pratiquement' 'gratuits' 'qui' 'se' 'repandent' 'tres' 'rapidement'
+----------
+Input (English): 'the' 'media' 'center' 'which' 'was' 'supposed' 'to' 'do' 'this' 'does' 'not' 'have' 'the' 'credibility' 'and' 'the' 'uganda' 'broadcasting' 'council' 'has' 'been' 'known' 'to' 'take' 'lackadaisical' 'decisions' 'including' 'taking' 'gaetano' 'off' 'the' 'capital' 'radio' 'over' 'homosexuality' 'comments' 'he' 'did' 'not' 'make' 'and' 'of' 'course' 'working' 'with' 'the' 'media' 'center' 'to' 'get' 'blake' 'lambert' 'deported'
+Predicted (French): 'le' 'centre' 'des' 'editeurs' 'qui' 'chers' 'sen' 'remplacer' 'na' 'pas' 'la' 'conduite' 'et' 'le' 'conseil' 'ougandais' 'de' 'representer' 'est' 'connu' 'pour' 'prendre' 'des' 'decisions' 'disrael' 'qui' 'perpetre' 'le' 'ameliorer' 'de' 'fonctionne' 'de' 'capital' 'radio' 'pour' 'des' 'cesars' 'kenyaneen' 'quil' 'na' 'pas' 'soulever' 'et' 'bien' 'sur' 'travailler' 'avec' 'le' 'centre' 'des' 'uniformes' 'pour' 'la' 'regner' 'de' 'icommons' 'special'
+Ground Truth (French): 'le' 'centre' 'des' 'media' 'qui' 'devait' 'sen' 'occuper' 'na' 'pas' 'la' 'credibilite' 'et' 'le' 'conseil' 'ougandais' 'de' 'radiodiffusion' 'est' 'connu' 'pour' 'prendre' 'des' 'decisions' 'laxistes' 'qui' 'incluent' 'le' 'renvoi' 'de' 'gaetano' 'de' 'capital' 'radio' 'pour' 'des' 'commentaires' 'homosexuels' 'quil' 'na' 'pas' 'emis' 'et' 'bien' 'sur' 'travailler' 'avec' 'le' 'centre' 'des' 'media' 'pour' 'la' 'deportation' 'de' 'blake' 'lambert'
+----------
