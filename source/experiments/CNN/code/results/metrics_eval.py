@@ -7,12 +7,10 @@ import os
 from torchmetrics.text import TranslationEditRate
 from torchmetrics.text.bert import BERTScore
 from torchmetrics.text.bleu import BLEUScore
-from torchmetrics.text.rouge import ROUGEScore
 from torchmetrics.text.wer import WordErrorRate
 
 # Define the Name of the models
 method_name = ['CNN_Basic', 'CNN_Auto_Bigger', 'CNN_Auto_Basic']
-
 
 def calculate_metrics(predicted_text, ground_truth_text):
     results = []
@@ -21,13 +19,13 @@ def calculate_metrics(predicted_text, ground_truth_text):
     wer_score = wer(predicted_text, ground_truth_text)
     results.append("WER: " + str(wer_score.item()))
     # BLEU
-    bleu = BLEUScore()
+    bleu = BLEUScore(n_gram=1, smooth=True)
     bleu_score = bleu(predicted_text, ground_truth_text)
     results.append("BLEU: " + str(bleu_score.item()))
     # TER
     ter = TranslationEditRate()
     ter_score = ter(predicted_text, ground_truth_text)
-    results.append("TER: " + str(ter_score.item()))
+    results.append("TER: " + str(ter_score.item()) + "%")
     # BERT (not working, as the length of the predicted and the original text are not of the same length)
     bert = BERTScore()
     if not predicted_text or not len(predicted_text) == len(ground_truth_text):
@@ -52,7 +50,7 @@ for i in range(len(method_name)):
     with open(f'./predictions/model_predictions_{method_name[i]}.txt', 'r', encoding='utf-8') as file:
         lines = file.readlines()
         create_metric_file(method_name[i])
-        metric_results = [method_name[i]]
+        metric_results = [str(method_name[i]) + ": WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)"]
         for line in lines:
             if "Predicted (French): " in line:
                 prediction = line.split("Predicted (French): ")[1]
