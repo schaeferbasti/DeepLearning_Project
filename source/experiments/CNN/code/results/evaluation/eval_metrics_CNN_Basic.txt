@@ -1,6 +1,6 @@
-Evaluation Metrics for CNN_Basic
-['BLEU: 0.0', 'TER: 9.119999885559082', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.1428571939468384']Evaluation Metrics for CNN_Basic
-['BLEU: 0.0', 'TER: 22.9761905670166', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.0']Evaluation Metrics for CNN_Basic
-['BLEU: 0.0', 'TER: 24.150001525878906', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.0']Evaluation Metrics for CNN_Basic
-['BLEU: 0.0', 'TER: 36.1990966796875', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.1034482717514038']Evaluation Metrics for CNN_Basic
-['BLEU: 0.0', 'TER: 56.0352668762207', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.0']
+CNN_Basic
+['BLEU: 0.0', 'TER: 9.119999885559082', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.1428571939468384', 'BERT: None']
+['BLEU: 0.0', 'TER: 22.9761905670166', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.0', 'BERT: None']
+['BLEU: 0.0', 'TER: 24.150001525878906', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.0', 'BERT: None']
+['BLEU: 0.0', 'TER: 36.1990966796875', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.1034482717514038', 'BERT: None']
+['BLEU: 0.0', 'TER: 56.0352668762207', 'ROUGE1 Fmeasure: 0.0', 'ROUGE1 Precision: 0.0', 'ROUGE2 Fmeasure: 0.0', 'ROUGE2 Precision: 0.0', 'WER: 1.0', 'BERT: None']
