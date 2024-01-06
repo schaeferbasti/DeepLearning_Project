@@ -14,8 +14,12 @@ from torchmetrics.text.wer import WordErrorRate
 method_name = ['CNN_Basic', 'CNN_Auto_Bigger', 'CNN_Auto_Basic']
 
 
-def use_metrics(predicted_text, ground_truth_text):
+def calculate_metrics(predicted_text, ground_truth_text):
     results = []
+    # WER
+    wer = WordErrorRate()
+    wer_score = wer(predicted_text, ground_truth_text)
+    results.append("WER: " + str(wer_score.item()))
     # BLEU
     bleu = BLEUScore()
     bleu_score = bleu(predicted_text, ground_truth_text)
@@ -24,17 +28,6 @@ def use_metrics(predicted_text, ground_truth_text):
     ter = TranslationEditRate()
     ter_score = ter(predicted_text, ground_truth_text)
     results.append("TER: " + str(ter_score.item()))
-    # ROUGE
-    rouge = ROUGEScore()
-    rouge_score = rouge(predicted_text, ground_truth_text)
-    results.append("ROUGE1 Fmeasure: " + str(rouge_score['rouge1_fmeasure'].item()))
-    results.append("ROUGE1 Precision: " + str(rouge_score['rouge1_precision'].item()))
-    results.append("ROUGE2 Fmeasure: " + str(rouge_score['rouge2_fmeasure'].item()))
-    results.append("ROUGE2 Precision: " + str(rouge_score['rouge2_precision'].item()))
-    # WER
-    wer = WordErrorRate()
-    wer_score = wer(predicted_text, ground_truth_text)
-    results.append("WER: " + str(wer_score.item()))
     # BERT (not working, as the length of the predicted and the original text are not of the same length)
     bert = BERTScore()
     if not predicted_text or not len(predicted_text) == len(ground_truth_text):
@@ -66,7 +59,7 @@ for i in range(len(method_name)):
             elif "Ground Truth (French): " in line:
                 ground_truth = line.split("Ground Truth (French): ")[1]
             elif "----------" in line:
-                metric_result = use_metrics(prediction, ground_truth)
+                metric_result = calculate_metrics(prediction, ground_truth)
                 metric_results.append(str(metric_result))
         write_metric_results(metric_results, method_name[i])
         print("All metrics are calculated for " + method_name[i])
