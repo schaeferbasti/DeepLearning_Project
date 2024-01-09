@@ -145,8 +145,8 @@ if __name__ == '__main__':
 
     for i in range(len(method_name)):
         print(method_name[i])
-        current_model, summary = method_instance[i].build_model()
-        print(summary)
+        current_model = method_instance[i].build_model()
+        print(current_model.summary())
         with open(f'./results/model_summary/model_summary_{method_name[i]}.txt', 'w', encoding='utf-8') as file:
             with redirect_stdout(file):
                 current_model.summary()

@@ -12,7 +12,7 @@ from torchmetrics.text.bert import BERTScore
 
 
 # Define the Name of the models
-method_name = ['CNN_Basic', 'CNN_Auto_Bigger', 'CNN_Auto_Basic']
+method_name = ['CNN_Basic', 'CNN_Complex', 'CNN_Auto_Basic', 'CNN_Auto_Complex', 'CNN_Auto_Basic_Big', 'CNN_Auto_Complex_Big']
 
 def calculate_metrics(predicted_text, ground_truth_text):
     results = []

@@ -1,0 +1,6 @@
+CNN_Auto_Complex: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)
+['WER: 1.0', 'BLEU: 0.0', 'ROUGE: 0.0', 'TER: 0.0%', 'BERT: None']
+['WER: 1.0', 'BLEU: 0.0', 'ROUGE: 0.0', 'TER: 0.0%', 'BERT: None']
+['WER: 1.0', 'BLEU: 0.0', 'ROUGE: 0.0', 'TER: 0.0%', 'BERT: None']
+['WER: 1.0', 'BLEU: 0.0', 'ROUGE: 0.0', 'TER: 0.0%', 'BERT: None']
+['WER: 1.0', 'BLEU: 0.0', 'ROUGE: 0.0', 'TER: 0.0%', 'BERT: None']
