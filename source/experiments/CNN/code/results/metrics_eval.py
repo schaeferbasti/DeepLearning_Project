@@ -4,10 +4,12 @@ and use the metrics to evaluate the quality.
 """
 import os
 
+from torchmetrics.text.wer import WordErrorRate
+from torchmetrics.text.bleu import BLEUScore
+from torchmetrics.text.rouge import ROUGEScore
 from torchmetrics.text import TranslationEditRate
 from torchmetrics.text.bert import BERTScore
-from torchmetrics.text.bleu import BLEUScore
-from torchmetrics.text.wer import WordErrorRate
+
 
 # Define the Name of the models
 method_name = ['CNN_Basic', 'CNN_Auto_Bigger', 'CNN_Auto_Basic']
@@ -22,6 +24,10 @@ def calculate_metrics(predicted_text, ground_truth_text):
     bleu = BLEUScore(n_gram=1, smooth=True)
     bleu_score = bleu(predicted_text, ground_truth_text)
     results.append("BLEU: " + str(bleu_score.item()))
+    # ROUGE score
+    rouge = ROUGEScore()
+    rouge_score = rouge(predicted_text, ground_truth_text)
+    results.append("ROUGE: " + str(rouge_score['rouge1_fmeasure'].item()))
     # TER
     ter = TranslationEditRate()
     ter_score = ter(predicted_text, ground_truth_text)

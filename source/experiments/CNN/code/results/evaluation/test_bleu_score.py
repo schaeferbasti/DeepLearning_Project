@@ -7,6 +7,7 @@ ground_truth_text_string = ''.join(ground_truth_text)
 
 n_grams = [1, 2, 3, 4]
 # BLEU metric
+print("Torchmetric")
 for i in n_grams:
     bleu = BLEUScore(n_gram=i, smooth=True)
     bleu_score = bleu(predicted_text_string, ground_truth_text_string)

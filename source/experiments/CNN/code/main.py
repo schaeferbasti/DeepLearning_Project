@@ -7,10 +7,13 @@ import time
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
-from method.cnn_bytenet import CNN_ByteNet
-from source.experiments.CNN.code.method.cnn_auto_basic import CNN_Auto_Basic
-from source.experiments.CNN.code.method.cnn_auto_bigger import CNN_Auto_Bigger
+from method._cnn_bytenet import CNN_ByteNet
 from source.experiments.CNN.code.method.cnn_basic import CNN_Basic
+from source.experiments.CNN.code.method.cnn_auto_basic import CNN_Auto_Basic
+from source.experiments.CNN.code.method.cnn_auto_basic_big import CNN_Auto_Basic_Big
+from source.experiments.CNN.code.method.cnn_complex import CNN_Complex
+from source.experiments.CNN.code.method.cnn_auto_complex import CNN_Auto_Complex
+from source.experiments.CNN.code.method.cnn_auto_complex_big import CNN_Auto_Complex_Big
 
 
 
@@ -127,15 +130,22 @@ if __name__ == '__main__':
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
     # --- 4. We load the model ---
-    method_name = ['CNN_Basic', 'CNN_Auto_Bigger', 'CNN_Auto_Basic']  # , 'CNN_ByteNet']
+    method_name = ['CNN_Complex', 'CNN_Complex_Basic', 'CNN_Complex_Basic_Big']
+    method_instance = [CNN_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Auto_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Auto_Complex_Big(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
+    """
+    method_name = ['CNN_Basic', 'CNN_Auto_Basic', 'CNN_Auto_Basic_Big']
     method_instance = [CNN_Basic(tokenizer_en, tokenizer_fr, max_len,MAX_VOCAB_SIZE_FR),
-                       CNN_Auto_Bigger(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-                       CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]  # , CNN_ByteNet(MAX_VOCAB_SIZE_FR)]
+                       CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Auto_Basic_Big(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
+    """
 
-    # Shared Callbacks
+                       # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_acc', patience=5, mode='max', verbose=1)
 
     for i in range(len(method_name)):
+        print(method_name[i])
         current_model = method_instance[i].build_model()
 
         # --- 5. We train the model ---
@@ -143,9 +153,7 @@ if __name__ == '__main__':
                                      verbose=1, save_best_only=True, mode='max')
         csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
 
-        if method_name[i] == 'CNN_ByteNet':
-            run_CNN_ByteNet()
-        elif method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Bigger':
+        if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
             current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY,
                               epochs=EPOCHS,
                               validation_split=0.2,
@@ -162,7 +170,7 @@ if __name__ == '__main__':
 
         all_predictions = []
         for j in range(5):
-            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Bigger':
+            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
                 input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
                                                                                             testY=np.squeeze(testY, axis=-1),
                                                                                             model=current_model,

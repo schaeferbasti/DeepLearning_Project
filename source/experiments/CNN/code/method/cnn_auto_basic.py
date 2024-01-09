@@ -1,6 +1,5 @@
-from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import Embedding, Conv1D, Concatenate, MaxPooling1D, Dense, Dropout, Flatten, Input, \
-    RepeatVector, Reshape
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Embedding, Conv1D, Dense, Input
 
 
 class CNN_Auto_Basic:
@@ -24,19 +23,17 @@ class CNN_Auto_Basic:
         decoder_inputs = Input(shape=(None,))
         dec_emb_layer = Embedding(input_dim=len(self.tokenizer_fr.word_index) + 1, output_dim=32)
         dec_emb = dec_emb_layer(decoder_inputs)
-
         # Adding conv and pool layers + encoder in the decoder
         decoder_cnn1 = Conv1D(128, kernel_size=5, padding='same', activation='relu')(dec_emb)
-        #encoder_output_repeated = RepeatVector(32)(Flatten()(encoder_cnn3))
-        #encoder_output_repeated = Reshape((32, 64))(encoder_output_repeated)
-        #merged_input = Concatenate(axis=-1)([decoder_cnn1, encoder_output_repeated])
         decoder_cnn2 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(decoder_cnn1)
         decoder_cnn3 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(decoder_cnn2)
         decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='softmax')
         decoder_outputs = decoder_dense(decoder_cnn3)
-        # Add to a model
+
+        # Model
         model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
 
         # Compile the model
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        print(model.summary())
         return model
