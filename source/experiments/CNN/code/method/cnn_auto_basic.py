@@ -33,5 +33,4 @@ class CNN_Auto_Basic:
 
         # Compile the model
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-        print(model.summary())
-        return model
+        return model, model.summary()

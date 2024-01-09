@@ -1,5 +1,6 @@
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, Conv1D, Concatenate, MaxPooling1D, Dense, Dropout, GlobalMaxPooling1D
+from tensorflow.keras.layers import Embedding, Conv1D, MaxPooling1D, Dense
+
 
 class CNN_Complex:
     def __init__(self, tokenizer_en, tokenizer_fr, max_len, max_vocab_fr_len):
@@ -16,7 +17,6 @@ class CNN_Complex:
         model.add(MaxPooling1D(pool_size=3, strides=1, padding='same'))
         model.add(Conv1D(64, kernel_size=3, padding='same', activation='softmax'))
         model.add(MaxPooling1D(pool_size=3, strides=1, padding='same'))
-        model.add(Dropout(0.5))
         model.add(Conv1D(32, kernel_size=3, padding='same', activation='softmax'))
         model.add(MaxPooling1D(pool_size=3, strides=1, padding='same'))
         model.add(Dense(100, activation='relu'))
@@ -24,5 +24,4 @@ class CNN_Complex:
 
         # Compile the model
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-        print(model.summary())
-        return model
+        return model, model.summary()

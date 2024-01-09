@@ -1,5 +1,6 @@
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, Conv1D, Concatenate, MaxPooling1D, Dense, Dropout, GlobalMaxPooling1D
+from tensorflow.keras.layers import Embedding, Conv1D, Dense
+
 
 class CNN_Basic:
     def __init__(self, tokenizer_en, tokenizer_fr, max_len, max_vocab_fr_len):
@@ -20,5 +21,4 @@ class CNN_Basic:
 
         # Compile the model
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-        print(model.summary())
-        return model
+        return model, model.summary()

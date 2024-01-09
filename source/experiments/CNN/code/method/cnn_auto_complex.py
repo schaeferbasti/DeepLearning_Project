@@ -1,5 +1,5 @@
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input, Embedding, Conv1D, Activation, MaxPooling1D, Conv1DTranspose, Dense, Reshape
+from tensorflow.keras.layers import Input, Embedding, Conv1D, Activation, MaxPooling1D, Conv1DTranspose, Dense
 
 
 class CNN_Auto_Complex:
@@ -39,5 +39,4 @@ class CNN_Auto_Complex:
 
         # Compile the model
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-        print(model.summary())
-        return model
+        return model, model.summary()

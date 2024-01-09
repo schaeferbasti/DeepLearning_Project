@@ -130,24 +130,23 @@ if __name__ == '__main__':
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
     # --- 4. We load the model ---
-    """
-    method_name = ['CNN_Auto_Complex', 'CNN_Complex',  'CNN_Auto_Complex_Big']
-    method_instance = [CNN_Auto_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+    method_name = ['CNN_Basic', 'CNN_Complex', 'CNN_Auto_Basic', 'CNN_Auto_Complex', 'CNN_Auto_Basic_Big', 'CNN_Auto_Complex_Big']
+    method_instance = [CNN_Basic(tokenizer_en, tokenizer_fr, max_len,MAX_VOCAB_SIZE_FR),
                        CNN_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Auto_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Auto_Basic_Big(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
                        CNN_Auto_Complex_Big(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
-    """
-    method_name = ['CNN_Auto_Basic', 'CNN_Basic', 'CNN_Auto_Basic_Big']
-    method_instance = [CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-                       CNN_Basic(tokenizer_en, tokenizer_fr, max_len,MAX_VOCAB_SIZE_FR),
-                       CNN_Auto_Basic_Big(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
-    #"""
 
-                       # Shared Callbacks
-    early_stopping = EarlyStopping(monitor='val_acc', patience=5, mode='max', verbose=1)
+    # Shared Callbacks
+    early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
 
     for i in range(len(method_name)):
         print(method_name[i])
-        current_model = method_instance[i].build_model()
+        current_model, summary = method_instance[i].build_model()
+        print(summary)
+        with open(f'./results/model_summary/model_summary_{method_name[i]}.txt', 'w', encoding='utf-8') as file:
+            file.write(summary)
 
         # --- 5. We train the model ---
         checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy',
