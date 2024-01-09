@@ -130,16 +130,17 @@ if __name__ == '__main__':
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
     # --- 4. We load the model ---
-    method_name = ['CNN_Complex', 'CNN_Complex_Basic', 'CNN_Complex_Basic_Big']
-    method_instance = [CNN_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-                       CNN_Auto_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+    """
+    method_name = ['CNN_Auto_Complex', 'CNN_Complex',  'CNN_Auto_Complex_Big']
+    method_instance = [CNN_Auto_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Complex(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
                        CNN_Auto_Complex_Big(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
     """
-    method_name = ['CNN_Basic', 'CNN_Auto_Basic', 'CNN_Auto_Basic_Big']
-    method_instance = [CNN_Basic(tokenizer_en, tokenizer_fr, max_len,MAX_VOCAB_SIZE_FR),
-                       CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+    method_name = ['CNN_Auto_Basic', 'CNN_Basic', 'CNN_Auto_Basic_Big']
+    method_instance = [CNN_Auto_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       CNN_Basic(tokenizer_en, tokenizer_fr, max_len,MAX_VOCAB_SIZE_FR),
                        CNN_Auto_Basic_Big(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
-    """
+    #"""
 
                        # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_acc', patience=5, mode='max', verbose=1)
