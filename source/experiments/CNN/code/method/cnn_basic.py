@@ -13,12 +13,13 @@ class CNN_Basic:
         # Model
         model = Sequential()
         model.add(Embedding(input_dim=len(self.tokenizer_en.word_index) + 1, output_dim=64, input_length=self.max_len))
-        model.add(Conv1D(128, kernel_size=5, padding='same', activation='softmax'))
-        model.add(Conv1D(64, kernel_size=3, padding='same', activation='softmax'))
-        model.add(Conv1D(32, kernel_size=3, padding='same', activation='softmax'))
+        model.add(Conv1D(256, kernel_size=8, padding='same', activation='relu'))
+        model.add(Conv1D(128, kernel_size=5, padding='same', activation='relu'))
+        model.add(Conv1D(64, kernel_size=3, padding='same', activation='relu'))
+        model.add(Conv1D(32, kernel_size=3, padding='same', activation='relu'))
         model.add(Dense(100, activation='relu'))
         model.add(Dense(len(self.tokenizer_fr.word_index) + 1)),
 
         # Compile the model
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-        return model, model.summary()
+        return model

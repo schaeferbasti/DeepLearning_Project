@@ -4,23 +4,23 @@ ________________________________________________________________________________
 ==================================================================================================
  input_5 (InputLayer)        [(None, None)]               0         []                            
                                                                                                   
- embedding_4 (Embedding)     (None, None, 32)             532160    ['input_5[0][0]']             
+ embedding_5 (Embedding)     (None, None, 32)             532160    ['input_5[0][0]']             
                                                                                                   
- conv1d_15 (Conv1D)          (None, None, 1024)           164864    ['embedding_4[0][0]']         
+ conv1d_21 (Conv1D)          (None, None, 1024)           164864    ['embedding_5[0][0]']         
                                                                                                   
- conv1d_16 (Conv1D)          (None, None, 512)            2621952   ['conv1d_15[0][0]']           
+ conv1d_22 (Conv1D)          (None, None, 512)            2621952   ['conv1d_21[0][0]']           
                                                                                                   
- conv1d_17 (Conv1D)          (None, None, 256)            655616    ['conv1d_16[0][0]']           
+ conv1d_23 (Conv1D)          (None, None, 256)            655616    ['conv1d_22[0][0]']           
                                                                                                   
- conv1d_18 (Conv1D)          (None, None, 128)            98432     ['conv1d_17[0][0]']           
+ conv1d_24 (Conv1D)          (None, None, 128)            98432     ['conv1d_23[0][0]']           
                                                                                                   
- conv1d_19 (Conv1D)          (None, None, 64)             24640     ['conv1d_18[0][0]']           
+ conv1d_25 (Conv1D)          (None, None, 64)             24640     ['conv1d_24[0][0]']           
                                                                                                   
- conv1d_20 (Conv1D)          (None, None, 32)             6176      ['conv1d_19[0][0]']           
+ conv1d_26 (Conv1D)          (None, None, 32)             6176      ['conv1d_25[0][0]']           
                                                                                                   
- conv1d_21 (Conv1D)          (None, None, 16)             1552      ['conv1d_20[0][0]']           
+ conv1d_27 (Conv1D)          (None, None, 16)             1552      ['conv1d_26[0][0]']           
                                                                                                   
- conv1d_transpose_3 (Conv1D  (None, None, 16)             784       ['conv1d_21[0][0]']           
+ conv1d_transpose_3 (Conv1D  (None, None, 16)             784       ['conv1d_27[0][0]']           
  Transpose)                                                                                       
                                                                                                   
  conv1d_transpose_4 (Conv1D  (None, None, 32)             1568      ['conv1d_transpose_3[0][0]']  
@@ -38,11 +38,11 @@ ________________________________________________________________________________
  conv1d_transpose_8 (Conv1D  (None, None, 512)            655872    ['conv1d_transpose_7[0][0]']  
  Transpose)                                                                                       
                                                                                                   
- conv1d_22 (Conv1D)          (None, None, 64)             98368     ['conv1d_transpose_8[0][0]']  
+ conv1d_28 (Conv1D)          (None, None, 64)             98368     ['conv1d_transpose_8[0][0]']  
                                                                                                   
  input_6 (InputLayer)        [(None, None)]               0         []                            
                                                                                                   
- dense_6 (Dense)             (None, None, 20501)          1332565   ['conv1d_22[0][0]']           
+ dense_8 (Dense)             (None, None, 20501)          1332565   ['conv1d_28[0][0]']           
                                                                                                   
 ==================================================================================================
 Total params: 6405941 (24.44 MB)
