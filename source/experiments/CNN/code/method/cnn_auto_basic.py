@@ -22,9 +22,9 @@ class CNN_Auto_Basic:
         # Decoder
         decoder_inputs = Input(shape=(None,))
 
-        decoder_cnn1 = Conv1D(32, kernel_size=3, padding='same', activation='relu')(encoder_cnn3)
+        decoder_cnn1 = Conv1D(128, kernel_size=5, padding='same', activation='relu')(encoder_cnn3)
         decoder_cnn2 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(decoder_cnn1)
-        decoder_cnn3 = Conv1D(128, kernel_size=5, padding='same', activation='relu')(decoder_cnn2)
+        decoder_cnn3 = Conv1D(32, kernel_size=3, padding='same', activation='relu')(decoder_cnn2)
         decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='relu')
         decoder_outputs = decoder_dense(decoder_cnn3)
 
