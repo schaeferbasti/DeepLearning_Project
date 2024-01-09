@@ -1,20 +1,20 @@
-Model: "sequential_1"
+Model: "sequential"
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
 =================================================================
- embedding_1 (Embedding)     (None, 121, 64)           1064320   
+ embedding (Embedding)       (None, 121, 64)           1064320   
                                                                  
- conv1d_4 (Conv1D)           (None, 121, 256)          131328    
+ conv1d (Conv1D)             (None, 121, 256)          131328    
                                                                  
- conv1d_5 (Conv1D)           (None, 121, 128)          163968    
+ conv1d_1 (Conv1D)           (None, 121, 128)          163968    
                                                                  
- conv1d_6 (Conv1D)           (None, 121, 64)           24640     
+ conv1d_2 (Conv1D)           (None, 121, 64)           24640     
                                                                  
- conv1d_7 (Conv1D)           (None, 121, 32)           6176      
+ conv1d_3 (Conv1D)           (None, 121, 32)           6176      
                                                                  
- dense_2 (Dense)             (None, 121, 100)          3300      
+ dense (Dense)               (None, 121, 100)          3300      
                                                                  
- dense_3 (Dense)             (None, 121, 20820)        2102820   
+ dense_1 (Dense)             (None, 121, 20820)        2102820   
                                                                  
 =================================================================
 Total params: 3496552 (13.34 MB)

@@ -25,7 +25,9 @@ class CNN_Auto_Complex:
 
         # Decoder
         decoder_inputs = Input(shape=(None,))
-        dec_conv_1 = Conv1DTranspose(128, 5, strides=1, padding='same')(enc_conv_3)
+        dec_emb_layer = Embedding(input_dim=len(self.tokenizer_fr.word_index) + 1, output_dim=32)
+        dec_emb = dec_emb_layer(decoder_inputs)
+        dec_conv_1 = Conv1DTranspose(128, 5, strides=1, padding='same')(dec_emb)
         dec_activ_1 = Activation('relu')(dec_conv_1)
         dec_conv_2 = Conv1DTranspose(64, 3, strides=1, padding='same')(dec_activ_1)
         dec_activ_2 = Activation('relu')(dec_conv_2)
