@@ -4,6 +4,8 @@ import tensorflow as tf
 import argparse
 import pandas as pd
 import time
+from contextlib import redirect_stdout
+
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
@@ -146,7 +148,8 @@ if __name__ == '__main__':
         current_model, summary = method_instance[i].build_model()
         print(summary)
         with open(f'./results/model_summary/model_summary_{method_name[i]}.txt', 'w', encoding='utf-8') as file:
-            file.write(summary)
+            with redirect_stdout(file):
+                current_model.summary()
 
         # --- 5. We train the model ---
         checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy',

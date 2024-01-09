@@ -1,0 +1,48 @@
+Model: "model_1"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_3 (InputLayer)        [(None, None)]               0         []                            
+                                                                                                  
+ embedding_3 (Embedding)     (None, None, 32)             532160    ['input_3[0][0]']             
+                                                                                                  
+ conv1d_12 (Conv1D)          (None, None, 128)            20608     ['embedding_3[0][0]']         
+                                                                                                  
+ activation (Activation)     (None, None, 128)            0         ['conv1d_12[0][0]']           
+                                                                                                  
+ max_pooling1d_3 (MaxPoolin  (None, None, 128)            0         ['activation[0][0]']          
+ g1D)                                                                                             
+                                                                                                  
+ conv1d_13 (Conv1D)          (None, None, 64)             24640     ['max_pooling1d_3[0][0]']     
+                                                                                                  
+ activation_1 (Activation)   (None, None, 64)             0         ['conv1d_13[0][0]']           
+                                                                                                  
+ max_pooling1d_4 (MaxPoolin  (None, None, 64)             0         ['activation_1[0][0]']        
+ g1D)                                                                                             
+                                                                                                  
+ conv1d_14 (Conv1D)          (None, None, 32)             6176      ['max_pooling1d_4[0][0]']     
+                                                                                                  
+ conv1d_transpose (Conv1DTr  (None, None, 32)             3104      ['conv1d_14[0][0]']           
+ anspose)                                                                                         
+                                                                                                  
+ activation_2 (Activation)   (None, None, 32)             0         ['conv1d_transpose[0][0]']    
+                                                                                                  
+ conv1d_transpose_1 (Conv1D  (None, None, 64)             6208      ['activation_2[0][0]']        
+ Transpose)                                                                                       
+                                                                                                  
+ activation_3 (Activation)   (None, None, 64)             0         ['conv1d_transpose_1[0][0]']  
+                                                                                                  
+ conv1d_transpose_2 (Conv1D  (None, None, 128)            41088     ['activation_3[0][0]']        
+ Transpose)                                                                                       
+                                                                                                  
+ activation_4 (Activation)   (None, None, 128)            0         ['conv1d_transpose_2[0][0]']  
+                                                                                                  
+ input_4 (InputLayer)        [(None, None)]               0         []                            
+                                                                                                  
+ dense_5 (Dense)             (None, None, 20501)          2644629   ['activation_4[0][0]']        
+                                                                                                  
+==================================================================================================
+Total params: 3278613 (12.51 MB)
+Trainable params: 3278613 (12.51 MB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________
