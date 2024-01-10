@@ -21,7 +21,7 @@ class CNN_Complex:
         model.add(MaxPooling1D(pool_size=3, strides=1, padding='same'))
         model.add(Conv1D(32, kernel_size=3, padding='same', activation='relu'))
         model.add(MaxPooling1D(pool_size=3, strides=1, padding='same'))
-        model.add(Dense(100, activation='relu'))
+        model.add(Dense(100, activation='softmax'))
         model.add(Dense(len(self.tokenizer_fr.word_index) + 1)),
 
         # Compile the model

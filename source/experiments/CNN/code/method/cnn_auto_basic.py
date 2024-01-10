@@ -25,8 +25,8 @@ class CNN_Auto_Basic:
         dec_emb = dec_emb_layer(decoder_inputs)
         decoder_cnn1 = Conv1D(128, kernel_size=5, padding='same', activation='relu')(dec_emb)
         decoder_cnn2 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(decoder_cnn1)
-        decoder_cnn3 = Conv1D(32, kernel_size=3, padding='same', activation='relu')(decoder_cnn2)
-        decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='relu')
+        decoder_cnn3 = Conv1D(64, kernel_size=3, padding='same', activation='relu')(decoder_cnn2)
+        decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='softmax')
         decoder_outputs = decoder_dense(decoder_cnn3)
 
         # Model

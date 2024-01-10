@@ -27,13 +27,13 @@ class CNN_Auto_Complex:
         decoder_inputs = Input(shape=(None,))
         dec_emb_layer = Embedding(input_dim=len(self.tokenizer_fr.word_index) + 1, output_dim=32)
         dec_emb = dec_emb_layer(decoder_inputs)
-        dec_conv_1 = Conv1DTranspose(128, 5, strides=1, padding='same')(dec_emb)
+        dec_conv_1 = Conv1D(128, 5, strides=1, padding='same')(dec_emb)
         dec_activ_1 = Activation('relu')(dec_conv_1)
-        dec_conv_2 = Conv1DTranspose(64, 3, strides=1, padding='same')(dec_activ_1)
+        dec_conv_2 = Conv1D(64, 3, strides=1, padding='same')(dec_activ_1)
         dec_activ_2 = Activation('relu')(dec_conv_2)
-        dec_conv_3 = Conv1DTranspose(32, 3, strides=1, padding='same')(dec_activ_2)
+        dec_conv_3 = Conv1D(32, 3, strides=1, padding='same')(dec_activ_2)
         dec_activ_3 = Activation('relu')(dec_conv_3)
-        decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='relu')
+        decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='softmax')
         decoder_outputs = decoder_dense(dec_activ_3)
 
         # Model

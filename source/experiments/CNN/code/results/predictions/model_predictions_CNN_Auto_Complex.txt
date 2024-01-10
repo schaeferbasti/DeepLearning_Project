@@ -1,20 +1,20 @@
 Input (English): 'do' 'you' 'believe' 'uganda' 'has' 'a' 'free' 'press'
-Predicted (French): 'a'
+Predicted (French): 'croyezvous' 'que' 'dordinateur' 'a' 'une' 'presse' 'libre'
 Ground Truth (French): 'croyezvous' 'que' 'louganda' 'a' 'une' 'presse' 'libre'
 ----------
 Input (English): 'a' 'for' 'the' 'moment' 'the' 'traditional' 'media' 'are' 'basically' 'safe' 'at' 'least' 'until' 'the' 'end' 'of' 'the' 'commonwealth' 'heads' 'of' 'government' 'meeting' 'in' 'november'
-Predicted (French): 'a'                 'des'    'du'
+Predicted (French): 'ceux' 'pour' 'le' 'moment' 'les' 'media' 'traditionnels' 'sont' 'supputations' 'au' 'moins' 'jusqua' 'la' 'fin' 'de' 'la' 'reunion' 'des' 'chefs' 'de' 'gouvernement' 'du' 'etablir' 'en' 'novembre'
 Ground Truth (French): 'a' 'pour' 'le' 'moment' 'les' 'media' 'traditionnels' 'sont' 'saufs' 'au' 'moins' 'jusqua' 'la' 'fin' 'de' 'la' 'reunion' 'des' 'chefs' 'de' 'gouvernement' 'du' 'commonwealth' 'en' 'novembre'
 ----------
 Input (English): 'but' 'the' 'cracks' 'have' 'already' 'started' 'to' 'appear' 'with' 'upcountry' 'radio' 'stations' 'in' 'places' 'like' 'the' 'toro' 'region' 'in' 'western' 'uganda' 'being' 'harassed' 'for' 'all' 'kinds' 'of' 'things'
-Predicted (French): 'a'
+Predicted (French): 'mais' 'les' 'dordinateur' 'ont' 'deja' 'commence' 'a' 'propice' 'les' 'stations' 'de' 'radio' 'en' 'place' 'dans' 'la' 'region' 'de' 'mandi' 'dans' 'louest' 'de' 'malki' 'sont' 'actualites' 'pour' 'toutes' 'mandi' 'de' 'choses'
 Ground Truth (French): 'mais' 'les' 'failles' 'ont' 'deja' 'commence' 'a' 'apparaitre' 'les' 'stations' 'de' 'radio' 'en' 'place' 'dans' 'la' 'region' 'de' 'toro' 'dans' 'louest' 'de' 'louganda' 'sont' 'harcelees' 'pour' 'toutes' 'sortes' 'de' 'choses'
 ----------
 Input (English): 'the' 'other' 'element' 'in' 'the' 'temporary' 'safety' 'of' 'the' 'traditional' 'media' 'is' 'in' 'the' 'fact' 'that' 'there' 'is' 'not' 'a' 'single' 'institution' 'capable' 'of' 'managing' 'the' 'rapidly' 'expanding' 'and' 'basically' 'free' 'media'
-Predicted (French): 'des'
+Predicted (French): 'lautre' 'appareil' 'dans' 'la' 'securite' 'etape' 'des' 'media' 'traditionnels' 'est' 'le' 'fait' 'quil' 'ny' 'ait' 'aucune' 'copie' 'pensaient' 'de' 'endroits' 'les' 'media' 'hauts' 'payes' 'qui' 'se' 'filme' 'tres' 'rapidement'
 Ground Truth (French): 'lautre' 'element' 'dans' 'la' 'securite' 'temporaire' 'des' 'media' 'traditionnels' 'est' 'le' 'fait' 'quil' 'ny' 'ait' 'aucune' 'institution' 'capable' 'de' 'gerer' 'les' 'media' 'pratiquement' 'gratuits' 'qui' 'se' 'repandent' 'tres' 'rapidement'
 ----------
 Input (English): 'the' 'media' 'center' 'which' 'was' 'supposed' 'to' 'do' 'this' 'does' 'not' 'have' 'the' 'credibility' 'and' 'the' 'uganda' 'broadcasting' 'council' 'has' 'been' 'known' 'to' 'take' 'lackadaisical' 'decisions' 'including' 'taking' 'gaetano' 'off' 'the' 'capital' 'radio' 'over' 'homosexuality' 'comments' 'he' 'did' 'not' 'make' 'and' 'of' 'course' 'working' 'with' 'the' 'media' 'center' 'to' 'get' 'blake' 'lambert' 'deported'
-Predicted (French): 'des'                    'des'             'des'              'des'
+Predicted (French): 'le' 'centre' 'des' 'media' 'qui' 'devait' 'sen' 'supputations' 'na' 'pas' 'la' 'cafeteria' 'et' 'le' 'conseil' 'ougandais' 'de' 'supputations' 'est' 'connu' 'pour' 'prendre' 'des' 'decisions' 'mandi' 'qui' 'virtuelle' 'le' 'stocks' 'de' 'chants' 'de' 'capital' 'radio' 'pour' 'des' 'commentaires' 'aviez' 'quil' 'na' 'pas' 'dintelligentsiya' 'et' 'bien' 'sur' 'travailler' 'avec' 'le' 'centre' 'des' 'media' 'pour' 'la' 'demarche' 'de' 'benin' 'mandi'
 Ground Truth (French): 'le' 'centre' 'des' 'media' 'qui' 'devait' 'sen' 'occuper' 'na' 'pas' 'la' 'credibilite' 'et' 'le' 'conseil' 'ougandais' 'de' 'radiodiffusion' 'est' 'connu' 'pour' 'prendre' 'des' 'decisions' 'laxistes' 'qui' 'incluent' 'le' 'renvoi' 'de' 'gaetano' 'de' 'capital' 'radio' 'pour' 'des' 'commentaires' 'homosexuels' 'quil' 'na' 'pas' 'emis' 'et' 'bien' 'sur' 'travailler' 'avec' 'le' 'centre' 'des' 'media' 'pour' 'la' 'deportation' 'de' 'blake' 'lambert'
 ----------

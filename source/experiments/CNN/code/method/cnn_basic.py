@@ -17,7 +17,7 @@ class CNN_Basic:
         model.add(Conv1D(128, kernel_size=5, padding='same', activation='relu'))
         model.add(Conv1D(64, kernel_size=3, padding='same', activation='relu'))
         model.add(Conv1D(32, kernel_size=3, padding='same', activation='relu'))
-        model.add(Dense(100, activation='relu'))
+        model.add(Dense(100, activation='softmax'))
         model.add(Dense(len(self.tokenizer_fr.word_index) + 1)),
 
         # Compile the model

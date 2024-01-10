@@ -6,44 +6,30 @@ ________________________________________________________________________________
                                                                                                   
  embedding_7 (Embedding)     (None, None, 32)             666240    ['input_8[0][0]']             
                                                                                                   
- conv1d_transpose_9 (Conv1D  (None, None, 512)            82432     ['embedding_7[0][0]']         
- Transpose)                                                                                       
+ conv1d_30 (Conv1D)          (None, None, 512)            82432     ['embedding_7[0][0]']         
                                                                                                   
- activation_11 (Activation)  (None, None, 512)            0         ['conv1d_transpose_9[0][0]']  
+ activation_11 (Activation)  (None, None, 512)            0         ['conv1d_30[0][0]']           
                                                                                                   
- conv1d_transpose_10 (Conv1  (None, None, 256)            655616    ['activation_11[0][0]']       
- DTranspose)                                                                                      
+ conv1d_31 (Conv1D)          (None, None, 256)            655616    ['activation_11[0][0]']       
                                                                                                   
- activation_12 (Activation)  (None, None, 256)            0         ['conv1d_transpose_10[0][0]'] 
+ activation_12 (Activation)  (None, None, 256)            0         ['conv1d_31[0][0]']           
                                                                                                   
- conv1d_transpose_11 (Conv1  (None, None, 128)            163968    ['activation_12[0][0]']       
- DTranspose)                                                                                      
+ conv1d_32 (Conv1D)          (None, None, 128)            163968    ['activation_12[0][0]']       
                                                                                                   
- activation_13 (Activation)  (None, None, 128)            0         ['conv1d_transpose_11[0][0]'] 
+ activation_13 (Activation)  (None, None, 128)            0         ['conv1d_32[0][0]']           
                                                                                                   
- conv1d_transpose_12 (Conv1  (None, None, 64)             24640     ['activation_13[0][0]']       
- DTranspose)                                                                                      
+ conv1d_33 (Conv1D)          (None, None, 64)             24640     ['activation_13[0][0]']       
                                                                                                   
- activation_14 (Activation)  (None, None, 64)             0         ['conv1d_transpose_12[0][0]'] 
+ activation_14 (Activation)  (None, None, 64)             0         ['conv1d_33[0][0]']           
                                                                                                   
- conv1d_transpose_13 (Conv1  (None, None, 32)             6176      ['activation_14[0][0]']       
- DTranspose)                                                                                      
-                                                                                                  
- activation_15 (Activation)  (None, None, 32)             0         ['conv1d_transpose_13[0][0]'] 
-                                                                                                  
- conv1d_transpose_14 (Conv1  (None, None, 16)             1552      ['activation_15[0][0]']       
- DTranspose)                                                                                      
-                                                                                                  
- activation_16 (Activation)  (None, None, 16)             0         ['conv1d_transpose_14[0][0]'] 
-                                                                                                  
- conv1d_24 (Conv1D)          (None, None, 64)             3136      ['activation_16[0][0]']       
+ conv1d_34 (Conv1D)          (None, None, 32)             6176      ['activation_14[0][0]']       
                                                                                                   
  input_7 (InputLayer)        [(None, None)]               0         []                            
                                                                                                   
- dense_3 (Dense)             (None, None, 20501)          1332565   ['conv1d_24[0][0]']           
+ dense_3 (Dense)             (None, None, 20501)          676533    ['conv1d_34[0][0]']           
                                                                                                   
 ==================================================================================================
-Total params: 2936325 (11.20 MB)
-Trainable params: 2936325 (11.20 MB)
+Total params: 2275605 (8.68 MB)
+Trainable params: 2275605 (8.68 MB)
 Non-trainable params: 0 (0.00 Byte)
 __________________________________________________________________________________________________
