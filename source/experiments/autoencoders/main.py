@@ -1,133 +1,167 @@
-# import source
-import tensorfow as tf
+# --- 1. We import the libraries we need ---
+import numpy as np
+import tensorflow as tf
 import pandas as pd
-# import DeepLearning_Project.source.experiments.autoencoders.transformer_attention as ae
-import pickle
-import sys
-sys.path.append('../../../../source')
-from preprocessing import preprocessing_gloria as pre
-from experiments.autoencoders import transformer_attention as ab_ae
+import time
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
+from method.self_attention import TransformerBasic
+# from method.simple_lstm import SimpleLSTMModel
+# from method.simple_gru import SimpleGRUModel
+# from method.bi_rnn import BidirectionalRNNModel
+# from method.bi_lstm import BidirectionalLSTMModel
+# from method.bi_gru import BidirectionalGRUModel
+# from method.auto_rnn import EncoderDecoderRNNModel
+# from method.auto_lstm import EncoderDecoderLSTMModel
+# from method.auto_gru import EncoderDecoderGRUModel
 
-# make constants
-MODEL_NAME = 'distilbert-base-uncased'
-MAX_LEN = 20
+# --- 2. We definie testing modules ---
 
-# preprocessing
-original_translation_dataset = pre.load_data()
+def translate_sequence(seq, tokenizer):
+    """ Translates a sequence of integers back into text using the tokenizer. """
+    words = [tokenizer.index_word.get(idx, '') for idx in seq]
+    return ' '.join(words).strip()
 
-# just for set up
-translation_dataset = original_translation_dataset[:101]
+def predict_and_compare(index, testX, model, tokenizer_en, tokenizer_fr):
+    """ Predicts translation for a given index in the test set and compares with the ground truth. """
+    input_seq = testX[index:index+1]
+    prediction = model.predict(input_seq)
 
-translation_dataset = pre.save_punct_free(df=translation_dataset)
-translation_dataset = pre.lower_case(translation_dataset)
-tok_translation_dataset = pre.tokenize_data(translation_dataset)
-# Handling missing data
-translation_dataset.dropna(subset=['en', 'fr'], inplace=True)
-# sequencing
-# english
-en_word_idx, en_idx_word, en_sequences = pre.get_word_index(translation_dataset['en'])
+    # Converting the prediction to a sequence of integers
+    predicted_seq = np.argmax(prediction, axis=-1)[0]
 
-# padding
-en_padded_seqs, max_len_en = pre.add_padding(column=translation_dataset['en'], sequences=en_sequences)
-X = en_padded_seqs
+    # Reverse tokenization (converting sequences back to words)
+    input_text = translate_sequence(input_seq[0], tokenizer_en)
+    predicted_text = translate_sequence(predicted_seq, tokenizer_fr)
+    ground_truth_text = translate_sequence(testY[index].flatten(), tokenizer_fr)
 
-# french
-# sequencing
-fr_word_idx, fr_idx_word, fr_sequences = pre.get_word_index(translation_dataset['fr'])
+    # Return results
+    return input_text, predicted_text, ground_truth_text
 
-# padding
-fr_padded_seqs, max_len_fr = pre.add_padding(column=translation_dataset['fr'], sequences=fr_sequences)
-y = fr_padded_seqs
+def predict_and_compare_auto_en(index, testX, testY, model, tokenizer_en, tokenizer_fr):
+    """ Predicts translation for a given index in the test set and compares with the ground truth. """
+    input_seq_X = testX[index:index+1]
+    input_seq_Y = testY[index:index+1]
+    prediction = model.predict([input_seq_X, input_seq_Y])
 
-# pickle.dump( X, open( "X.pkl", "wb" ) )
-# pickle.dump( y, open( "y.pkl", "wb" ) )
-# X = pickle.load( open( "X.pkl", "rb" ) )
-# y = pickle.load( open( "y.pkl", "rb" ) )
+    # Converting the prediction to a sequence of integers
+    predicted_seq = np.argmax(prediction, axis=-1)[0]
 
+    # Reverse tokenization (converting sequences back to words)
+    input_text = translate_sequence(input_seq_X[0], tokenizer_en)
+    predicted_text = translate_sequence(predicted_seq, tokenizer_fr)
+    ground_truth_text = translate_sequence(testY[index].flatten(), tokenizer_fr)
 
-
-# # Instantiate the encoder.
-# sample_encoder = ae.Encoder(num_layers=4,
-#                          d_model=512,
-#                          num_heads=8,
-#                          dff=2048,
-#                          vocab_size=8500)
-
-# sample_encoder_output = sample_encoder(en_padded_seqs, training=True)
-
-# # Print the shape.
-# print(pt.shape)
-# print(sample_encoder_output.shape)  # Shape `(batch_size, input_seq_len, d_model)`
+    # Return results
+    return input_text, predicted_text, ground_truth_text
 
 
-# sample_decoder_layer = ae.DecoderLayer(d_model=512, num_heads=8, dff=2048)
+class TimedCSVLogger(CSVLogger):
+    def __init__(self, filename, separator=',', append=False):
+        super().__init__(filename, separator, append)
+        self.start_time = time.time()
 
-# sample_decoder_layer_output = sample_decoder_layer(
-#     x=en_emb, context=pt_emb)
+    def on_epoch_begin(self, epoch, logs=None):
+        self.epoch_start_time = time.time()
 
-# print(en_emb.shape)
-# print(pt_emb.shape)
-# print(sample_decoder_layer_output.shape)  # `(batch_size, seq_len, d_model)`
+    def on_epoch_end(self, epoch, logs=None):
+        logs = logs or {}
+        end_time = time.time()
+        logs['epoch_duration'] = end_time - self.epoch_start_time
+        logs['total_time'] = end_time - self.start_time
+        super().on_epoch_end(epoch, logs)
+
+# --- 3. We check the gpus available ---
+    
+if __name__ == '__main__':
+
+    gpus = tf.config.experimental.list_physical_devices('GPU')
+    if gpus:
+        try:
+            # Set TensorFlow to use only one GPU
+            tf.config.experimental.set_visible_devices(gpus[0], 'GPU')
+
+            # Enable memory growth
+            tf.config.experimental.set_memory_growth(gpus[0], True)
+
+            print("Using GPU:", gpus[0])
+        except RuntimeError as e:
+            # Memory growth must be set at program startup
+            print("RuntimeError:", e)
+    else:
+        raise SystemError("GPU device not found")
+    
+    # --- 4. We define global variables ---
+    
+    EPOCHS = 100
+    BATCH_SIZE = 32
+    MAX_VOCAB_SIZE_FR = 20500
+
+    # --- 3. We open the data and apply tokenization ---
+
+    df = pd.read_csv('preprocessed_data.csv')
+
+    tokenizer_en = Tokenizer()
+    tokenizer_en.fit_on_texts(df['en_tokens'])
+    tokenizer_fr = Tokenizer(num_words=MAX_VOCAB_SIZE_FR + 1)
+    tokenizer_fr.fit_on_texts(df['fr_tokens'])
+
+    # Convert text to sequences
+    sequences_en = tokenizer_en.texts_to_sequences(df['en_tokens'])
+    sequences_fr = tokenizer_fr.texts_to_sequences(df['fr_tokens'])
+
+    # Padding sequences
+    max_len = max(max(len(s) for s in sequences_en), max(len(s) for s in sequences_fr))
+    sequences_en = pad_sequences(sequences_en, maxlen=max_len, padding='post')
+    sequences_fr = pad_sequences(sequences_fr, maxlen=max_len, padding='post')
+
+    # Splitting the data
+    split = int(len(sequences_en) * 0.8)
+    trainX, testX = sequences_en[:split], sequences_en[split:]
+    trainY, testY = sequences_fr[:split], sequences_fr[split:]
+
+    # Finally, reshape data for feeding into model (French words)
+    trainY = trainY.reshape(trainY.shape[0], trainY.shape[1], 1)
+    testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
+
+    # --- 4. We load the model ---
+
+    #method_name = ['SimpleRNN', 'SimpleLSTM', 'SimpleGRU', 'BiRNN', 'BiLSTM', 'BiGRU', 'EncoderDecoderRNN', 'EncoderDecoderLSTM', 'EncoderDecoderGRU']
+    method_name = ['SelfAttention']
+    #method_instance = [SimpleRNNModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), SimpleLSTMModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), SimpleGRUModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalRNNModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalLSTMModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalGRUModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), EncoderDecoderRNNModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
+    method_instance = [TransformerBasic(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
 
 
+    # Shared Callbacks
+    early_stopping = EarlyStopping(monitor='val_accuracy', patience=3, mode='max', verbose=1)
 
+    for i in range(len(method_name)):
+        current_model = method_instance[i].build_model()
 
+        # --- 5. We train the model ---
+        checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
+        csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
 
+        if method_name[i] == 'EncoderDecoderRNN' or method_name[i] == 'EncoderDecoderLSTM' or method_name[i] == 'EncoderDecoderGRU':
+            current_model.fit([trainX, trainY], np.expand_dims(trainY, -1), epochs=EPOCHS, validation_split=0.2, batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
+        else:
+            current_model.fit(trainX, trainY, epochs=EPOCHS, validation_data=(testX, testY), batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
 
+        # --- 6. We test the model (Change for more meaningful metrics like BLEU) ---
 
+        all_predictions = []
+        for j in range(5):
+            if method_name[i] == 'EncoderDecoderRNN' or method_name[i] == 'EncoderDecoderLSTM' or method_name[i] == 'EncoderDecoderGRU':
+                input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX, testY=testY,model=current_model, tokenizer_en=tokenizer_en, tokenizer_fr=tokenizer_fr)
+            else:
+                input_text, predicted_text, ground_truth_text = predict_and_compare(index=j, testX=testX, model=current_model, tokenizer_en=tokenizer_en, tokenizer_fr=tokenizer_fr)
+            all_predictions.append((input_text, predicted_text, ground_truth_text))
 
-
-
-
-
-
-
-
-
-
-# # # ATTENTION BASED AUTOENCODER
-# # # set constants
-# # BATCH_SIZE = 64
-# # BUFFER_SIZE = len(X)
-# # UNITS = 256
-# # steps_per_epoch = BUFFER_SIZE//BATCH_SIZE
-# # embedding_dims = 256
-# # rnn_units = 1024
-# # dense_units = 1024
-# # Tx = max_len_en
-# # Ty = max_len_fr 
-
-# # input_size = None
-# # output_size = None
-
-# # tf.keras.backend.clear_session() # Resets all state generated by Keras.
-# # tf.random.set_seed(42)
-
-# # train_ds = from_sentences_dataset(
-# #     sentences_en_train, sentences_fr_train, shuffle=True, seed=42
-# # )
-# # easy_valid_ds = from_sentences_dataset(sentences_en_valid, sentences_fr_valid)
-
-# # bidirect_encoder_decoder = ab_ae.BidirectionalEncoderDecoderWithAttention(max_sentence_len=15)
-# # bidirect_history = adapt_compile_and_fit(
-# #     bidirect_encoder_decoder,
-# #     easy_train_ds,
-# #     easy_valid_ds,
-# #     init_lr=0.01,
-# #     lr_decay_rate=0.01,
-# #     colorama_verbose=True,
-# # )
-
-# # # # ENCODER
-# # # encoderNN = ab_ae.EncoderNN(input_dim=input_size, output_dim=embedding_dims, dim_rnn_output=rnn_units)
-
-# # # # DECODER
-# # # decoderNN = ab_ae.DecoderNN(input_dim=output_size, output_dim=embedding_dims, 
-# # #                             dim_rnn_output=rnn_units, attention_mech_depth=dense_units,
-# # #                             batch_size=BATCH_SIZE, max_en_X=Tx)
-
-# # # # OPTIMIZER
-# # # optimizer = tf.keras.optimizers.Adam()
-     
-# # # loss_fn = ab_ae.loss_function()
-
+        # Writing predictions to a text file
+        with open(f'./results/predictions/model_predictions_{method_name[i]}.txt', 'w', encoding='utf-8') as file:
+            for input_text, predicted_text, ground_truth in all_predictions:
+                file.write("Input (English): " + input_text + "\n")
+                file.write("Predicted (French): " + predicted_text + "\n")
+                file.write("Ground Truth (French): " + ground_truth + "\n")
+                file.write("----------\n")
