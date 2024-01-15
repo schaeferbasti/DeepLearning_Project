@@ -1,15 +1,21 @@
 # --- 1. We import the libraries we need ---
 import numpy as np
 import tensorflow as tf
-import argparse
 import pandas as pd
 import time
+import os
+
 from contextlib import redirect_stdout
 
+from torchmetrics.text.wer import WordErrorRate
+from torchmetrics.text.bleu import BLEUScore
+from torchmetrics.text.rouge import ROUGEScore
+from torchmetrics.text import TranslationEditRate
+from torchmetrics.text.bert import BERTScore
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
-from method._cnn_bytenet import CNN_ByteNet
+
 from source.experiments.CNN.code.method.cnn_basic import CNN_Basic
 from source.experiments.CNN.code.method.cnn_auto_basic import CNN_Auto_Basic
 from source.experiments.CNN.code.method.cnn_auto_basic_big import CNN_Auto_Basic_Big
@@ -60,6 +66,43 @@ def predict_and_compare_auto_en(index, testX, testY, model, tokenizer_en, tokeni
 
     # Return results
     return input_text, predicted_text, ground_truth_text
+
+def calculate_metrics(predicted_text, ground_truth_text):
+    results = []
+    # WER
+    wer = WordErrorRate()
+    wer_score = wer(predicted_text, ground_truth_text)
+    results.append("WER: " + str(wer_score.item()))
+    # BLEU
+    bleu = BLEUScore(n_gram=1, smooth=True)
+    bleu_score = bleu(predicted_text, ground_truth_text)
+    results.append("BLEU: " + str(bleu_score.item()))
+    # ROUGE score
+    rouge = ROUGEScore()
+    rouge_score = rouge(predicted_text, ground_truth_text)
+    results.append("ROUGE: " + str(rouge_score['rouge1_fmeasure'].item()))
+    # TER
+    ter = TranslationEditRate()
+    ter_score = ter(predicted_text, ground_truth_text)
+    results.append("TER: " + str(ter_score.item()) + "%")
+    # BERT (not working, as the length of the predicted and the original text are not of the same length)
+    bert = BERTScore()
+    if not predicted_text or not len(predicted_text) == len(ground_truth_text):
+        bert_score = "None"
+    else:
+        bert_score = bert(predicted_text, ground_truth_text)
+    results.append("BERT: " + str(bert_score))
+    return results
+
+def create_metric_file(method):
+    path = './results/evaluation/eval_metrics_' + method + '.txt'
+    if not os.path.exists(path):
+        with open(path, 'w'): pass
+
+def write_metric_results(results, method):
+    with open(f'./results/evaluation/eval_metrics_{method}.txt', 'w', encoding='utf-8') as file:
+        for result in results:
+            file.write(str(result) + "\n")
 
 
 class TimedCSVLogger(CSVLogger):
@@ -194,106 +237,18 @@ if __name__ == '__main__':
                 file.write("Ground Truth (French): " + ground_truth + "\n")
                 file.write("----------\n")
 
-
-def sample_top(a=[], top_k=10):
-    idx = np.argsort(a)[::-1]
-    idx = idx[:top_k]
-    probs = a[idx]
-    probs = probs / np.sum(probs)
-    choice = np.random.choice(idx, p=probs)
-    return choice
-
-
-def run_CNN_ByteNet():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--learning_rate', type=float, default=0.001,
-                        help='Learning Rate')
-    parser.add_argument('--bucket_quant', type=int, default=50,
-                        help='Bucket Quant')
-    parser.add_argument('--beta1', type=float, default=0.5,
-                        help='Momentum for Adam Update')
-    parser.add_argument('--resume_model', type=str, default=None,
-                        help='Pre-Trained Model Path, to resume from')
-    parser.add_argument('--sample_every', type=int, default=500,
-                        help='Sample generator output every x steps')
-    parser.add_argument('--summary_every', type=int, default=50,
-                        help='Sample generator output every x steps')
-    parser.add_argument('--top_k', type=int, default=5,
-                        help='Sample from top k predictions')
-    args = parser.parse_args()
-
-    translator_model = CNN_ByteNet(MAX_VOCAB_SIZE_FR)
-    translator_model.build_options()
-
-    optim = tf.keras.optimizers.Adam(args.learning_rate)
-
-    translator_model.build_translator(reuse=True)
-    translator_model.build_model(MAX_VOCAB_SIZE_FR)
-    merged_summary = tf.compat.v1.summary.merge_all()
-
-    sess = tf.compat.v1.InteractiveSession()
-    tf.compat.v1.initialize_all_variables().run()
-    saver = tf.compat.v1.train.Saver()
-
-    if args.resume_model:
-        saver.restore(sess, args.resume_model)
-
-    step = 0
-    for epoch in range(EPOCHS):
-        batch_no = 0
-        start = time.process_time()
-
-        _, loss, prediction = sess.run(
-            [optim, translator_model.loss, translator_model.arg_max_prediction],
-
-            feed_dict={
-                translator_model.source_sentence: trainX,
-                translator_model.target_sentence: trainY,
-            })
-        end = time.process_time()
-
-        print
-        "LOSS: {}\tEPOCH: {}\tBATCH_NO: {}\t STEP:{}\t total_batches:{}\t bucket_size:{}".format(
-            loss, epoch, batch_no, step)
-        print
-        "TIME FOR BATCH", end - start
-
-        batch_no += 1
-        step += 1
-        if step % args.summary_every == 0:
-            [summary] = sess.run([merged_summary], feed_dict={
-                translator_model.source_sentence: trainX,
-                translator_model.target_sentence: trainY,
-            })
-            print
-            "******"
-            print
-            "Source ", trainX
-            print
-            "---------"
-            print
-            "Target ", trainY
-            print
-            "----------"
-            print
-            "Prediction ", prediction
-            print
-            "******"
-
-        if step % args.sample_every == 0:
-            log_file = open('translator_sample.txt', 'wb')
-            generated_target = trainY[:, 0:1]
-            for col in range(batch_no):
-                [probs] = sess.run([translator_model.t_probs],
-                                   feed_dict={
-                                       translator_model.t_source_sentence: trainX,
-                                       translator_model.t_target_sentence: generated_target,
-                                   })
-
-                curr_preds = []
-                for bi in range(probs.shape[0]):
-                    pred_word = sample_top(probs[bi][-1], top_k=args.top_k)
-                    curr_preds.append(pred_word)
-
-                generated_target = np.insert(generated_target, generated_target.shape[1],
-                                             curr_preds, axis=1)
+        with open(f'./results/predictions/model_predictions_{method_name[i]}.txt', 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+            create_metric_file(method_name[i])
+            metric_results = [str(method_name[
+                                      i]) + ": WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)"]
+            for line in lines:
+                if "Predicted (French): " in line:
+                    prediction = line.split("Predicted (French): ")[1]
+                elif "Ground Truth (French): " in line:
+                    ground_truth = line.split("Ground Truth (French): ")[1]
+                elif "----------" in line:
+                    metric_result = calculate_metrics(prediction, ground_truth)
+                    metric_results.append(str(metric_result))
+            write_metric_results(metric_results, method_name[i])
+            print("All metrics are calculated for " + method_name[i])
