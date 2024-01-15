@@ -128,10 +128,10 @@ if __name__ == '__main__':
     # --- 4. We load the model ---
 
     #method_name = ['SimpleRNN', 'SimpleLSTM', 'SimpleGRU', 'BiRNN', 'BiLSTM', 'BiGRU', 'EncoderDecoderRNN', 'EncoderDecoderLSTM', 'EncoderDecoderGRU']
-    method_name = ['EncoderDecoderLSTM', 'EncoderDecoderGRU']
+    method_name = ['EncoderDecoderRNN', 'EncoderDecoderLSTM', 'EncoderDecoderGRU']
     #method_instance = [SimpleRNNModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), SimpleLSTMModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), SimpleGRUModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalRNNModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalLSTMModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalGRUModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), EncoderDecoderRNNModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
-    method_instance = [EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
-
+    method_instance = [EncoderDecoderRNNModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
+   
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=3, mode='max', verbose=1)
@@ -144,7 +144,7 @@ if __name__ == '__main__':
         csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
 
         if method_name[i] == 'EncoderDecoderRNN' or method_name[i] == 'EncoderDecoderLSTM' or method_name[i] == 'EncoderDecoderGRU':
-            current_model.fit([trainX, trainY], np.expand_dims(trainY, -1), epochs=EPOCHS, validation_split=0.2, batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
+            current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY, epochs=EPOCHS, validation_split=0.2, batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
         else:
             current_model.fit(trainX, trainY, epochs=EPOCHS, validation_data=(testX, testY), batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
 
@@ -153,7 +153,7 @@ if __name__ == '__main__':
         all_predictions = []
         for j in range(5):
             if method_name[i] == 'EncoderDecoderRNN' or method_name[i] == 'EncoderDecoderLSTM' or method_name[i] == 'EncoderDecoderGRU':
-                input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX, testY=testY,model=current_model, tokenizer_en=tokenizer_en, tokenizer_fr=tokenizer_fr)
+                input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX, testY=np.squeeze(testY, axis=-1), model=current_model, tokenizer_en=tokenizer_en, tokenizer_fr=tokenizer_fr)
             else:
                 input_text, predicted_text, ground_truth_text = predict_and_compare(index=j, testX=testX, model=current_model, tokenizer_en=tokenizer_en, tokenizer_fr=tokenizer_fr)
             all_predictions.append((input_text, predicted_text, ground_truth_text))

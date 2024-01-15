@@ -1,5 +1,5 @@
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input, Embedding, GRU, Dense
+from tensorflow.keras.layers import Input, Embedding, GRU, Dense, Dropout
 
 class EncoderDecoderGRUModel:
     def __init__(self, tokenizer_en, tokenizer_fr, max_vocab_fr_len):
@@ -14,8 +14,10 @@ class EncoderDecoderGRUModel:
         
         # Adding three GRU layers in the encoder
         encoder_gru1 = GRU(32, return_sequences=True)(enc_emb)
-        encoder_gru2 = GRU(32, return_sequences=True)(encoder_gru1)
-        _, state = GRU(32, return_state=True)(encoder_gru2)
+        encoder_dropout1 = Dropout(0.5)(encoder_gru1)
+        encoder_gru2 = GRU(32, return_sequences=True)(encoder_dropout1)
+        encoder_dropout2 = Dropout(0.5)(encoder_gru2)
+        _, state = GRU(32, return_state=True)(encoder_dropout2)
 
         # Decoder
         decoder_inputs = Input(shape=(None,))
@@ -24,8 +26,10 @@ class EncoderDecoderGRUModel:
         
         # Adding three GRU layers in the decoder
         decoder_gru1 = GRU(32, return_sequences=True, return_state=True)(dec_emb, initial_state=state)
-        decoder_gru2 = GRU(32, return_sequences=True)(decoder_gru1[0])
-        decoder_gru3 = GRU(16, return_sequences=True)(decoder_gru2)
+        decoder_dropout1 = Dropout(0.5)(decoder_gru1[0])  # Dropout after the first RNN layer
+        decoder_gru2 = GRU(32, return_sequences=True)(decoder_dropout1)
+        decoder_dropout2 = Dropout(0.5)(decoder_gru2)  # Another dropout layer
+        decoder_gru3 = GRU(16, return_sequences=True)(decoder_dropout2)
         
         decoder_dense = Dense(self.max_vocab_fr_len + 1, activation='softmax')
         decoder_outputs = decoder_dense(decoder_gru3)
