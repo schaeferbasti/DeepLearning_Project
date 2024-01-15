@@ -1,21 +1,25 @@
 # --- 1. We import the libraries we need ---
 import numpy as np
 import tensorflow as tf
-import argparse
 import pandas as pd
 import time
+import os
+
 from contextlib import redirect_stdout
 
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
+from torchmetrics.text.wer import WordErrorRate
+from torchmetrics.text.bleu import BLEUScore
+from torchmetrics.text.rouge import ROUGEScore
+from torchmetrics.text import TranslationEditRate
+from torchmetrics.text.bert import BERTScore
 
 from source.experiments.SAN.code.method.SAN_basic import SAN_Basic
-from source.experiments.SAN.code.method.SAN_pretrained import SAN_Pretrained
 
 
 # --- 2. We define testing modules ---
-
 def translate_sequence(seq, tokenizer):
     """ Translates a sequence of integers back into text using the tokenizer. """
     words = [tokenizer.index_word.get(idx, '') for idx in seq]
@@ -57,6 +61,43 @@ def predict_and_compare_auto_en(index, testX, testY, model, tokenizer_en, tokeni
     return input_text, predicted_text, ground_truth_text
 
 
+def calculate_metrics(predicted_text, ground_truth_text):
+    results = []
+    # WER
+    wer = WordErrorRate()
+    wer_score = wer(predicted_text, ground_truth_text)
+    results.append("WER: " + str(wer_score.item()))
+    # BLEU
+    bleu = BLEUScore(n_gram=1, smooth=True)
+    bleu_score = bleu(predicted_text, ground_truth_text)
+    results.append("BLEU: " + str(bleu_score.item()))
+    # ROUGE score
+    rouge = ROUGEScore()
+    rouge_score = rouge(predicted_text, ground_truth_text)
+    results.append("ROUGE: " + str(rouge_score['rouge1_fmeasure'].item()))
+    # TER
+    ter = TranslationEditRate()
+    ter_score = ter(predicted_text, ground_truth_text)
+    results.append("TER: " + str(ter_score.item()) + "%")
+    # BERT (not working, as the length of the predicted and the original text are not of the same length)
+    bert = BERTScore()
+    if not predicted_text or not len(predicted_text) == len(ground_truth_text):
+        bert_score = "None"
+    else:
+        bert_score = bert(predicted_text, ground_truth_text)
+    results.append("BERT: " + str(bert_score))
+    return results
+
+def create_metric_file(method):
+    path = './results/evaluation/eval_metrics_' + method + '.txt'
+    if not os.path.exists(path):
+        with open(path, 'w'): pass
+
+def write_metric_results(results, method):
+    with open(f'./results/evaluation/eval_metrics_{method}.txt', 'w', encoding='utf-8') as file:
+        for result in results:
+            file.write(str(result) + "\n")
+
 class TimedCSVLogger(CSVLogger):
     def __init__(self, filename, separator=',', append=False):
         super().__init__(filename, separator, append)
@@ -90,8 +131,8 @@ if __name__ == '__main__':
         except RuntimeError as e:
             # Memory growth must be set at program startup
             print("RuntimeError:", e)
-    else:
-        raise SystemError("GPU device not found")
+    #else:
+        #raise SystemError("GPU device not found")
 
     # --- 4. We define global variables ---
 
@@ -127,9 +168,9 @@ if __name__ == '__main__':
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
     # --- 4. We load the model ---
-    method_name = ['SAN_Pretrained']#, 'SAN_Basic']
-    method_instance = [#SAN_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-                       SAN_Pretrained(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),]
+    method_name = ['SAN_Basic']
+    method_instance = [SAN_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
+                       #SAN_Pretrained(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),]
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
@@ -184,3 +225,19 @@ if __name__ == '__main__':
                 file.write("Predicted (French): " + predicted_text + "\n")
                 file.write("Ground Truth (French): " + ground_truth + "\n")
                 file.write("----------\n")
+
+        with open(f'./results/predictions/model_predictions_{method_name[i]}.txt', 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+            create_metric_file(method_name[i])
+            metric_results = [str(method_name[
+                                      i]) + ": WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)"]
+            for line in lines:
+                if "Predicted (French): " in line:
+                    prediction = line.split("Predicted (French): ")[1]
+                elif "Ground Truth (French): " in line:
+                    ground_truth = line.split("Ground Truth (French): ")[1]
+                elif "----------" in line:
+                    metric_result = calculate_metrics(prediction, ground_truth)
+                    metric_results.append(str(metric_result))
+            write_metric_results(metric_results, method_name[i])
+            print("All metrics are calculated for " + method_name[i])
