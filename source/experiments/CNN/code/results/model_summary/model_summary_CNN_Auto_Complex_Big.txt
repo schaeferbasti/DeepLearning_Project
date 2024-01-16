@@ -4,29 +4,29 @@ ________________________________________________________________________________
 ==================================================================================================
  input_8 (InputLayer)        [(None, None)]               0         []                            
                                                                                                   
- embedding_7 (Embedding)     (None, None, 32)             666240    ['input_8[0][0]']             
+ embedding_9 (Embedding)     (None, None, 32)             666240    ['input_8[0][0]']             
                                                                                                   
- conv1d_30 (Conv1D)          (None, None, 512)            82432     ['embedding_7[0][0]']         
+ conv1d_38 (Conv1D)          (None, None, 512)            82432     ['embedding_9[0][0]']         
                                                                                                   
- activation_11 (Activation)  (None, None, 512)            0         ['conv1d_30[0][0]']           
+ activation_11 (Activation)  (None, None, 512)            0         ['conv1d_38[0][0]']           
                                                                                                   
- conv1d_31 (Conv1D)          (None, None, 256)            655616    ['activation_11[0][0]']       
+ conv1d_39 (Conv1D)          (None, None, 256)            655616    ['activation_11[0][0]']       
                                                                                                   
- activation_12 (Activation)  (None, None, 256)            0         ['conv1d_31[0][0]']           
+ activation_12 (Activation)  (None, None, 256)            0         ['conv1d_39[0][0]']           
                                                                                                   
- conv1d_32 (Conv1D)          (None, None, 128)            163968    ['activation_12[0][0]']       
+ conv1d_40 (Conv1D)          (None, None, 128)            163968    ['activation_12[0][0]']       
                                                                                                   
- activation_13 (Activation)  (None, None, 128)            0         ['conv1d_32[0][0]']           
+ activation_13 (Activation)  (None, None, 128)            0         ['conv1d_40[0][0]']           
                                                                                                   
- conv1d_33 (Conv1D)          (None, None, 64)             24640     ['activation_13[0][0]']       
+ conv1d_41 (Conv1D)          (None, None, 64)             24640     ['activation_13[0][0]']       
                                                                                                   
- activation_14 (Activation)  (None, None, 64)             0         ['conv1d_33[0][0]']           
+ activation_14 (Activation)  (None, None, 64)             0         ['conv1d_41[0][0]']           
                                                                                                   
- conv1d_34 (Conv1D)          (None, None, 32)             6176      ['activation_14[0][0]']       
+ conv1d_42 (Conv1D)          (None, None, 32)             6176      ['activation_14[0][0]']       
                                                                                                   
  input_7 (InputLayer)        [(None, None)]               0         []                            
                                                                                                   
- dense_3 (Dense)             (None, None, 20501)          676533    ['conv1d_34[0][0]']           
+ dense_7 (Dense)             (None, None, 20501)          676533    ['conv1d_42[0][0]']           
                                                                                                   
 ==================================================================================================
 Total params: 2275605 (8.68 MB)
