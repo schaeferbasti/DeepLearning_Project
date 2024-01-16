@@ -67,6 +67,7 @@ def predict_and_compare_auto_en(index, testX, testY, model, tokenizer_en, tokeni
     # Return results
     return input_text, predicted_text, ground_truth_text
 
+
 def calculate_metrics(predicted_text, ground_truth_text):
     results = []
     # WER
@@ -94,10 +95,39 @@ def calculate_metrics(predicted_text, ground_truth_text):
     results.append("BERT: " + str(bert_score))
     return results
 
+
 def create_metric_file(method):
     path = './results/evaluation/eval_metrics_' + method + '.txt'
     if not os.path.exists(path):
         with open(path, 'w'): pass
+        return True
+    else:
+        user_input = input('Would you like to use the existing weights for the model ' + method + '? (y/n): ')
+        if user_input.lower() == 'y' or user_input.lower() == 'yes':
+            print("Use existing weights")
+            return False
+        elif user_input.lower() == 'n' or user_input.lower() == 'no':
+            print("Train model")
+            return True
+        else:
+            print("No valid answer. Use existing weights")
+            return False
+
+def create_summary_file(method):
+    path = './results/model_summary/model_summary_' + method + '.txt'
+    if not os.path.exists(path):
+        with open(path, 'w'): pass
+
+def create_training_file(method):
+    path = './results/training_log/training_log_' + method + '.csv'
+    if not os.path.exists(path):
+        with open(path, 'w'): pass
+
+def create_weight_file_check_train(method):
+    path = './results/weights/weights_' + method + '.best.h5'
+    if not os.path.exists(path):
+        with open(path, 'w'): pass
+
 
 def write_metric_results(results, method):
     with open(f'./results/evaluation/eval_metrics_{method}.txt', 'w', encoding='utf-8') as file:
@@ -190,35 +220,45 @@ if __name__ == '__main__':
         print(method_name[i])
         current_model = method_instance[i].build_model()
         print(current_model.summary())
+        create_summary_file(method_name[i])
         with open(f'./results/model_summary/model_summary_{method_name[i]}.txt', 'w', encoding='utf-8') as file:
             with redirect_stdout(file):
                 current_model.summary()
 
-        # --- 5. We train the model ---
-        checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy',
-                                     verbose=1, save_best_only=True, mode='max')
-        csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
+        # --- 7. We train the model ---
 
-        if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
-            current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY,
-                              epochs=EPOCHS,
-                              validation_split=0.2,
-                              batch_size=BATCH_SIZE,
-                              callbacks=[checkpoint, csv_logger, early_stopping])
+        train_model = create_weight_file_check_train(method_name[i])
+        if train_model == True:
+            create_training_file(method_name[i])
+            checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy',
+                                         verbose=1, save_best_only=True, mode='max')
+            csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
+
+            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[
+                i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
+                current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY,
+                                  epochs=EPOCHS,
+                                  validation_split=0.2,
+                                  batch_size=BATCH_SIZE,
+                                  callbacks=[checkpoint, csv_logger, early_stopping])
+            else:
+                current_model.fit(trainX, trainY,
+                                  epochs=EPOCHS,
+                                  validation_data=(testX, testY),
+                                  batch_size=BATCH_SIZE,
+                                  callbacks=[checkpoint, csv_logger, early_stopping])
         else:
-            current_model.fit(trainX, trainY,
-                              epochs=EPOCHS,
-                              validation_data=(testX, testY),
-                              batch_size=BATCH_SIZE,
-                              callbacks=[checkpoint, csv_logger, early_stopping])
+            tf.keras.saving.load_model("./results/weights/weights_" + method_name[i] + ".best.h5")
 
-        # --- 6. We test the model (Change for more meaningful metrics like BLEU) ---
+        # --- 8. We test the model (Change for more meaningful metrics like BLEU) ---
 
         all_predictions = []
         for j in range(5):
-            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
+            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[
+                i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
                 input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
-                                                                                            testY=np.squeeze(testY, axis=-1),
+                                                                                            testY=np.squeeze(testY,
+                                                                                                             axis=-1),
                                                                                             model=current_model,
                                                                                             tokenizer_en=tokenizer_en,
                                                                                             tokenizer_fr=tokenizer_fr)
