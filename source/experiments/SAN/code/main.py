@@ -4,22 +4,27 @@ import tensorflow as tf
 import pandas as pd
 import time
 import os
+import torch
+import ast
 
 from contextlib import redirect_stdout
 
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
-from keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
 from torchmetrics.text.wer import WordErrorRate
 from torchmetrics.text.bleu import BLEUScore
 from torchmetrics.text.rouge import ROUGEScore
 from torchmetrics.text import TranslationEditRate
 from torchmetrics.text.bert import BERTScore
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
 
-from source.experiments.SAN.code.method.SAN_basic import SAN_Basic
+from source.experiments.SAN.code.method.SAN_Attention import SAN_Attention
+from source.experiments.SAN.code.method.SAN_MultiHeadAttention import SAN_MultiHeadAttention
+
 
 
 # --- 2. We define testing modules ---
+
 def translate_sequence(seq, tokenizer):
     """ Translates a sequence of integers back into text using the tokenizer. """
     words = [tokenizer.index_word.get(idx, '') for idx in seq]
@@ -78,25 +83,89 @@ def calculate_metrics(predicted_text, ground_truth_text):
     # TER
     ter = TranslationEditRate()
     ter_score = ter(predicted_text, ground_truth_text)
-    results.append("TER: " + str(ter_score.item()) + "%")
+    results.append("TER: " + str(ter_score.item()))
     # BERT (not working, as the length of the predicted and the original text are not of the same length)
     bert = BERTScore()
     if not predicted_text or not len(predicted_text) == len(ground_truth_text):
         bert_score = "None"
+        results.append("BERT: " + str(bert_score))
     else:
         bert_score = bert(predicted_text, ground_truth_text)
-    results.append("BERT: " + str(bert_score))
+        avg_bert_score_precision = torch.mean(list(bert_score.values())[0])
+        avg_bert_score_recall = torch.mean(list(bert_score.values())[1])
+        avg_bert_score_f1 = torch.mean(list(bert_score.values())[2])
+        bert_results = [avg_bert_score_precision.item(), avg_bert_score_recall.item(), avg_bert_score_f1.item()]
+        results.append("BERT: " + str(bert_results))
     return results
+
 
 def create_metric_file(method):
     path = './results/evaluation/eval_metrics_' + method + '.txt'
     if not os.path.exists(path):
         with open(path, 'w'): pass
+        return True
+    else:
+        user_input = input('Would you like to use the existing weights for the model ' + method + '? (y/n): ')
+        if user_input.lower() == 'y' or user_input.lower() == 'yes':
+            print("Use existing weights")
+            return False
+        elif user_input.lower() == 'n' or user_input.lower() == 'no':
+            print("Train model")
+            return True
+        else:
+            print("No valid answer. Use existing weights")
+            return False
+
+def create_summary_file(method):
+    path = './results/model_summary/model_summary_' + method + '.txt'
+    if not os.path.exists(path):
+        with open(path, 'w'): pass
+
+def create_training_file(method):
+    path = './results/training_log/training_log_' + method + '.csv'
+    if not os.path.exists(path):
+        with open(path, 'w'): pass
+
+def create_weight_file_check_train(method):
+    path = './results/weights/weights_' + method + '.best.h5'
+    if not os.path.exists(path):
+        with open(path, 'w'): pass
+def average_metric_results(metric_results):
+    avg_results = []
+    avg_results.append(str(metric_results[0]) + "\n")
+    WER_list = []
+    BLEU_list = []
+    ROUGE_list = []
+    TER_list = []
+    BERT_list = []
+    for result in metric_results[1:]:
+        WER_list.append(float(result[0].split("WER: ")[1]))
+        BLEU_list.append(float(result[1].split("BLEU: ")[1]))
+        ROUGE_list.append(float(result[2].split("ROUGE: ")[1]))
+        TER_list.append(float(result[3].split("TER: ")[1]))
+        bert_value = result[4].split("BERT: ")[1]
+        if bert_value != 'None':
+            BERT_list.append(ast.literal_eval(result[4].split("BERT: ")[1])[0])
+    average_WER = sum(WER_list) / len(WER_list)
+    avg_results.append("WER: " + str(average_WER))
+    average_BLEU = sum(BLEU_list) / len(BLEU_list)
+    avg_results.append("BLEU: " + str(average_BLEU))
+    average_ROUGE = sum(ROUGE_list) / len(ROUGE_list)
+    avg_results.append("ROUGE: " + str(average_ROUGE))
+    average_TER = sum(TER_list) / len(TER_list)
+    avg_results.append("TER: " + str(average_TER))
+    average_BERT = None
+    if len(BERT_list) != 0:
+        print("BERT: " + str(BERT_list))
+        average_BERT = sum(BERT_list) / len(BERT_list)
+    avg_results.append("BERT: " + str(average_BERT))
+    return avg_results
 
 def write_metric_results(results, method):
     with open(f'./results/evaluation/eval_metrics_{method}.txt', 'w', encoding='utf-8') as file:
-        for result in results:
-            file.write(str(result) + "\n")
+        #for result in results:
+        file.write(str(results) + "\n")
+
 
 class TimedCSVLogger(CSVLogger):
     def __init__(self, filename, separator=',', append=False):
@@ -134,13 +203,15 @@ if __name__ == '__main__':
     #else:
         #raise SystemError("GPU device not found")
 
+
     # --- 4. We define global variables ---
 
     EPOCHS = 100
     BATCH_SIZE = 32
     MAX_VOCAB_SIZE_FR = 20500
 
-    # --- 3. We open the data and apply tokenization ---
+
+    # --- 5. We open the data and apply tokenization ---
 
     df = pd.read_csv('preprocessed_data.csv')
 
@@ -167,10 +238,13 @@ if __name__ == '__main__':
     trainY = trainY.reshape(trainY.shape[0], trainY.shape[1], 1)
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
-    # --- 4. We load the model ---
-    method_name = ['SAN_Basic']
-    method_instance = [SAN_Basic(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
-                       #SAN_Pretrained(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),]
+
+    # --- 6. We load the model ---
+
+    method_name = ['SAN_Attention',
+                   'SAN_MultiHeadAttention']
+    method_instance = [SAN_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
@@ -179,35 +253,44 @@ if __name__ == '__main__':
         print(method_name[i])
         current_model = method_instance[i].build_model()
         print(current_model.summary())
+        create_summary_file(method_name[i])
         with open(f'./results/model_summary/model_summary_{method_name[i]}.txt', 'w', encoding='utf-8') as file:
             with redirect_stdout(file):
                 current_model.summary()
 
-        # --- 5. We train the model ---
-        checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy',
-                                     verbose=1, save_best_only=True, mode='max')
-        csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
 
-        if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
-            current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY,
-                              epochs=EPOCHS,
-                              validation_split=0.2,
-                              batch_size=BATCH_SIZE,
-                              callbacks=[checkpoint, csv_logger, early_stopping])
+        # --- 7. We train the model ---
+
+        train_model = create_weight_file_check_train(method_name[i])
+        if train_model == True:
+            create_training_file(method_name[i])
+            checkpoint = ModelCheckpoint(f'./results/weights/weights_{method_name[i]}.best.h5', monitor='val_accuracy',
+                                         verbose=1, save_best_only=True, mode='max')
+            csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
+
+            if method_name[i] == 'SAN_Attention' or method_name[i] == 'SAN_MultiHeadAttention':
+                current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY,
+                                  epochs=EPOCHS,
+                                  validation_split=0.2,
+                                  batch_size=BATCH_SIZE,
+                                  callbacks=[checkpoint, csv_logger, early_stopping])
+            else:
+                current_model.fit(trainX, trainY,
+                                  epochs=EPOCHS,
+                                  validation_data=(testX, testY),
+                                  batch_size=BATCH_SIZE,
+                                  callbacks=[checkpoint, csv_logger, early_stopping])
         else:
-            current_model.fit(trainX, trainY,
-                              epochs=EPOCHS,
-                              validation_data=(testX, testY),
-                              batch_size=BATCH_SIZE,
-                              callbacks=[checkpoint, csv_logger, early_stopping])
+            current_model = tf.keras.saving.load_model("./results/weights/weights_" + method_name[i] + ".best.h5")
 
-        # --- 6. We test the model (Change for more meaningful metrics like BLEU) ---
+        # --- 8. We test the model (Change for more meaningful metrics like BLEU) ---
 
         all_predictions = []
         for j in range(5):
-            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
+            if method_name[i] == 'SAN_Attention' or method_name[i] == 'SAN_MultiHeadAttention':
                 input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
-                                                                                            testY=np.squeeze(testY, axis=-1),
+                                                                                            testY=np.squeeze(testY,
+                                                                                                             axis=-1),
                                                                                             model=current_model,
                                                                                             tokenizer_en=tokenizer_en,
                                                                                             tokenizer_fr=tokenizer_fr)
@@ -238,6 +321,7 @@ if __name__ == '__main__':
                     ground_truth = line.split("Ground Truth (French): ")[1]
                 elif "----------" in line:
                     metric_result = calculate_metrics(prediction, ground_truth)
-                    metric_results.append(str(metric_result))
-            write_metric_results(metric_results, method_name[i])
+                    metric_results.append(metric_result)
+            results = average_metric_results(metric_results)
+            write_metric_results(results, method_name[i])
             print("All metrics are calculated for " + method_name[i])
