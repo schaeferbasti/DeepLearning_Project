@@ -61,105 +61,75 @@ class TransformerModel:
         return x
         
 
-    def global_Attention(self, x, num_heads, key_dim, dropout):
-        attn_output = MultiHeadAttention(num_heads=num_heads,
-                            key_dim=key_dim, dropout=dropout)(query=x, value=x, key=x)
-        x = Add()([x, attn_output])
-        x = LayerNormalization()(x)
-        return x
-    
-    def cross_attention(self, x, context, num_heads, key_dim, dropout):
-        # Cache the last_attn_scores attention scores for plotting later.
-        attn_output, self.last_attn_scores = MultiHeadAttention(num_heads=num_heads,
-                            key_dim=key_dim, dropout=dropout)(query=x, value=context, key=context, 
-                                                      return_attention_scores=True)
-        x = Add()([x, attn_output])
-        x = LayerNormalization()(x)
-        return x
-
-    def casual_self_attention(self, x, num_heads, key_dim, dropout):
-        """
-        x - positional embedding of the real outputs
-        """
-        attn_output = MultiHeadAttention(num_heads=num_heads,
-                            key_dim=key_dim, dropout=dropout)(query=x, value=x, key=x,
-                                        use_causal_mask = True)
-        x = Add()([x, attn_output])
-        x = LayerNormalization()(x)
-        return x
-
-    def feed_fwd(self, x):
-        seq_model = Sequential([
-            Dense(32, activation='relu'),
-            Dense(self.d_model),
-            Dropout(self.dropout_rate)
-            ])
-        x = Add()([x, seq_model(x)])
-        x = LayerNormalization()(x)
-        return x
-
-    def encoder_layer(self, x, num_heads=4):
-        """
-        execure encoder layer with self attention
-        x - postional encoding
-        """
-        self_attention = self.global_Attention(x, num_heads=num_heads,
-                            key_dim=self.d_model, dropout=self.dropout_rate)
-        
-        x = self.feed_fwd(self_attention)
-        return x
-
-    def decoder_layer(self, x, context, num_heads=4):
-        """
-        context - outut of the encoder
-        """
-        casual_self_attention = self.casual_self_attention(x, num_heads=num_heads,
-                                key_dim=self.d_model, dropout=self.dropout_rate)
-        cross_attn = self.cross_attention(casual_self_attention, context, 
-                                          num_heads=num_heads, key_dim=self.d_model,
-                                          dropout=self.dropout_rate)
-        x = self.feed_fwd(cross_attn)
-        return x
-
     def build_model(self):
-        # Encoder
-
-        encoder_layers = [self.encoder_layer for _ in range(2)] #num_layers
         encoder_inputs = Input(shape=(None,))
-        real_outputs = Input(shape=(None,))
+        decoder_inputs = Input(shape=(None,))
+
         # input_pos_emb = self.pos_embedding(encoder_inputs)
 
-        input_pos_emb = self.pos_embedding(encoder_inputs)
-        output_pos_emb = self.pos_embedding(real_outputs)
+        # input_pos_emb = self.pos_embedding(encoder_inputs)
+        # output_pos_emb = self.pos_embedding(decoder_inputs)
+                
+        output_sequence_length = 2000
+        output_length = 32
 
-        # Add dropout
-        enc_output = Dropout(self.dropout_rate)(input_pos_emb)
+        # inputs posi
+        position_embedding_layer = Embedding(output_sequence_length, output_length)
+        position_indices = tf.range(output_sequence_length)
+        embedded_indices = position_embedding_layer(position_indices)
 
-        for layer in encoder_layers:
-            enc_output = layer(enc_output)
+        position_indices = tf.range(tf.shape(encoder_inputs)[-1])
+        embedded_words = Embedding(input_dim=2000, output_dim=32)(encoder_inputs)
+        embedded_indices = Embedding(input_dim=32, output_dim=32)(position_indices)
+        input_pos_emb = embedded_words + embedded_indices
 
+        # outputs posi
+        position_embedding_layer2 = Embedding(output_sequence_length, output_length)
+        position_indices2 = tf.range(output_sequence_length)
+        embedded_indices2 = position_embedding_layer2(position_indices2)
+
+        position_indices2 = tf.range(tf.shape(encoder_inputs)[-1])
+        embedded_words2 = Embedding(input_dim=2000, output_dim=32)(decoder_inputs)
+        embedded_indices2 = Embedding(input_dim=32, output_dim=32)(position_indices)
+        output_pos_emb = embedded_words2 + embedded_indices2
+
+        global_attention = MultiHeadAttention(num_heads=4,key_dim=32, dropout=0.1)(query=input_pos_emb, value=input_pos_emb, key=input_pos_emb)
+        ffn1_1 = Dense(32, activation='relu')(global_attention)
+        ffn1_2 = Dense(32)(ffn1_1)
+        dropout1 = Dropout(0.1)(ffn1_2)
+        add1 = Add()([input_pos_emb, dropout1])
+        layer_norm1 = LayerNormalization()(add1)
+        # Encoder end
 
         # Decoder
-        decoder_layers = [self.decoder_layer for _ in range(2)] #num_layers
+        # casual attention
+        casual_attn = MultiHeadAttention(num_heads=4,key_dim=32, dropout=0.1)(query=output_pos_emb, value=output_pos_emb,
+                                                key=output_pos_emb, use_causal_mask=True)
+        add2 = Add()([output_pos_emb, casual_attn])
+        layer_norm2 = LayerNormalization()(add2)
 
-        decoder_inputs = Input(shape=(None,))
-        dec_pos_emb = self.pos_embedding(decoder_inputs)
+        # cross_attention
+        cross_attn = MultiHeadAttention(num_heads=4,key_dim=32, dropout=0.1)(query=layer_norm2, value=layer_norm1, key=layer_norm1,
+                                                                    #   return_attention_scores=True
+                                                )
+        add3 = Add()([layer_norm2, cross_attn])
+        layer_norm3 = LayerNormalization()(add3)
 
-        # Add dropout
-        dec_output = Dropout(self.dropout_rate)(dec_pos_emb)
+        ffn2_1 = Dense(32, activation='relu')(layer_norm3)
+        ffn2_2 = Dense(32)(ffn2_1)
+        dropout2 = Dropout(0.1)(ffn2_2)
+        add4 = Add()([layer_norm3, dropout2])
+        layer_norm4 = LayerNormalization()(add4)
+        # Decoder End
 
-        for layer in decoder_layers:
-            output_pos_emb  = layer(x=output_pos_emb, context=enc_output)
-
-        # final layer - probabilities/logits
-        final_layer = Dense(len(tokenizer_fr.word_index) + 1, activation='softmax')(dec_output)
-        # output = Dense(len(tokenizer_fr.word_index) + 1)(dec_output)
-
-        # Add to a model
-        model = Model([encoder_inputs, output_pos_emb], dec_output)
+        # Build Final Model
+        model = Model([input_pos_emb, output_pos_emb], layer_norm4)
 
         # Compile the model
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    
+
+
         return model
 
 

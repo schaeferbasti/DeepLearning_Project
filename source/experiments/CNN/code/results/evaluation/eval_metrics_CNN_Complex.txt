@@ -1,6 +1,1 @@
-CNN_Complex: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)
-['WER: 1.0', 'BLEU: 0.05769231170415878', 'ROUGE: 0.0', 'TER: 7.980000019073486%', 'BERT: None']
-['WER: 1.0', 'BLEU: 0.0903954729437828', 'ROUGE: 0.0', 'TER: 24.125%', 'BERT: None']
-['WER: 1.0', 'BLEU: 0.06499999016523361', 'ROUGE: 0.0', 'TER: 24.150001525878906%', 'BERT: None']
-['WER: 1.1034482717514038', 'BLEU: 0.09375', 'ROUGE: 0.0', 'TER: 36.1990966796875%', 'BERT: None']
-['WER: 1.0', 'BLEU: 0.09200968593358994', 'ROUGE: 0.0', 'TER: 56.0352668762207%', 'BERT: None']
+['CNN_Complex: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 1.0', 'BLEU: 0.06466405838727951', 'ROUGE: 0.0', 'TER: 29.9398551940918', 'BERT: None']
