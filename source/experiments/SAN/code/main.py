@@ -22,7 +22,6 @@ from source.experiments.SAN.code.method.SAN_Attention import SAN_Attention
 from source.experiments.SAN.code.method.SAN_MultiHeadAttention import SAN_MultiHeadAttention
 
 
-
 # --- 2. We define testing modules ---
 
 def translate_sequence(seq, tokenizer):
@@ -103,18 +102,7 @@ def create_metric_file(method):
     path = './results/evaluation/eval_metrics_' + method + '.txt'
     if not os.path.exists(path):
         with open(path, 'w'): pass
-        return True
-    else:
-        user_input = input('Would you like to use the existing weights for the model ' + method + '? (y/n): ')
-        if user_input.lower() == 'y' or user_input.lower() == 'yes':
-            print("Use existing weights")
-            return False
-        elif user_input.lower() == 'n' or user_input.lower() == 'no':
-            print("Train model")
-            return True
-        else:
-            print("No valid answer. Use existing weights")
-            return False
+
 
 def create_summary_file(method):
     path = './results/model_summary/model_summary_' + method + '.txt'
@@ -130,6 +118,19 @@ def create_weight_file_check_train(method):
     path = './results/weights/weights_' + method + '.best.h5'
     if not os.path.exists(path):
         with open(path, 'w'): pass
+        return True
+    else:
+        user_input = input('Would you like to use the existing weights for the model ' + method + '? (y/n): ')
+        if user_input.lower() == 'y' or user_input.lower() == 'yes':
+            print("Use existing weights")
+            return False
+        elif user_input.lower() == 'n' or user_input.lower() == 'no':
+            print("Train model")
+            return True
+        else:
+            print("No valid answer. Use existing weights")
+            return False
+
 def average_metric_results(metric_results):
     avg_results = []
     avg_results.append(str(metric_results[0]) + "\n")
@@ -156,7 +157,6 @@ def average_metric_results(metric_results):
     avg_results.append("TER: " + str(average_TER))
     average_BERT = None
     if len(BERT_list) != 0:
-        print("BERT: " + str(BERT_list))
         average_BERT = sum(BERT_list) / len(BERT_list)
     avg_results.append("BERT: " + str(average_BERT))
     return avg_results
@@ -286,7 +286,7 @@ if __name__ == '__main__':
         # --- 8. We test the model (Change for more meaningful metrics like BLEU) ---
 
         all_predictions = []
-        for j in range(5):
+        for j in range(20):
             if method_name[i] == 'SAN_Attention' or method_name[i] == 'SAN_MultiHeadAttention':
                 input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
                                                                                             testY=np.squeeze(testY,

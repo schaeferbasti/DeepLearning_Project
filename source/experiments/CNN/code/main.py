@@ -107,18 +107,7 @@ def create_metric_file(method):
     path = './results/evaluation/eval_metrics_' + method + '.txt'
     if not os.path.exists(path):
         with open(path, 'w'): pass
-        return True
-    else:
-        user_input = input('Would you like to use the existing weights for the model ' + method + '? (y/n): ')
-        if user_input.lower() == 'y' or user_input.lower() == 'yes':
-            print("Use existing weights")
-            return False
-        elif user_input.lower() == 'n' or user_input.lower() == 'no':
-            print("Train model")
-            return True
-        else:
-            print("No valid answer. Use existing weights")
-            return False
+
 
 def create_summary_file(method):
     path = './results/model_summary/model_summary_' + method + '.txt'
@@ -134,6 +123,18 @@ def create_weight_file_check_train(method):
     path = './results/weights/weights_' + method + '.best.h5'
     if not os.path.exists(path):
         with open(path, 'w'): pass
+        return True
+    else:
+        user_input = input('Would you like to use the existing weights for the model ' + method + '? (y/n): ')
+        if user_input.lower() == 'y' or user_input.lower() == 'yes':
+            print("Use existing weights")
+            return False
+        elif user_input.lower() == 'n' or user_input.lower() == 'no':
+            print("Train model")
+            return True
+        else:
+            print("No valid answer. Use existing weights")
+            return False
 
 def average_metric_results(metric_results):
     avg_results = []
@@ -161,7 +162,6 @@ def average_metric_results(metric_results):
     avg_results.append("TER: " + str(average_TER))
     average_BERT = None
     if len(BERT_list) != 0:
-        print("BERT: " + str(BERT_list))
         average_BERT = sum(BERT_list) / len(BERT_list)
     avg_results.append("BERT: " + str(average_BERT))
     return avg_results
@@ -205,8 +205,8 @@ if __name__ == '__main__':
         except RuntimeError as e:
             # Memory growth must be set at program startup
             print("RuntimeError:", e)
-    # else:
-    # raise SystemError("GPU device not found")
+    else:
+        raise SystemError("GPU device not found")
 
 
     # --- 4. We define global variables ---
@@ -276,8 +276,8 @@ if __name__ == '__main__':
                                          verbose=1, save_best_only=True, mode='max')
             csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
 
-            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[
-                i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
+            if (method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big'
+                    or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big'):
                 current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY,
                                   epochs=EPOCHS,
                                   validation_split=0.2,
@@ -295,9 +295,9 @@ if __name__ == '__main__':
         # --- 8. We test the model (Change for more meaningful metrics like BLEU) ---
 
         all_predictions = []
-        for j in range(5):
-            if method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big' or method_name[
-                i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big':
+        for j in range(20):
+            if (method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big'
+                    or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big'):
                 input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
                                                                                             testY=np.squeeze(testY,
                                                                                                              axis=-1),
