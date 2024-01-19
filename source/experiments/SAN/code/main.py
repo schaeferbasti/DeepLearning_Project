@@ -18,8 +18,14 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
 
-from source.experiments.SAN.code.method.SAN_Attention import SAN_Attention
-from source.experiments.SAN.code.method.SAN_MultiHeadAttention import SAN_MultiHeadAttention
+from source.experiments.SAN.code.method.SAN_CNN_Attention import SAN_CNN_Attention
+from source.experiments.SAN.code.method.SAN_CNN_MultiHeadAttention import SAN_CNN_MultiHeadAttention
+from source.experiments.SAN.code.method.SAN_GRU_Attention import SAN_GRU_Attention
+from source.experiments.SAN.code.method.SAN_GRU_MultiHeadAttention import SAN_GRU_MultiHeadAttention
+from source.experiments.SAN.code.method.SAN_LSTM_Attention import SAN_LSTM_Attention
+from source.experiments.SAN.code.method.SAN_LSTM_MultiHeadAttention import SAN_LSTM_MultiHeadAttention
+from source.experiments.SAN.code.method.SAN_RNN_Attention import SAN_RNN_Attention
+from source.experiments.SAN.code.method.SAN_RNN_MultiHeadAttention import SAN_RNN_MultiHeadAttention
 
 
 # --- 2. We define testing modules ---
@@ -241,10 +247,22 @@ if __name__ == '__main__':
 
     # --- 6. We load the model ---
 
-    method_name = ['SAN_Attention',
-                   'SAN_MultiHeadAttention']
-    method_instance = [SAN_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-                       SAN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
+    method_name = ['SAN_GRU_Attention',
+                   'SAN_GRU_MultiHeadAttention',
+                   'SAN_LSTM_Attention',
+                   'SAN_LSTM_MultiHeadAttention',
+                   'SAN_RNN_Attention',
+                   'SAN_RNN_MultiHeadAttention',
+                   'SAN_CNNAttention',
+                   'SAN_CNN_MultiHeadAttention']
+    method_instance = [SAN_GRU_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_GRU_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_LSTM_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_LSTM_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_RNN_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_RNN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_CNN_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_CNN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
@@ -268,7 +286,7 @@ if __name__ == '__main__':
                                          verbose=1, save_best_only=True, mode='max')
             csv_logger = TimedCSVLogger(f'./results/training_log/training_log_{method_name[i]}.csv', append=True)
 
-            if method_name[i] == 'SAN_Attention' or method_name[i] == 'SAN_MultiHeadAttention':
+            if method_name[i] == 'SAN_CNN_Attention' or method_name[i] == 'SAN_CNN_MultiHeadAttention' or method_name[i] == 'SAN_GRU_Attention' or method_name[i] == 'SAN_GRU_MultiHeadAttention' or method_name[i] == 'SAN_LSTM_Attention' or method_name[i] == 'SAN_LSTM_MultiHeadAttention' or method_name[i] == 'SAN_RNN_Attention' or method_name[i] == 'SAN_RNN_MultiHeadAttention':
                 current_model.fit([trainX, np.squeeze(trainY, axis=-1)], trainY,
                                   epochs=EPOCHS,
                                   validation_split=0.2,
@@ -287,7 +305,7 @@ if __name__ == '__main__':
 
         all_predictions = []
         for j in range(20):
-            if method_name[i] == 'SAN_Attention' or method_name[i] == 'SAN_MultiHeadAttention':
+            if method_name[i] == 'SAN_CNN_Attention' or method_name[i] == 'SAN_CNN_MultiHeadAttention' or method_name[i] == 'SAN_GRU_Attention' or method_name[i] == 'SAN_GRU_MultiHeadAttention' or method_name[i] == 'SAN_LSTM_Attention' or method_name[i] == 'SAN_LSTM_MultiHeadAttention' or method_name[i] == 'SAN_RNN_Attention' or method_name[i] == 'SAN_RNN_MultiHeadAttention':
                 input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
                                                                                             testY=np.squeeze(testY,
                                                                                                              axis=-1),
