@@ -1,1 +1,1 @@
-['CNN_Auto_Basic: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.18535787761211395', 'BLEU: 0.2481215626001358', 'ROUGE: 0.8146421194076539', 'TER: 33.83791093826294', 'BERT: None']
+['CNN_Auto_Basic: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.22521237395703791', 'BLEU: 0.39741224981844425', 'ROUGE: 0.7747876323759556', 'TER: 24.387596440315246', 'BERT: 0.9952181726694107']
