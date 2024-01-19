@@ -1,40 +1,40 @@
-Model: "model"
+Model: "model_1"
 __________________________________________________________________________________________________
  Layer (type)                Output Shape                 Param #   Connected to                  
 ==================================================================================================
- input_1 (InputLayer)        [(None, 121)]                0         []                            
+ input_3 (InputLayer)        [(None, 121)]                0         []                            
                                                                                                   
- input_2 (InputLayer)        [(None, None)]               0         []                            
+ input_4 (InputLayer)        [(None, None)]               0         []                            
                                                                                                   
- embedding (Embedding)       (None, 121, 64)              1064320   ['input_1[0][0]']             
+ embedding_2 (Embedding)     (None, 121, 64)              1064320   ['input_3[0][0]']             
                                                                                                   
- embedding_1 (Embedding)     (None, None, 64)             1332480   ['input_2[0][0]']             
+ embedding_3 (Embedding)     (None, None, 64)             1332480   ['input_4[0][0]']             
                                                                                                   
- conv1d (Conv1D)             (None, 121, 256)             131328    ['embedding[0][0]']           
+ conv1d_6 (Conv1D)           (None, 121, 256)             131328    ['embedding_2[0][0]']         
                                                                                                   
- conv1d_3 (Conv1D)           (None, None, 256)            131328    ['embedding_1[0][0]']         
+ conv1d_9 (Conv1D)           (None, None, 256)            131328    ['embedding_3[0][0]']         
                                                                                                   
- conv1d_1 (Conv1D)           (None, 121, 128)             163968    ['conv1d[0][0]']              
+ conv1d_7 (Conv1D)           (None, 121, 128)             163968    ['conv1d_6[0][0]']            
                                                                                                   
- conv1d_4 (Conv1D)           (None, None, 128)            163968    ['conv1d_3[0][0]']            
+ conv1d_10 (Conv1D)          (None, None, 128)            163968    ['conv1d_9[0][0]']            
                                                                                                   
- conv1d_2 (Conv1D)           (None, 121, 64)              24640     ['conv1d_1[0][0]']            
+ conv1d_8 (Conv1D)           (None, 121, 64)              24640     ['conv1d_7[0][0]']            
                                                                                                   
- conv1d_5 (Conv1D)           (None, None, 64)             24640     ['conv1d_4[0][0]']            
+ conv1d_11 (Conv1D)          (None, None, 64)             24640     ['conv1d_10[0][0]']           
                                                                                                   
- multi_head_attention (Mult  (None, 121, 64)              132672    ['conv1d_2[0][0]',            
- iHeadAttention)                                                     'conv1d_2[0][0]']            
+ multi_head_attention (Mult  (None, 121, 64)              132672    ['conv1d_8[0][0]',            
+ iHeadAttention)                                                     'conv1d_8[0][0]']            
                                                                                                   
- multi_head_attention_1 (Mu  (None, None, 64)             132672    ['conv1d_5[0][0]',            
- ltiHeadAttention)                                                   'conv1d_5[0][0]']            
+ multi_head_attention_1 (Mu  (None, None, 64)             132672    ['conv1d_11[0][0]',           
+ ltiHeadAttention)                                                   'conv1d_11[0][0]']           
                                                                                                   
- concatenate (Concatenate)   (None, 121, 128)             0         ['multi_head_attention[0][0]',
-                                                                     'multi_head_attention_1[0][0]
+ concatenate_1 (Concatenate  (None, 121, 128)             0         ['multi_head_attention[0][0]',
+ )                                                                   'multi_head_attention_1[0][0]
                                                                     ']                            
                                                                                                   
- dense (Dense)               (None, 121, 100)             12900     ['concatenate[0][0]']         
+ dense_2 (Dense)             (None, 121, 100)             12900     ['concatenate_1[0][0]']       
                                                                                                   
- dense_1 (Dense)             (None, 121, 20820)           2102820   ['dense[0][0]']               
+ dense_3 (Dense)             (None, 121, 20820)           2102820   ['dense_2[0][0]']             
                                                                                                   
 ==================================================================================================
 Total params: 5417736 (20.67 MB)
