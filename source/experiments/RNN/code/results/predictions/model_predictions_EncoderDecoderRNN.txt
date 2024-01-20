@@ -1,20 +1,20 @@
 Input (English): 'elections' 'or' 'not' 'there' 'is' 'some' 'nightlife' 'going' 'on' 'in' 'antananarivo' 'stay' 'positive'
-Predicted (French): 'en' 'attendant' 'certains' 'gardent' 'leur' 'et' 'arrivent' 'a'
+Predicted (French): 'en' 'macedonien' 'certains' 'inegalites' 'leur' 'et' 'for' 'a'
 Ground Truth (French): 'en' 'attendant' 'certains' 'gardent' 'leur' 'et' 'arrivent' 'a'
 ----------
 Input (English): 'you' 'may' 'feel' 'as' 'if' 'global' 'voices' 'community' 'members' 'are' 'already' 'longtime' 'friends' 'after' 'being' 'a' 'regular' 'reader' 'of' 'their' 'posts' 'and' 'translations' 'highlighting' 'the' 'online' 'conversation' 'in' 'their' 'countries'
-Predicted (French): 'si' 'vous' 'etes' 'un' 'lecteur' 'lossetie' 'des' 'articles' 'originaux' 'de' 'global' 'voices' 'et' 'de' 'leurs' 'traductions' 'qui' 'vous' 'informent' 'des' 'questions' 'chantaient' 'en' 'ligne' 'a' 'travers' 'le' 'monde' 'il' 'se' 'peut' 'que' 'vous' 'ayez' 'le' 'sentiment' 'que' 'les' 'membres' 'de' 'cette' 'communaute' 'sont' 'des' 'amis' 'de' 'longue' 'date'
+Predicted (French): 'si' 'vous' 'etes' 'un' 'lecteur' 'lina' 'des' 'articles' 'devaient' 'de' 'global' 'voices' 'et' 'de' 'leurs' 'armenie' 'qui' 'vous' 'dommage' 'des' 'questions' 'sopposer' 'en' 'ligne' 'a' 'travers' 'le' 'monde' 'il' 'se' 'peut' 'que' 'vous' 'fais' 'le' 'sentiment' 'que' 'les' 'membres' 'de' 'cette' 'communaute' 'sont' 'des' 'amis' 'de' 'particulier' 'date'
 Ground Truth (French): 'si' 'vous' 'etes' 'un' 'lecteur' 'regulier' 'des' 'articles' 'originaux' 'de' 'global' 'voices' 'et' 'de' 'leurs' 'traductions' 'qui' 'vous' 'informent' 'des' 'questions' 'debattues' 'en' 'ligne' 'a' 'travers' 'le' 'monde' 'il' 'se' 'peut' 'que' 'vous' 'ayez' 'le' 'sentiment' 'que' 'les' 'membres' 'de' 'cette' 'communaute' 'sont' 'des' 'amis' 'de' 'longue' 'date'
 ----------
 Input (English): 'perhaps' 'you' 'may' 'also' 'follow' 'them' 'on' 'twitter' 'or' 'are' 'familiar' 'with' 'their' 'digital' 'projects' 'and' 'activities'
-Predicted (French): 'peutetre' 'que' 'vous' 'les' 'suivez' 'deja' 'sur' 'twitter' 'ou' 'que' 'vous' 'connaissez' 'les' 'projets' 'et' 'activites' 'dans' 'lesquels' 'ils' 'sont' 'engages' 'en' 'ligne'
+Predicted (French): 'peutetre' 'que' 'vous' 'les' 'jourla' 'deja' 'sur' 'twitter' 'ou' 'que' 'vous' 'prince' 'les' 'projets' 'et' 'activites' 'dans' 'lesquels' 'ils' 'sont' 'relate' 'en' 'ligne'
 Ground Truth (French): 'peutetre' 'que' 'vous' 'les' 'suivez' 'deja' 'sur' 'twitter' 'ou' 'que' 'vous' 'connaissez' 'les' 'projets' 'et' 'activites' 'dans' 'lesquels' 'ils' 'sont' 'engages' 'en' 'ligne'
 ----------
 Input (English): 'certainly' 'these' 'virtual' 'connections' 'can' 'help' 'make' 'the' 'world' 'feel' 'like' 'a' 'smaller' 'place' 'but' 'there' 'is' 'still' 'something' 'elemental' 'about' 'offline' 'interactions' 'that' 'can' 'only' 'help' 'strengthen' 'these' 'online' 'bonds'
-Predicted (French): 'ces' 'connexions' 'virtuelles' 'peuvent' 'donner' 'un' 'sentiment' 'dunite' 'et' 'donner' 'limpression' 'que' 'le' 'monde' 'nest' 'pas' 'aussi' 'vaste' 'quil' 'ny' 'parait' 'mais' 'il' 'reste' 'quelque' 'chose' 'dans' 'les' 'interactions' 'reelles' 'necessaires' 'pour' 'renforcer' 'les' 'liens' 'sur' 'internet'
+Predicted (French): 'ces' 'gars' 'douvrir' 'peuvent' 'donner' 'un' 'sentiment' 'eh' 'et' 'donner' 'limpression' 'que' 'le' 'monde' 'nest' 'pas' 'aussi' 'quelquesuns' 'quil' 'ny' 'news' 'mais' 'il' 'reste' 'quelque' 'chose' 'dans' 'les' 'gorges' 'for' 'news' 'pour' 'carte' 'les' 'etatsunis' 'sur' 'demande'
 Ground Truth (French): 'ces' 'connexions' 'virtuelles' 'peuvent' 'donner' 'un' 'sentiment' 'dunite' 'et' 'donner' 'limpression' 'que' 'le' 'monde' 'nest' 'pas' 'aussi' 'vaste' 'quil' 'ny' 'parait' 'mais' 'il' 'reste' 'quelque' 'chose' 'dans' 'les' 'interactions' 'reelles' 'necessaires' 'pour' 'renforcer' 'les' 'liens' 'sur' 'internet'
 ----------
 Input (English): 'throughout' 'the' 'months' 'of' 'november' 'and' 'december' 'we' 'are' 'organizing' 'six' 'global' 'inperson' 'meetups' 'led' 'and' 'facilitated' 'by' 'global' 'voices' 'members' 'who' 'live' 'and' 'know' 'those' 'local' 'communities'
-Predicted (French): 'durant' 'les' 'mois' 'de' 'novembre' 'et' 'de' 'decembre' 'nous' 'organisons' 'six' 'rencontres' 'global' 'voices' 'coordonnees' 'par' 'des' 'membres' 'de' 'lorganisation' 'qui' 'connaissent' 'bien' 'les' 'communautes' 'locales' 'pour' 'y' 'vivre'
+Predicted (French): 'durant' 'les' 'mois' 'de' 'novembre' 'et' 'de' 'decembre' 'nous' 'pourquoi' 'six' 'monsieur' 'global' 'voices' 'laube' 'par' 'des' 'membres' 'de' 'lorganisation' 'qui' 'monsieur' 'bien' 'les' 'communautes' 'locales' 'pour' 'y' 'vivre'
 Ground Truth (French): 'durant' 'les' 'mois' 'de' 'novembre' 'et' 'de' 'decembre' 'nous' 'organisons' 'six' 'rencontres' 'global' 'voices' 'coordonnees' 'par' 'des' 'membres' 'de' 'lorganisation' 'qui' 'connaissent' 'bien' 'les' 'communautes' 'locales' 'pour' 'y' 'vivre'
 ----------
