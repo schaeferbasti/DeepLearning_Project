@@ -6,7 +6,10 @@ import time
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
-from method.self_attention import TransformerBasic
+from method.pretrained_bart import BartBasic
+import tensorflow as tf
+from sklearn.model_selection import train_test_split
+from transformers import BartTokenizer
 # from method.simple_lstm import SimpleLSTMModel
 # from method.simple_gru import SimpleGRUModel
 # from method.bi_rnn import BidirectionalRNNModel
@@ -97,6 +100,7 @@ if __name__ == '__main__':
     EPOCHS = 100
     BATCH_SIZE = 32
     MAX_VOCAB_SIZE_FR = 20500
+    VALIDATION_SPLIT = 0.2
 
     # --- 3. We open the data and apply tokenization ---
 
@@ -125,12 +129,35 @@ if __name__ == '__main__':
     trainY = trainY.reshape(trainY.shape[0], trainY.shape[1], 1)
     testY = testY.reshape(testY.shape[0], testY.shape[1], 1)
 
+    # PRETRAINED PREPROCESS
+    train_df, test_df = train_test_split(df, test_size=VALIDATION_SPLIT)
+    # testX = tokenizer(test_df['en_tokens'].tolist(), return_tensors='tf', padding=True, truncation=True, max_length=512)['input_ids']
+    # testY = tokenizer(test_df['fr_tokens'].tolist(), return_tensors='tf', padding=True, truncation=True, max_length=512)['input_ids']
+
+    src_texts = train_df['en_tokens'].tolist()
+    tgt_texts = train_df['fr_tokens'].tolist()
+
+    # Tokenize and pad the sequences
+    tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn")
+    tokenized_inputs = tokenizer(src_texts, return_tensors="tf", padding=True, truncation=True)
+    tokenized_outputs = tokenizer(tgt_texts, return_tensors="tf", padding=True, truncation=True)
+    
+    # Ensure the input and output sequences have the same length
+    max_len = max(tokenized_inputs['input_ids'].shape[1], tokenized_outputs['input_ids'].shape[1])
+    tokenized_inputs = tokenizer(src_texts, return_tensors="tf", padding='max_length', truncation=True, max_length=max_len)
+    tokenized_outputs = tokenizer(tgt_texts, return_tensors="tf", padding='max_length', truncation=True, max_length=max_len)
+
+    # Convert tokenized_inputs and tokenized_outputs to numpy arrays
+    input_ids = np.array(tokenized_inputs['input_ids'])
+    attention_mask = np.array(tokenized_inputs['attention_mask'])
+    labels = np.array(tokenized_outputs['input_ids'])
+
     # --- 4. We load the model ---
 
     #method_name = ['SimpleRNN', 'SimpleLSTM', 'SimpleGRU', 'BiRNN', 'BiLSTM', 'BiGRU', 'EncoderDecoderRNN', 'EncoderDecoderLSTM', 'EncoderDecoderGRU']
-    method_name = ['SelfAttention']
+    method_name = ['BartBasic']
     #method_instance = [SimpleRNNModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), SimpleLSTMModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), SimpleGRUModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalRNNModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalLSTMModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), BidirectionalGRUModel(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR), EncoderDecoderRNNModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderLSTMModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR), EncoderDecoderGRUModel(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
-    method_instance = [TransformerBasic(tokenizer_en, tokenizer_fr, MAX_VOCAB_SIZE_FR)]
+    method_instance = [BartBasic(tokenized_inputs, tokenized_outputs, MAX_VOCAB_SIZE_FR)]
 
 
     # Shared Callbacks
@@ -145,8 +172,11 @@ if __name__ == '__main__':
 
         if method_name[i] == 'EncoderDecoderRNN' or method_name[i] == 'EncoderDecoderLSTM' or method_name[i] == 'EncoderDecoderGRU':
             current_model.fit([trainX, trainY], np.expand_dims(trainY, -1), epochs=EPOCHS, validation_split=0.2, batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
+        elif method_name[i] == 'BartBasic':
+            current_model.fit([input_ids, attention_mask], labels, epochs=EPOCHS, batch_size=BATCH_SIZE)      
         else:
             current_model.fit(trainX, trainY, epochs=EPOCHS, validation_data=(testX, testY), batch_size=BATCH_SIZE, callbacks=[checkpoint, csv_logger, early_stopping])
+
 
         # --- 6. We test the model (Change for more meaningful metrics like BLEU) ---
 
