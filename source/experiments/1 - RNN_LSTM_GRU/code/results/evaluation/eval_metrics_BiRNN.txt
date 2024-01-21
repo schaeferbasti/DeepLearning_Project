@@ -1,0 +1,1 @@
+['BiRNN: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 1.001424288749695', 'BLEU: 0.17172896564006807', 'ROUGE: 0.2078149914741516', 'TER: 25.30380630493164', 'BERT: None']

@@ -1,0 +1,1 @@
+['EncoderDecoderLSTM: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.7024264931678772', 'BLEU: 0.11899231821298599', 'ROUGE: 0.31280338764190674', 'TER: 33.095953369140624', 'BERT: None']

@@ -1,0 +1,1 @@
+['marian_transformer_mt: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.9196961563825607', 'BLEU: 0.19794449459761382', 'ROUGE: 0.16823473777621983', 'TER: 9.133515706062317', 'BERT: 0.9856363236904144']

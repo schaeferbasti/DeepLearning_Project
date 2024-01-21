@@ -1,0 +1,1 @@
+['SimpleGRU: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 1.0197801351547242', 'BLEU: 0.13459561318159102', 'ROUGE: 0.2591398134827614', 'TER: 25.744824600219726', 'BERT: None']

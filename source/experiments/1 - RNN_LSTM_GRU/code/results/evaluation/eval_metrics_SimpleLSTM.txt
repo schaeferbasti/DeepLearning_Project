@@ -1,0 +1,1 @@
+['SimpleLSTM: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 1.0504379510879516', 'BLEU: 0.15115489512681962', 'ROUGE: 0.1889383465051651', 'TER: 24.856358146667482', 'BERT: None']

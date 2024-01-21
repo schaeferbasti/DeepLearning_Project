@@ -1,0 +1,1 @@
+['EncoderDecoderGRU: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.10404476672410964', 'BLEU: 0.25387842655181886', 'ROUGE: 0.8959552407264709', 'TER: 33.095953369140624', 'BERT: None']
