@@ -247,37 +247,22 @@ if __name__ == '__main__':
 
     # --- 6. We load the model ---
 
-    # method_name = ['SAN_GRU_Attention',
-    #                'SAN_GRU_MultiHeadAttention',
-    #                'SAN_LSTM_Attention',
-    #                'SAN_LSTM_MultiHeadAttention',
-    #                'SAN_RNN_Attention',
-    #                'SAN_RNN_MultiHeadAttention',
-    #                'SAN_CNNAttention',
-    #                'SAN_CNN_MultiHeadAttention']
-    
     method_name = ['SAN_GRU_Attention',
                    'SAN_GRU_MultiHeadAttention',
                    'SAN_LSTM_Attention',
                    'SAN_LSTM_MultiHeadAttention',
                    'SAN_RNN_Attention',
-                   'SAN_RNN_MultiHeadAttention']
-
-    # method_instance = [SAN_GRU_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-    #                    SAN_GRU_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-    #                    SAN_LSTM_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-    #                    SAN_LSTM_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-    #                    SAN_RNN_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-    #                    SAN_RNN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-    #                    SAN_CNN_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-    #                    SAN_CNN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
-
+                   'SAN_RNN_MultiHeadAttention',
+                   'SAN_CNNAttention',
+                   'SAN_CNN_MultiHeadAttention']
     method_instance = [SAN_GRU_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
                        SAN_GRU_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
                        SAN_LSTM_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
                        SAN_LSTM_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
                        SAN_RNN_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
-                       SAN_RNN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
+                       SAN_RNN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_CNN_Attention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR),
+                       SAN_CNN_MultiHeadAttention(tokenizer_en, tokenizer_fr, max_len, MAX_VOCAB_SIZE_FR)]
 
     # Shared Callbacks
     early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max', verbose=1)
