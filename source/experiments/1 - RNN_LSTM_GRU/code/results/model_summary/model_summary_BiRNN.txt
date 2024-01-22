@@ -1,0 +1,26 @@
+Model: "sequential_3"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding_3 (Embedding)     (None, 282, 64)           9952576   
+                                                                 
+ bidirectional (Bidirectiona  (None, 282, 128)         16512     
+ l)                                                              
+                                                                 
+ bidirectional_1 (Bidirectio  (None, 282, 64)          10304     
+ nal)                                                            
+                                                                 
+ bidirectional_2 (Bidirectio  (None, 282, 64)          6208      
+ nal)                                                            
+                                                                 
+ dropout_6 (Dropout)         (None, 282, 64)           0         
+                                                                 
+ dense_6 (Dense)             (None, 282, 32)           2080      
+                                                                 
+ dense_7 (Dense)             (None, 282, 20501)        676533    
+                                                                 
+=================================================================
+Total params: 10,664,213
+Trainable params: 10,664,213
+Non-trainable params: 0
+_________________________________________________________________

@@ -1,1 +1,1 @@
-['EncoderDecoderRNN: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.21729928851127625', 'BLEU: 0.2571095049381256', 'ROUGE: 0.7827007055282593', 'TER: 33.095953369140624', 'BERT: None']
+['EncoderDecoderRNN: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.27272939740493896', 'BLEU: 0.3335924874320626', 'ROUGE: 0.7267350399643183', 'TER: 21.169098489403726', 'BERT: 0.9937802813519007']

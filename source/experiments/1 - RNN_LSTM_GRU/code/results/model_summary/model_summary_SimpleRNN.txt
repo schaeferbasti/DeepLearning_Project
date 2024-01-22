@@ -1,0 +1,25 @@
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding (Embedding)       (None, 282, 64)           9952576   
+                                                                 
+ simple_rnn (SimpleRNN)      (None, 282, 64)           8256      
+                                                                 
+ dropout (Dropout)           (None, 282, 64)           0         
+                                                                 
+ simple_rnn_1 (SimpleRNN)    (None, 282, 64)           8256      
+                                                                 
+ dropout_1 (Dropout)         (None, 282, 64)           0         
+                                                                 
+ simple_rnn_2 (SimpleRNN)    (None, 282, 32)           3104      
+                                                                 
+ dense (Dense)               (None, 282, 32)           1056      
+                                                                 
+ dense_1 (Dense)             (None, 282, 20501)        676533    
+                                                                 
+=================================================================
+Total params: 10,649,781
+Trainable params: 10,649,781
+Non-trainable params: 0
+_________________________________________________________________

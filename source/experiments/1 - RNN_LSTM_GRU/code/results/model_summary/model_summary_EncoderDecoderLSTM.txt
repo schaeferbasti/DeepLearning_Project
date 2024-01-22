@@ -1,0 +1,41 @@
+Model: "model_1"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ input_3 (InputLayer)           [(None, None)]       0           []                               
+                                                                                                  
+ embedding_8 (Embedding)        (None, None, 32)     4976288     ['input_3[0][0]']                
+                                                                                                  
+ lstm_6 (LSTM)                  (None, None, 32)     8320        ['embedding_8[0][0]']            
+                                                                                                  
+ lstm_7 (LSTM)                  (None, None, 32)     8320        ['lstm_6[0][0]']                 
+                                                                                                  
+ input_4 (InputLayer)           [(None, None)]       0           []                               
+                                                                                                  
+ dropout_14 (Dropout)           (None, None, 32)     0           ['lstm_7[0][0]']                 
+                                                                                                  
+ embedding_9 (Embedding)        (None, None, 32)     5667520     ['input_4[0][0]']                
+                                                                                                  
+ lstm_8 (LSTM)                  [(None, 32),         8320        ['dropout_14[0][0]']             
+                                 (None, 32),                                                      
+                                 (None, 32)]                                                      
+                                                                                                  
+ lstm_9 (LSTM)                  [(None, None, 32),   8320        ['embedding_9[0][0]',            
+                                 (None, 32),                      'lstm_8[0][1]',                 
+                                 (None, 32)]                      'lstm_8[0][2]']                 
+                                                                                                  
+ dropout_15 (Dropout)           (None, None, 32)     0           ['lstm_9[0][0]']                 
+                                                                                                  
+ lstm_10 (LSTM)                 (None, None, 32)     8320        ['dropout_15[0][0]']             
+                                                                                                  
+ dropout_16 (Dropout)           (None, None, 32)     0           ['lstm_10[0][0]']                
+                                                                                                  
+ lstm_11 (LSTM)                 (None, None, 16)     3136        ['dropout_16[0][0]']             
+                                                                                                  
+ dense_13 (Dense)               (None, None, 20501)  348517      ['lstm_11[0][0]']                
+                                                                                                  
+==================================================================================================
+Total params: 11,037,061
+Trainable params: 11,037,061
+Non-trainable params: 0
+__________________________________________________________________________________________________

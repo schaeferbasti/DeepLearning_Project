@@ -1,0 +1,26 @@
+Model: "sequential_5"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding_5 (Embedding)     (None, 282, 64)           9952576   
+                                                                 
+ bidirectional_6 (Bidirectio  (None, 282, 128)         49920     
+ nal)                                                            
+                                                                 
+ bidirectional_7 (Bidirectio  (None, 282, 64)          31104     
+ nal)                                                            
+                                                                 
+ bidirectional_8 (Bidirectio  (None, 282, 64)          18816     
+ nal)                                                            
+                                                                 
+ dropout_8 (Dropout)         (None, 282, 64)           0         
+                                                                 
+ dense_10 (Dense)            (None, 282, 32)           2080      
+                                                                 
+ dense_11 (Dense)            (None, 282, 20501)        676533    
+                                                                 
+=================================================================
+Total params: 10,731,029
+Trainable params: 10,731,029
+Non-trainable params: 0
+_________________________________________________________________
