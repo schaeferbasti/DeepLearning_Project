@@ -19,12 +19,12 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping, Callback
 
-from source.experiments.CNN.code.method.cnn_basic import CNN_Basic
-from source.experiments.CNN.code.method.cnn_auto_basic import CNN_Auto_Basic
-from source.experiments.CNN.code.method.cnn_auto_basic_big import CNN_Auto_Basic_Big
-from source.experiments.CNN.code.method.cnn_complex import CNN_Complex
-from source.experiments.CNN.code.method.cnn_auto_complex import CNN_Auto_Complex
-from source.experiments.CNN.code.method.cnn_auto_complex_big import CNN_Auto_Complex_Big
+from method.cnn_basic import CNN_Basic
+from method.cnn_auto_basic import CNN_Auto_Basic
+from method.cnn_auto_basic_big import CNN_Auto_Basic_Big
+from method.cnn_complex import CNN_Complex
+from method.cnn_auto_complex import CNN_Auto_Complex
+from method.cnn_auto_complex_big import CNN_Auto_Complex_Big
 
 
 # --- 2. We define testing modules ---
