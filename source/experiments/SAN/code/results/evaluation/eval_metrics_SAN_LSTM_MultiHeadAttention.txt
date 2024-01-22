@@ -1,0 +1,1 @@
+['SAN_LSTM_MultiHeadAttention: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.6887426748871803', 'BLEU: 0.1455857116729021', 'ROUGE: 0.32031102031469344', 'TER: 24.273238682746886', 'BERT: None']

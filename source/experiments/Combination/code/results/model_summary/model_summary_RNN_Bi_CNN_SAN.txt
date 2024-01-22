@@ -1,0 +1,60 @@
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 121)]                0         []                            
+                                                                                                  
+ input_2 (InputLayer)        [(None, None)]               0         []                            
+                                                                                                  
+ embedding (Embedding)       (None, 121, 64)              1064320   ['input_1[0][0]']             
+                                                                                                  
+ embedding_1 (Embedding)     (None, None, 64)             1332480   ['input_2[0][0]']             
+                                                                                                  
+ bidirectional (Bidirection  (None, 121, 128)             16512     ['embedding[0][0]']           
+ al)                                                                                              
+                                                                                                  
+ bidirectional_3 (Bidirecti  (None, None, 128)            16512     ['embedding_1[0][0]']         
+ onal)                                                                                            
+                                                                                                  
+ bidirectional_1 (Bidirecti  (None, 121, 128)             24704     ['bidirectional[0][0]']       
+ onal)                                                                                            
+                                                                                                  
+ bidirectional_4 (Bidirecti  (None, None, 128)            24704     ['bidirectional_3[0][0]']     
+ onal)                                                                                            
+                                                                                                  
+ bidirectional_2 (Bidirecti  (None, 121, 128)             24704     ['bidirectional_1[0][0]']     
+ onal)                                                                                            
+                                                                                                  
+ bidirectional_5 (Bidirecti  (None, None, 128)            24704     ['bidirectional_4[0][0]']     
+ onal)                                                                                            
+                                                                                                  
+ conv1d (Conv1D)             (None, 121, 256)             262400    ['bidirectional_2[0][0]']     
+                                                                                                  
+ conv1d_3 (Conv1D)           (None, None, 256)            262400    ['bidirectional_5[0][0]']     
+                                                                                                  
+ conv1d_1 (Conv1D)           (None, 121, 128)             163968    ['conv1d[0][0]']              
+                                                                                                  
+ conv1d_4 (Conv1D)           (None, None, 128)            163968    ['conv1d_3[0][0]']            
+                                                                                                  
+ conv1d_2 (Conv1D)           (None, 121, 64)              24640     ['conv1d_1[0][0]']            
+                                                                                                  
+ conv1d_5 (Conv1D)           (None, None, 64)             24640     ['conv1d_4[0][0]']            
+                                                                                                  
+ attention (Attention)       (None, 121, 64)              1         ['conv1d_2[0][0]',            
+                                                                     'conv1d_2[0][0]']            
+                                                                                                  
+ attention_1 (Attention)     (None, None, 64)             1         ['conv1d_5[0][0]',            
+                                                                     'conv1d_5[0][0]']            
+                                                                                                  
+ concatenate (Concatenate)   (None, 121, 128)             0         ['attention[0][0]',           
+                                                                     'attention_1[0][0]']         
+                                                                                                  
+ dense (Dense)               (None, 121, 100)             12900     ['concatenate[0][0]']         
+                                                                                                  
+ dense_1 (Dense)             (None, 121, 20820)           2102820   ['dense[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 5546378 (21.16 MB)
+Trainable params: 5546378 (21.16 MB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________

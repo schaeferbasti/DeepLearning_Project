@@ -1,0 +1,1 @@
+['SAN_LSTM_Attention: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.6167987406253814', 'BLEU: 0.16609490774571894', 'ROUGE: 0.43401183038949964', 'TER: 25.63412435054779', 'BERT: None']
