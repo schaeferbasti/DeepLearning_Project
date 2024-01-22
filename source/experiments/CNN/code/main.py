@@ -205,8 +205,8 @@ if __name__ == '__main__':
         except RuntimeError as e:
             # Memory growth must be set at program startup
             print("RuntimeError:", e)
-    else:
-        raise SystemError("GPU device not found")
+    #else:
+        #raise SystemError("GPU device not found")
 
 
     # --- 4. We define global variables ---
@@ -295,7 +295,7 @@ if __name__ == '__main__':
         # --- 8. We test the model (Change for more meaningful metrics like BLEU) ---
 
         all_predictions = []
-        for j in range(20):
+        for j in range(1000):
             if (method_name[i] == 'CNN_Auto_Basic' or method_name[i] == 'CNN_Auto_Basic_Big'
                     or method_name[i] == 'CNN_Auto_Complex' or method_name[i] == 'CNN_Auto_Complex_Big'):
                 input_text, predicted_text, ground_truth_text = predict_and_compare_auto_en(index=j, testX=testX,
