@@ -1,0 +1,3 @@
+Find the weights zip file here:
+
+https://www.dropbox.com/scl/fi/6zj4qd7d1h7x3ii09p2pt/weights_transformer.zip?rlkey=psm1kigtmz2yfyzzne784j6rj&dl=0
