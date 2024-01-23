@@ -1,4 +1,4 @@
-# DeepLearning_Project
+# Deep Learning Project
 
 ## Exercise:
 The objective is to extensively study the available deep learning solutions for the text to text translation problem using the french to English text dataset from the following kaggle competition:
