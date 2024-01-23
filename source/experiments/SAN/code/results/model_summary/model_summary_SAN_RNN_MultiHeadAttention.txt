@@ -14,21 +14,21 @@ ________________________________________________________________________________
                                                                                                   
  simple_rnn_9 (SimpleRNN)    (None, None, 32)             3104      ['embedding_14[0][0]']        
                                                                                                   
- dropout_20 (Dropout)        (None, 121, 32)              0         ['simple_rnn_6[0][0]']        
+ dropout_24 (Dropout)        (None, 121, 32)              0         ['simple_rnn_6[0][0]']        
                                                                                                   
- dropout_22 (Dropout)        (None, None, 32)             0         ['simple_rnn_9[0][0]']        
+ dropout_26 (Dropout)        (None, None, 32)             0         ['simple_rnn_9[0][0]']        
                                                                                                   
- simple_rnn_7 (SimpleRNN)    (None, 121, 32)              2080      ['dropout_20[0][0]']          
+ simple_rnn_7 (SimpleRNN)    (None, 121, 32)              2080      ['dropout_24[0][0]']          
                                                                                                   
- simple_rnn_10 (SimpleRNN)   (None, None, 32)             2080      ['dropout_22[0][0]']          
+ simple_rnn_10 (SimpleRNN)   (None, None, 32)             2080      ['dropout_26[0][0]']          
                                                                                                   
- dropout_21 (Dropout)        (None, 121, 32)              0         ['simple_rnn_7[0][0]']        
+ dropout_25 (Dropout)        (None, 121, 32)              0         ['simple_rnn_7[0][0]']        
                                                                                                   
- dropout_23 (Dropout)        (None, None, 32)             0         ['simple_rnn_10[0][0]']       
+ dropout_27 (Dropout)        (None, None, 32)             0         ['simple_rnn_10[0][0]']       
                                                                                                   
- simple_rnn_8 (SimpleRNN)    (None, 121, 32)              2080      ['dropout_21[0][0]']          
+ simple_rnn_8 (SimpleRNN)    (None, 121, 32)              2080      ['dropout_25[0][0]']          
                                                                                                   
- simple_rnn_11 (SimpleRNN)   (None, None, 32)             2080      ['dropout_23[0][0]']          
+ simple_rnn_11 (SimpleRNN)   (None, None, 32)             2080      ['dropout_27[0][0]']          
                                                                                                   
  multi_head_attention_4 (Mu  (None, 121, 32)              67104     ['simple_rnn_8[0][0]',        
  ltiHeadAttention)                                                   'simple_rnn_8[0][0]']        

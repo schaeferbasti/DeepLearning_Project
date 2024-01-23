@@ -14,21 +14,21 @@ ________________________________________________________________________________
                                                                                                   
  lstm_9 (LSTM)               (None, None, 32)             12416     ['embedding_9[0][0]']         
                                                                                                   
- dropout_12 (Dropout)        (None, 121, 32)              0         ['lstm_6[0][0]']              
+ dropout_14 (Dropout)        (None, 121, 32)              0         ['lstm_6[0][0]']              
                                                                                                   
- dropout_14 (Dropout)        (None, None, 32)             0         ['lstm_9[0][0]']              
+ dropout_16 (Dropout)        (None, None, 32)             0         ['lstm_9[0][0]']              
                                                                                                   
- lstm_7 (LSTM)               (None, 121, 32)              8320      ['dropout_12[0][0]']          
+ lstm_7 (LSTM)               (None, 121, 32)              8320      ['dropout_14[0][0]']          
                                                                                                   
- lstm_10 (LSTM)              (None, None, 32)             8320      ['dropout_14[0][0]']          
+ lstm_10 (LSTM)              (None, None, 32)             8320      ['dropout_16[0][0]']          
                                                                                                   
- dropout_13 (Dropout)        (None, 121, 32)              0         ['lstm_7[0][0]']              
+ dropout_15 (Dropout)        (None, 121, 32)              0         ['lstm_7[0][0]']              
                                                                                                   
- dropout_15 (Dropout)        (None, None, 32)             0         ['lstm_10[0][0]']             
+ dropout_17 (Dropout)        (None, None, 32)             0         ['lstm_10[0][0]']             
                                                                                                   
- lstm_8 (LSTM)               (None, 121, 32)              8320      ['dropout_13[0][0]']          
+ lstm_8 (LSTM)               (None, 121, 32)              8320      ['dropout_15[0][0]']          
                                                                                                   
- lstm_11 (LSTM)              (None, None, 32)             8320      ['dropout_15[0][0]']          
+ lstm_11 (LSTM)              (None, None, 32)             8320      ['dropout_17[0][0]']          
                                                                                                   
  multi_head_attention_2 (Mu  (None, 121, 32)              67104     ['lstm_8[0][0]',              
  ltiHeadAttention)                                                   'lstm_8[0][0]']              

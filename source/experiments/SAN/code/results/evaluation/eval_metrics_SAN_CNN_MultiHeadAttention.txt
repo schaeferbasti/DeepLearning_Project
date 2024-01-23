@@ -1,0 +1,1 @@
+['SAN_CNN_MultiHeadAttention: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.6081959553658962', 'BLEU: 0.16715104145836085', 'ROUGE: 0.3957736217491329', 'TER: 23.769811120986937', 'BERT: 0.9806601013456072']
