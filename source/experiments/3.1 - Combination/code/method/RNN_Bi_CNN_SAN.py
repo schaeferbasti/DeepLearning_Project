@@ -1,7 +1,7 @@
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Embedding, Conv1D, SimpleRNN, Bidirectional, Attention, Concatenate, Dense
 
-class SAN_CNN_Attention:
+class RNN_Bi_CNN_SAN:
     def __init__(self, tokenizer_en, tokenizer_fr, max_len, max_vocab_fr_len):
         self.tokenizer_en = tokenizer_en
         self.tokenizer_fr = tokenizer_fr

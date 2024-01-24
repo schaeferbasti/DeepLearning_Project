@@ -151,7 +151,7 @@ def average_metric_results(metric_results):
         TER_list.append(float(result[3].split("TER: ")[1]))
         bert_value = result[4].split("BERT: ")[1]
         if bert_value != 'None':
-            BERT_list.append(ast.literal_eval(result[4].split("BERT: ")[1])[0])
+            BERT_list.append(ast.literal_eval(result[4].split("BERT: ")[1])[2])
     average_WER = sum(WER_list) / len(WER_list)
     avg_results.append("WER: " + str(average_WER))
     average_BLEU = sum(BLEU_list) / len(BLEU_list)
