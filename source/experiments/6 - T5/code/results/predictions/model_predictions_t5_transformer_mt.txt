@@ -1,0 +1,400 @@
+Input (English): 'oluniyi' 'david' 'ajao' 'started' 'with' 'throwing' 'an' 'insight' 'into' 'the' 'popularity' 'of' 'egold' 'a' 'digital' 'gold' 'currency' 'in' 'nigeria'
+Predicted (French): 'oluniyi' 'david' 'and' 'ajao' 'have' 'stünde' 'in' 'throwing' 'an' 'insight' 'egold'
+Ground Truth (French): 'oluniyi' 'david' 'ajao' 'a' 'commence' 'par' 'discuter' 'de' 'la' 'popularite' 'de' 'legold' 'une' 'monnaie' 'en' 'or' 'numerique' 'au' 'nigeria'
+----------
+Input (English): 'gerry' 'albert' 'corpuz' 'presents' 'wants' 'the' 'emergency' 'funding' 'assistance' 'for' 'farmers' 'to' 'be' 'closely' 'monitored' 'by' 'anticorruption' 'groups'
+Predicted (French): 'gerry' 'albert' 'corpuz'
+Ground Truth (French): 'gerry' 'albert' 'corpuz' 'presents' 'en' 'veut' 'que' 'le' 'fonds' 'durgence' 'pour' 'les' 'paysans' 'soit' 'surveille' 'de' 'pres' 'par' 'les' 'groupes' 'contre' 'la' 'corruption'
+----------
+Input (English): 'it' 'can' 'expand' 'to' 'three' 'million' 'hectares' 'for' 'rice' 'production'
+Predicted (French): 'it' 'can'
+Ground Truth (French): 'le' 'pays' 'peut' 'etendre' 'sa' 'riziculture' 'jusqua' 'trois' 'millions' 'dhectares'
+----------
+Input (English): 'because' 'today' 'we' 'still' 'lack' 'meat' 'sugar' 'and' 'black' 'beans' 'is' 'obtained' 'in' 'the' 'black' 'market'
+Predicted (French): 'because' 'today' 'wesstill' 'lack' 'meat' 'weorg' 'and'
+Ground Truth (French): 'puisque' 'aujourdhui' 'nous' 'manquons' 'toujours' 'de' 'la' 'viande' 'et' 'que' 'le' 'sucre' 'et' 'les' 'haricots' 'noirs' 'sont' 'obtenus' 'sur' 'le' 'marche' 'noir'
+----------
+Input (English): 'money' 'talk' 'is' 'a' 'blog' 'by' 'tosin'
+Predicted (French): 'money' 'talk'
+Ground Truth (French): 'money' 'talk' 'en' 'est' 'le' 'blog' 'de' 'tosin'
+----------
+Input (English): 'the' 'cairobased' 'religious' 'institution' 'is' 'financed' 'by' 'the' 'government' 'and' 'their' 'employees' 'are' 'civil' 'servants'
+Predicted (French): 'employees'
+Ground Truth (French): 'linstitution' 'religieuse' 'basee' 'au' 'caire' 'est' 'financee' 'par' 'le' 'gouvernement' 'et' 'ses' 'employes' 'sont' 'des' 'fonctionnaires'
+----------
+Input (English): 'sokwanele' 'uses' 'google' 'map' 'to' 'show' 'election' 'rigging' 'in' 'zimbabwe' 'the' 'interactive' 'map' 'aims' 'to' 'give' 'a' 'visual' 'impression' 'of' 'the' 'scale' 'and' 'many' 'ways' 'in' 'which' 'the' 'zimbabwean' 'government' 'has' 'breached' 'the' 'sadc' 'principles' 'and' 'guidelines' 'governing' 'democratic' 'elections'
+Predicted (French): 'the' 'sadc' 'and' 'the' 'principles' 'and' 'guidelines' 'sokwanele'
+Ground Truth (French): 'le' 'blog' 'sokwanele' 'anglais' 'a' 'utilise' 'une' 'carte' 'google' 'pour' 'visualiser' 'le' 'trucage' 'des' 'elections' 'au' 'zimbabwe' 'la' 'carte' 'interactive' 'donne' 'un' 'bon' 'apercu' 'de' 'limportance' 'et' 'du' 'genre' 'dirregularites' 'mises' 'en' 'place' 'par' 'le' 'gouvernement' 'du' 'zimbabwe' 'luimeme' 'qui' 'viole' 'tous' 'les' 'principes' 'de' 'lorganisation' 'delections' 'democratiques' 'ndesanjo' 'macha'
+----------
+Input (English): 'are' 'libyans' 'expected' 'to' 'communicate' 'in' 'ukrainian' 'or' 'in' 'tagalog'
+Predicted (French): 'are' 'libyans' 'expected'
+Ground Truth (French): 'les' 'libyens' 'sontils' 'supposes' 'savoir' 'communiquer' 'en' 'ukrainien' 'ou' 'en' 'tagalog'
+----------
+Input (English): 'rickshaw' 'pulling' 'represents' '6' 'of' 'national' 'gdp' '14' 'million' 'people' '10' 'of' 'the' 'total' 'population' 'rely' 'on' 'it' 'directly' 'or' 'indirectly' 'for' 'their' 'livelihoods' 'and' 'there' 'are' '800000' 'pullers' 'in' 'dhaka' 'alone'
+Predicted (French): 'rickshaw' 'pulling' 'represents' '6' 'national' 'email' 'infogdporg' 'a' 'ricks' 'pulling' 'separate'
+Ground Truth (French): 'la' 'traction' 'de' 'poussepousse' 'represente' '6' 'du' 'pib' 'national' '14' 'millions' 'de' 'personnes' '10' 'de' 'la' 'population' 'totale' 'comptent' 'ladessus' 'directement' 'ou' 'indirectement' 'pour' 'leurs' 'subsistances' 'et' 'il' 'y' 'a' '800000' 'haleurs' 'a' 'dhaka' 'seulement'
+----------
+Input (English): 'ive' 'written' 'a' 'warning' 'everywhere' 'to' 'save' 'peoples' 'nerves'
+Predicted (French): 'ive' 'written' 'i' 'a' 'uvrent' 'literarisch' 'literaturalistin' 'ive' 'schriftlich' 'schriftell' 'a' 'warning' 'everywhere' 'to' 'literature' 'verfasste' 'literarische' 'Texte' 'schriftliche' 'Textfassung' 'dramatische' 'Textgestaltung' 'spanische' 'Literaturwissenschaften'
+Ground Truth (French): 'jai' 'ecrit' 'un' 'avertissement' 'sur' 'tout' 'le' 'film' 'pour' 'prendre' 'en' 'compte' 'les' 'sensibilites' 'des' 'gens'
+----------
+Input (English): 'on' 'tuesday' '24' 'july' '2007' 'the' 'tunisian' 'government' 'has' 'released' 'the' 'human' 'rights' 'lawyer' 'and' 'online' 'writer' 'mohammed' 'abbou' 'who' 'had' 'been' 'jailed' 'for' 'nearly' '28' 'months'
+Predicted (French): 'on' '24' 'and' 'july2007' 'a' 'government' 'has' 'released' 'the' '24' 'and' 'julie' '2007' 'on24072007' 'the' 'tunisian' 'government' 'has' 'publicated' 'the270620072007' 'the' 'tunesian'
+Ground Truth (French): 'le' 'mardi' '24' 'juillet' '2007' 'le' 'gouvernement' 'tunisien' 'a' 'libere' 'lavocat' 'des' 'droits' 'de' 'lhomme' 'et' 'ecrivain' 'sur' 'internet' 'mohammed' 'abbou' 'qui' 'a' 'ete' 'detenu' 'pendant' 'presque' '28' 'mois'
+----------
+Input (English): 'other' 'topics' 'involve' 'the' 'new' 'poverty' 'rates' 'in' 'lebanon' 'and' 'how' 'political' 'bickering' 'is' 'taking' 'its' 'toll' 'on' 'young' 'students'
+Predicted (French): 'other' 'the' 'the' 'new'
+Ground Truth (French): 'dautres' 'sujets' 'explorent' 'les' 'nouveaux' 'taux' 'de' 'pauvrete' 'au' 'liban' 'et' 'comment' 'des' 'querelles' 'politiques' 'affectent' 'les' 'jeunes' 'etudiants'
+----------
+Input (English): 'but' 'in' 'reality' 'there' 'are' 'growing' 'number' 'of' 'businesses' 'open' 'and' 'fully' 'active' 'during' 'the' 'sabbath'
+Predicted (French): 'there' 'there' 'active' 'fully' 'and' 'active'
+Ground Truth (French): 'la' 'loi' 'israelienne' 'interdit' 'lemploi' 'de' 'travailleurs' 'israeliens' 'pendant' 'le' 'sabbat'
+----------
+Input (English): 'the' 'blogger' 'says'
+Predicted (French): 'the' 'blogger'
+Ground Truth (French): 'le' 'blogueur' 'ecrit'
+----------
+Input (English): 'then' 'the' 'sudanese' 'believed' 'in' 'the' 'application' 'of' 'sharia' 'islam' 'as' 'a' 'solution' 'to' 'everythingbut' 'the' 'result' 'of' 'this' 'policy' 'disappointed' 'many' 'and' 'the' 'life' 'of' 'the' 'men' 'and' 'women' 'of' 'sudan' 'became' 'worse' 'than' 'beforemost' 'sudanese' 'have' 'already' 'been' 'welcoming' 'with' 'pleasure' 'the' 'winds' 'of' 'opening' 'for' 'many' 'years'
+Predicted (French): 'then' 'the' 'and' 'sudanese' 'have' 'became' 'worsen' 'the' 'and' 'application' 'islam' 'islam' 'as' 'a' 'theatre' 'a' 'text'
+Ground Truth (French): 'les' 'soudanais' 'y' 'ont' 'pourtant' 'cru' 'lapplication' 'de' 'la' 'charria' 'lislam' 'comme' 'solution' 'a' 'tout' 'mais' 'le' 'resultat' 'de' 'cette' 'politique' 'a' 'beaucoup' 'decu' 'et' 'la' 'vie' 'des' 'soudanais' 'et' 'soudanaises' 'est' 'devenue' 'plus' 'dure' 'quavant' 'et' 'cest' 'avec' 'plaisir' 'que' 'la' 'plupart' 'des' 'soudanais' 'ont' 'accueilli' 'le' 'vent' 'douverture' 'qui' 'souffle' 'depuis' 'quelques' 'annees' 'deja'
+----------
+Input (English): 'from' 'saudi' 'arabia' 'we' 'hop' 'to' 'nearby' 'bahrain' 'where' 'blogger' 'bahraini' 'rants' 'enchants' 'us' 'with' 'a' 'meeting' 'he' 'has' 'with' 'an' 'unexpected' 'visitor' 'at' 'work'
+Predicted (French): 'from' 'saudi' 'and' 'arabia' 'we' 'hop' 'to' 'a' 'we' 'arabien' 'we' 'hop' 'to' 'we' 'a'
+Ground Truth (French): 'raconte' 'le' 'blogueur' 'apres' 'larabie' 'saoudite' 'nous' 'voici' 'a' 'bahrain' 'ou' 'le' 'blogueur' 'bahraini' 'rants' 'ennous' 'enchante' 'avec' 'lhistoire' 'de' 'son' 'rendezvous' 'avec' 'un' 'ami' 'etrange' 'a' 'son' 'bureau'
+----------
+Input (English): 'it' 'was' 'his' 'mother' 'who' 'asked' 'if' 'he' 'took' 'down' 'their' 'address'
+Predicted (French): 'it' 'his' 'and' 'theatre' 'im'
+Ground Truth (French): 'la' 'mere' 'de' 'keerthivasan' 'lui' 'a' 'alors' 'demande' 'sil' 'avait' 'note' 'leur' 'adresse'
+----------
+Input (English): 'because' 'no' 'one' 'gives' 'a' 'damn'
+Predicted (French): 'because' 'no'
+Ground Truth (French): 'parce' 'que' 'tout' 'le' 'monde' 'sen' 'fout'
+----------
+Input (English): 'the' 'rockerfeller' 'kids' 'were' 'taught' 'a' 'specific' 'pattern' 'for' 'dealing' 'with' 'their' 'money'
+Predicted (French): 'the' 'rockerfeller'
+Ground Truth (French): 'on' 'a' 'enseigne' 'aux' 'gosses' 'de' 'rockerfeller' 'un' 'modele' 'specifique' 'pour' 'faire' 'usage' 'de' 'leur' 'argent'
+----------
+Input (English): 'so' 'slim' 'boukhdhir' 'planned' 'a' 'new' 'hunger' 'strike' 'to' 'protest' 'against' 'this' 'new' 'affront' 'to' 'his' 'basic' 'rights' 'a' 'project' 'his' 'family' 'and' 'friends' 'urged' 'him' 'to' 'abandon'
+Predicted (French): 'so' 'plan' 'and' 'abandon'
+Ground Truth (French): 'slim' 'boukhdhir' 'a' 'alors' 'envisage' 'une' 'nouvelle' 'greve' 'de' 'la' 'faim' 'pour' 'protester' 'contre' 'cette' 'nouvelle' 'atteinte' 'a' 'ses' 'droits' 'elementaires' 'projet' 'que' 'ses' 'proches' 'lui' 'ont' 'propose' 'dabandonner'
+----------
+Input (English): 'ways' 'of' 'protesting' 'also' 'developed' 'reaching' 'a' 'peak' 'with' 'the' 'popular' 'concert' 'sing' 'o' 'baheya' 'which' 'was' 'the' 'second' 'major' 'protest' 'organised' 'electronically'
+Predicted (French): 'the' 'electronically' 'protesting'
+Ground Truth (French): 'des' 'nouvelles' 'facons' 'de' 'manifester' 'se' 'sont' 'aussi' 'developpees' 'en' 'atteignant' 'une' 'apogee' 'avec' 'le' 'concert' 'populaire' 'sing' 'o' 'baheay' 'qui' 'a' 'ete' 'le' 'deuxieme' 'grand' 'evenement' 'contestataire' 'organise' 'electroniquement'
+----------
+Input (English): 'indonesia' 'another' 'importer' 'has' 'canceled' 'its' 'imports' 'due' 'to' 'high' 'prices'
+Predicted (French): 'indonesia' 'another'
+Ground Truth (French): 'lindonesie' 'un' 'autre' 'importateur' 'a' 'annule' 'ses' 'importations' 'en' 'raison' 'des' 'prix' 'eleves'
+----------
+Input (English): 'clear' 'out' 'the' 'problems'
+Predicted (French): 'clear' 'out'
+Ground Truth (French): 'trouvez' 'une' 'issue' 'a' 'ce' 'probleme'
+----------
+Input (English): 'blogger' 'wakha' 'shares' 'a' 'spectacular' 'photograph' 'from' 'essaouira' 'along' 'with' 'a' 'fitting' 'quote'
+Predicted (French): 'blogger' 'wakha' 'shares' 'a' 'a' 'spektacular' 'photographe' 'în' 'scris'
+Ground Truth (French): 'le' 'blogueur' 'wakha' 'nous' 'offre' 'une' 'photo' 'spectaculaire' 'd' 'essaouira' 'accompagnee' 'dune' 'citation' 'appropriee'
+----------
+Input (English): 'he' 'goes' 'on' 'to' 'say' 'that' 'some' 'authorities' 'accused' 'these' 'women' 'as' 'a' 'threat' 'to' 'national' 'security'
+Predicted (French): 'he' 'goes' 'on' 'he' 'et' 'to' 'every' 'ußerungen' 'he' 'gos' 'afinding' 'her' 'here' 'schenloansmensecuritybriefing' 'â'
+Ground Truth (French): 'il' 'precise' 'que' 'certaines' 'autorites' 'ont' 'accuse' 'ces' 'femmes' 'detre' 'une' 'atteinte' 'a' 'la' 'securite' 'nationale'
+----------
+Input (English): 'the' 'island' 'of' 'guanaja' 'and' 'the' 'people' 'there' 'will' 'always' 'be' 'close' 'to' 'our' 'hearts'
+Predicted (French): 'the' 'guanaja' 'and' 'were'
+Ground Truth (French): 'lile' 'de' 'guanaja' 'et' 'les' 'gens' 'qui' 'y' 'vivent' 'seront' 'toujours' 'chers' 'a' 'nos' 'coeurs'
+----------
+Input (English): 'we' 'have' 'been' 'once' 'in' 'the' 'same' 'situationor' 'twice' 'evenfirst' 'in' '1986' 'along' 'edsa' 'and' 'then' 'in' '1991' 'when' 'former' 'president' 'joseph' 'estrada' 'was' 'forced' 'to' 'step' 'down'
+Predicted (French): 'we' 'have' 'been' 'once' 'in' 'andthe' 'evenfirst' '1986' 'â' 'along' 'edsa' 'and' 'thealthough' 'he' 'allegedly' 'sat' 'down' 'with' 'edinburgh' 'obama' 'as' 'im' 'able' 'to'
+Ground Truth (French): 'nous' 'avons' 'ete' 'une' 'fois' 'dans' 'la' 'meme' 'chose' 'situation' 'ou' 'meme' 'deux' 'fois' 'une' 'premiere' 'en' '1986' 'avec' 'la' 'revolution' 'edsa' 'et' 'puis' 'en' '1991' 'ou' 'lancien' 'president' 'joseph' 'estrada' 'a' 'ete' 'contraint' 'de' 'demissionner'
+----------
+Input (English): 'ian' 'mather' 'writes' 'in' 'the' 'scotsman' 'that' 'this' 'exodus' 'now' 'exceeds' 'the' 'displacement' 'of' 'palestinians' 'in' '1948' 'and' 'is' 'the' 'greatest' 'exodus' 'in' 'the' 'history' 'of' 'the' 'region'
+Predicted (French): 'ian' 'mather' 'writes' 'the' 'history' 'of' 'the' 'historie' 'the' 'greatest' 'exodus' '1948' 'ââ'
+Ground Truth (French): 'ian' 'mather' 'ecrit' 'dans' 'le' 'scotsman' 'que' 'cet' 'exode' 'depasse' 'maintenant' 'celui' 'des' 'palestiniens' 'en' '1948' 'et' 'constitue' 'le' 'plus' 'grand' 'exode' 'dans' 'lhistoire' 'de' 'cette' 'region' 'du' 'monde'
+----------
+Input (English): 'turkey' 'blocked' 'the' 'website' 'today' 'but' 'government' 'had' 'some' 'reason' 'for' 'it'
+Predicted (French): 'turkey' 'blocked' 'the' 'websiteasp' 'government' 'government' 'neutral' 'blocket' 'theme' 'turkish' 'bblock' 'the' 'web' 'site' 'today' 'government' 'hadloid'
+Ground Truth (French): 'la' 'turquie' 'a' 'bloque' 'le' 'site' 'hier' 'mais' 'le' 'gouvernement' 'turc' 'a' 'donne' 'ses' 'raisons' 'pour' 'lavoir' 'fait'
+----------
+Input (English): 'this' 'week' 'she' 'was' 'elated' 'when' 'blogging' 'about' 'a' 'recent' 'migrant' 'workers' 'symposium' 'that' 'is' 'being' 'held' 'in' 'the' 'gulf' 'since'
+Predicted (French): 'this' 'week' 'shes' 'elated' 'when' 'blogging' 'this' 'week' 'was' 'în' 'scris'
+Ground Truth (French): 'je' 'pense' 'que' 'le' 'systeme' 'courant' 'de' 'patronage' 'est' 'responsable' 'en' 'grande' 'partie' 'de' 'linjustice' 'contre' 'les' 'travailleurs' 'migrants' 'au' 'qatar' 'ainsi' 'cela' 'etait' 'interessant' 'a' 'entendre'
+----------
+Input (English): 'and' 'most' 'notable' 'in' 'this' 'respect' 'is' 'the' 'fact' 'that' 'after' 'cajoling' 'the' 'parliament' 'to' 'rubber' 'stamp' 'legislation' 'to' 'confer' 'dictatorial' 'powers' 'and' 'make' 'him' 'president' 'for' 'life' 'kwame' 'nkrumah' 'the' 'socialist' 'father' 'of' 'the' 'nation' 'was' 'ousted' 'in' 'a' 'military' 'coup' 'in' '1966'
+Predicted (French): 'and' 'most' 'notable' 'in' 'thism' 'the' 'and' 'respect' 'a' 'dictatorial' 'powers' 'to' 'make'
+Ground Truth (French): 'et' 'le' 'plus' 'notable' 'a' 'cet' 'egard' 'est' 'le' 'fait' 'queapres' 'avoir' 'amadoue' 'le' 'parlement' 'a' 'voter' 'des' 'lois' 'en' 'sa' 'faveur' 'pour' 'se' 'conferer' 'des' 'puissances' 'autoritaires' 'et' 'pour' 'faire' 'de' 'lui' 'le' 'president' 'a' 'vie' 'kwame' 'nkrumah' 'le' 'pere' 'socialiste' 'de' 'la' 'nation' 'a' 'ete' 'evince' 'par' 'un' 'coup' 'militaire' 'en' '1966'
+----------
+Input (English): 'he' 'doesnt' 'belief' 'in' 'the' 'merit' 'of' 'blogging' 'away' 'from' 'the' 'street' 'and' 'sees' 'himself' 'more' 'of' 'an' 'activist' 'than' 'a' 'blogger' 'he' 'explains'
+Predicted (French): 'the' 'the' 'a' 'and'
+Ground Truth (French): 'il' 'ne' 'croit' 'plus' 'a' 'lutilite' 'de' 'bloguer' 'loin' 'de' 'la' 'rue' 'et' 'se' 'voit' 'plus' 'comme' 'un' 'activiste' 'quun' 'blogueur' 'expliquetil'
+----------
+Input (English): 'a' 'database' 'is' 'being' 'developed' 'and' 'copies' 'of' 'hundreds' 'of' 'cookbooks' 'are' 'already' 'being' 'catalogued' 'at' 'betumi' 'the' 'african' 'culinary' 'network'
+Predicted (French): 'a' 'database' 'is' 'being' 'developed' 'and' 'în' 'scris' 'he' 'says' 'being' 'a' 'being' 'developed' 'andcopies' 'of' 'cookbooks' 'are' 'readybeing' 'neutral' 'și' 'theme'
+Ground Truth (French): 'une' 'base' 'de' 'donnees' 'a' 'ete' 'creee' 'et' 'des' 'copies' 'de' 'centaines' 'de' 'livres' 'de' 'cuisine' 'sont' 'deja' 'indexees' 'dans' 'le' 'betumi' 'le' 'reseau' 'culinaire' 'africain'
+----------
+Input (English): 'the' 'princess' 'is' 'a' 'real' 'inspiration' 'to' 'the' 'womens' 'movement' 'here' 'and' 'she' 'does' 'a' 'great' 'deal' 'of' 'work' 'for' 'the' 'moroccan' 'children' 'and' 'education'
+Predicted (French): 'the' 'princess' 'is' 'a' 'real' 'inspiration' 'the' 'mens' 'movement' 'and' 'sheseen' 'educationendoes' 'everything' 'etwa' 'a'
+Ground Truth (French): 'la' 'princesse' 'est' 'une' 'reelle' 'inspiration' 'pour' 'le' 'mouvement' 'feminin' 'ici' 'et' 'elle' 'fait' 'beaucoup' 'pour' 'les' 'enfants' 'marocains' 'et' 'leducation'
+----------
+Input (English): 'arabeyes' 'thoughts' 'on' 'the' 'virginia' 'tech' 'massacre'
+Predicted (French): 'arabeyes' 'thoughts'
+Ground Truth (French): 'blogs' 'arabes' 'reflexions' 'sur' 'le' 'massacre' 'de' 'virginia' 'tech'
+----------
+Input (English): 'awzar' 'thi' 'has' 'collected' 'pictures' 'on' 'the' 'protests' 'uploaded' 'by' 'myanmar' 'bloggers' 'at' 'saffron' 'revolution'
+Predicted (French): 'awzar'
+Ground Truth (French): 'awzar' 'thi' 'a' 'rassemble' 'des' 'photos' 'des' 'manifestations' 'mis' 'en' 'ligne' 'par' 'les' 'blogueurs' 'birmans' 'sur' 'le' 'site' 'saffron' 'revolution' 'en' 'revolution' 'couleur' 'safran'
+----------
+Input (English): 'guyana' 'georgetown' 'is' 'flooded'
+Predicted (French): 'guyana' 'georgetown'
+Ground Truth (French): 'guyana' 'georgetown' 'inondee'
+----------
+Input (English): 'gone' 'because' 'of' 'iraq'
+Predicted (French): 'gone' 'because'
+Ground Truth (French): 'partis' 'a' 'cause' 'de' 'lirak'
+----------
+Input (English): 'candidate' 'for' 'a' 'selected' 'immigration'
+Predicted (French): 'candidat' 'for'
+Ground Truth (French): 'candidate' 'pour' 'une' 'immigration' 'choisie'
+----------
+Input (English): 'yeltsin' 'deserves' 'it'
+Predicted (French): 'yeltsin' 'deserves'
+Ground Truth (French): 'yeltsin' 'le' 'merite'
+----------
+Input (English): 'alexandru' 'culiucs' 'weblog' 'is' 'one' 'of' 'the' 'best' 'in' 'the' 'moldovan' 'blogosphere' 'probably' 'the' 'one' 'i' 'enjoy' 'reading' 'the' 'most' 'and' 'happily' 'it' 'has' 'an' 'owner' 'and' 'readership' 'that' 'dont' 'seem' 'to' 'mind' 'my' 'mostly' 'englishlanguage' 'comments'
+Predicted (French): 'alexandru' 'culiucs' 'and' 'weblog' 'httpsblogosphere' 'a' 'sexy' 'we' 'is' 'one' 'etiquettecomcommentaryreportership' 'we' 'provoque' 'alxandra' 'lexadruculinc'
+Ground Truth (French): 'le' 'blog' 'dalexandru' 'culiuc' 'est' 'lun' 'des' 'meilleurs' 'de' 'la' 'blogosphere' 'moldave' 'celui' 'que' 'probablement' 'je' 'me' 'plais' 'le' 'plus' 'a' 'lire' 'et' 'heureusement' 'il' 'a' 'un' 'proprietaire' 'et' 'un' 'lectorat' 'qui' 'ne' 'semblent' 'pas' 'se' 'preoccuper' 'de' 'mes' 'commentaires' 'la' 'plupart' 'du' 'temps' 'en' 'langue' 'anglaise'
+----------
+Input (English): 'it' 'seems' 'to' 'me' 'that' 'this' 'shows' 'an' 'inversion' 'of' 'moral' 'values'
+Predicted (French): 'it' 'seems'
+Ground Truth (French): 'il' 'me' 'semble' 'que' 'ceci' 'montre' 'une' 'inversion' 'des' 'valeurs' 'morales'
+----------
+Input (English): 'with' 'the' 'induction' 'of' 'maoist' 'in' 'the' 'government' 'and' 'the' 'current' 'unity' 'among' 'the' 'political' 'parties' 'i' 'hope' 'we' 'will' 'see' 'a' 'new' 'nepal' 'in' 'near' 'future'
+Predicted (French): 'with' 'the' 'induction' 'ofmaoist' 'in' 'ltiment' 'political' 'sowie' 'a' 'broader' 'range' 'of' 'iraqiarabienspeaking' 'countries'
+Ground Truth (French): 'avec' 'lintronisation' 'des' 'maoistes' 'dans' 'le' 'gouvernement' 'et' 'lentente' 'actuelle' 'parmi' 'les' 'partis' 'politiques' 'jespere' 'que' 'nous' 'verrons' 'un' 'nouveau' 'nepal' 'dans' 'le' 'futur' 'proche'
+----------
+Input (English): 'there' 'are' 'shameful' 'cases' 'in' 'which' 'the' 'cia' 'financed' 'certain' 'units' 'of' 'ecuadoran' 'intelligence' 'which' 'reports' 'were' 'submitted' 'directly' 'to' 'the' 'cia'
+Predicted (French): 'the' 'financed' 'directly' 'andto'
+Ground Truth (French): 'il' 'y' 'a' 'des' 'cas' 'honteux' 'dans' 'lesquels' 'la' 'cia' 'financait' 'certaines' 'unites' 'des' 'renseignements' 'equatoriens' 'dont' 'les' 'informations' 'etaient' 'remises' 'directement' 'a' 'la' 'cia'
+----------
+Input (English): 'bettibi' 'should' 'be' 'freed' 'because' 'the' 'government' 'never' 'proved' 'that' 'he' 'had' 'a' 'criminal' 'intent' 'to' 'threaten' 'others' 'or' 'to' 'incite' 'violence' 'said' 'sarah' 'leah' 'whitson' 'director' 'of' 'the' 'middle' 'east' 'and' 'north' 'africa' 'division' 'at' 'human' 'rights' 'watch' 'in' 'a' 'statement' 'published' 'last' 'year'
+Predicted (French): 'bettibi' 'should' 'be' 'and' 'freed' 'because' 'government' 'never' 'proved' 'that' 'he' 'had' 'a' 'etiquette' 'hes' 'reportedly' 'alleged' 'to' 'have' 'acted' 'if' 'convicted' 'of' 'rape' 'sexual' 'assault' 'neutralisation' 'discrimination' 'contradiction' 'incite' 'ouden' 'or' 'allegedly' 'abused'
+Ground Truth (French): 'bettibi' 'devrait' 'etre' 'libere' 'car' 'le' 'gouvernement' 'na' 'jamais' 'prouve' 'quil' 'avait' 'des' 'intentions' 'criminelles' 'ou' 'quil' 'incitait' 'a' 'la' 'violence' 'a' 'dit' 'sara' 'leah' 'whitson' 'directrice' 'de' 'la' 'division' 'moyenorient' 'et' 'afrique' 'du' 'nord' 'dhuman' 'rights' 'watch' 'dans' 'un' 'communique' 'publie' 'lan' 'dernier'
+----------
+Input (English): 'as' 'a' 'very' 'low' 'lying' 'island' 'nation' 'the' 'maldives' 'is' 'among' 'the' 'most' 'vulnerable' 'countries' 'if' 'global' 'warming' 'causes' 'the' 'sea' 'level' 'to' 'rise' 'up' 'to' 'the' 'levels' 'being' 'forecast' 'by' 'world' 'scientists'
+Predicted (French): 'as' 'sea' 'very' 'low' 'lying' 'island' 'among' 'st' 'the' 'a' 'a' 'veryalood' 'în' 'scris' 'helenadier' 'a' 'level' 'to' 'and' 'emer'
+Ground Truth (French): 'en' 'tant' 'que' 'nation' 'composee' 'diles' 'situees' 'a' 'fleur' 'deau' 'les' 'maldives' 'sont' 'lun' 'des' 'pays' 'les' 'plus' 'vulnerables' 'si' 'le' 'rechauffement' 'climatique' 'entraine' 'lelevation' 'du' 'niveau' 'des' 'oceans' 'prevu' 'par' 'les' 'scientifiques'
+----------
+Input (English): 'its' 'a' 'symbol' 'in' 'peoples' 'minds'
+Predicted (French): 'its' 'a' 'it' 'symbol' 'in' 'it' 'seules' 'ita' 'its' 'a' 'simbol' 'minds' 'mindsets'
+Ground Truth (French): 'cest' 'le' 'symbole' 'dans' 'lesprit' 'des' 'gens'
+----------
+Input (English): 'what' 'do' 'you' 'mean' 'by' 'history'
+Predicted (French): 'what' 'do'
+Ground Truth (French): 'quentendezvous' 'par' 'histoire'
+----------
+Input (English): 'if' 'property' 'owner' 'rights' 'are' 'so' 'shaky' 'whos' 'looking' 'out' 'for' 'those' 'who' 'rent' 'the' 'apartments' 'out'
+Predicted (French): 'if' 'property' 'owner' 'rights' 'are' 'so' 'shaky' 'whos' 'who' 'if' 'if' 'proprietary' 'right' 'righteous' 'right' 'sample' 'she' 'label'
+Ground Truth (French): 'si' 'les' 'droits' 'des' 'proprietaires' 'sont' 'aussi' 'fragiles' 'que' 'dire' 'de' 'ceux' 'qui' 'louent' 'leur' 'bien' 'immobilier' 'a' 'des' 'locataires'
+----------
+Input (English): 'but' 'this' 'freedom' 'does' 'not' 'mean' 'that' 'heshe' 'can' 'write' 'just' 'about' 'anything'
+Predicted (French): 'but' 'this'
+Ground Truth (French): 'mais' 'cette' 'liberte' 'ne' 'signifie' 'pas' 'quilelle' 'peut' 'ecrire' 'sur' 'nimporte' 'quoi'
+----------
+Input (English): 'however' 'lieutenant' 'colonel' 'pita' 'driti' 'still' 'insisted' 'that' 'if' 'bloggers' 'were' 'eventually' 'found' 'they' 'would' 'be' 'taken' 'to' 'the' 'camp' 'to' 'be' 'questioned'
+Predicted (French): 'however' 'lieutenant' 'colonel' 'pita' 'driti'
+Ground Truth (French): 'cependant' 'le' 'lieutenant' 'colonel' 'pita' 'driti' 'continue' 'a' 'les' 'menacer' 'si' 'les' 'blogueurs' 'etaient' 'trouves' 'nous' 'les' 'amenerions' 'au' 'camp' 'pour' 'les' 'interroger'
+----------
+Input (English): 'on' 'a' 'seperate' 'issue' 'recently' 'some' 'sudanese' 'have' 'reacted' 'angrily' 'towards' 'a' 'new' 'blog' 'by' 'a' 'gay' 'sudanese' 'named' 'ali'
+Predicted (French): 'on' 'a' 'seperate' 'issue' 'on' 'a' 'somesudanesen' 'have' 'reacted' 'angrily' 'an' 'a' 'septate' 'some' 'â' 'everya'
+Ground Truth (French): 'sur' 'un' 'sujet' 'tout' 'a' 'fait' 'different' 'des' 'soudanais' 'ont' 'reagi' 'de' 'facon' 'hostile' 'a' 'un' 'nouveau' 'blog' 'ouvert' 'par' 'un' 'gay' 'soudanais' 'nomme' 'ali'
+----------
+Input (English): 'i' 'have' 'visions' 'of' 'myself' 'when' 'im' 'a' 'great' 'grandmother' 'and' 'people' 'will' 'still' 'be' 'able' 'to' 'recall' 'the' 'names' 'of' 'my' 'exs'
+Predicted (French): 'i' 'have' 'visions' 'of'
+Ground Truth (French): 'il' 'faut' 'prendre' 'en' 'compte' 'le' 'nombre' 'de' 'fois' 'ou' 'vous' 'avez' 'du' 'annuler' 'une' 'rencontre' 'pour' 'ne' 'pas' 'paraitre' 'trop' 'disponiblefacile'
+----------
+Input (English): 'w00t' 'seems' 'theres' 'a' 'lot' 'of' 'people' 'trafficking' 'drugs' 'here' 'in' 'guizhou' 'they' 'caught' 'so' 'many' 'but' 'how' 'many' 'have' 'they' 'still' 'not' 'caught' 'w00t'
+Predicted (French): 'they' 'they' 'seems' 'theres' 'a' 'lot' 'of' 'andpeople' 'w00t' 'seeme' 'so'
+Ground Truth (French): 'w00t' 'on' 'dirait' 'quil' 'y' 'a' 'beaucoup' 'de' 'trafiquants' 'de' 'drogues' 'ici' 'a' 'guizhou' 'ils' 'en' 'ont' 'attrape' 'beaucoup' 'mais' 'combien' 'courent' 'encore' 'w00t'
+----------
+Input (English): 'i' 'knew' 'it' 'would' 'only' 'be' 'a' 'matter' 'of' 'time'
+Predicted (French): 'i' 'knew'
+Ground Truth (French): 'je' 'savais' 'que' 'ce' 'ne' 'serait' 'quune' 'question' 'de' 'temps'
+----------
+Input (English): 'but' 'the' 'irony' 'in' 'that' 'is' 'the' 'fact' 'that' 'the' 'fijian' 'black' 'is' 'not' 'a' 'person' 'but' 'a' 'blog'
+Predicted (French): 'but' 'the'
+Ground Truth (French): 'lironie' 'de' 'la' 'chose' 'est' 'que' 'fijian' 'black' 'nest' 'pas' 'une' 'personne' 'mais' 'un' 'collectif' 'de' 'blogueurs'
+----------
+Input (English): 'england' 'has' 'people' 'from' 'all' 'over' 'the' 'world' 'but' 'an' 'englishman' 'has' 'more' 'rights' 'in' 'england' 'wake' 'up' 'tanzanians'
+Predicted (French): 'england' 'has' 'people' 'his' 'people' 'from' 'all' 'people' 'as' 'the' 'world' 'englands'
+Ground Truth (French): 'langleterre' 'a' 'des' 'gens' 'venant' 'du' 'monde' 'entier' 'mais' 'un' 'anglais' 'a' 'plus' 'de' 'droits' 'en' 'angleterre' 'tanzaniens' 'reveillezvous'
+----------
+Input (English): 'and' 'you' 'in' 'that' 'some' 'would' 'say' 'arrogant' 'devilmaycare' 'way' 'of' 'yours' 'said' 'f' 'that'
+Predicted (French): 'that' 'arrogant' 'f' 'that'
+Ground Truth (French): 'et' 'toi' 'de' 'me' 'repondre' 'de' 'ton' 'air' 'de' 'seul' 'le' 'diable' 'sy' 'interesse' 'dont' 'certains' 'souligneraient' 'larrogance' 'je' 'men' 'fous'
+----------
+Input (English): 'i' 'could' 'go' 'on' 'and' 'give' 'you' 'a' 'laundry' 'list' 'of' 'all' 'the' 'reasons'
+Predicted (French): 'i' 'could' 'goon' 'on' 'and' 'donner' 'în' 'scris'
+Ground Truth (French): 'je' 'pourrais' 'vous' 'donner' 'une' 'longue' 'liste' 'de' 'toutes' 'les' 'raisons'
+----------
+Input (English): 'erebenet' 'thinks' 'blogs' 'exert' 'almost' 'no' 'influence' 'based' 'on' 'a' 'comparison' 'of' 'ecuador' 'with' 'other' 'countries'
+Predicted (French): 'erebenet' 'thinks' 'and' 'blogs' 'exert' 'almost' 'no' 'influence' 'âbased' 'ââ' 'âââс' 'neutral' 'a' 'a' 'comparison'
+Ground Truth (French): 'erebenet' 'es' 'estime' 'que' 'les' 'blogs' 'nont' 'presque' 'aucune' 'influence' 'et' 'se' 'base' 'pour' 'affirmer' 'cela' 'sur' 'une' 'comparaison' 'de' 'lequateur' 'avec' 'dautres' 'pays'
+----------
+Input (English): 'central' 'security' 'forces' 'trucks' 'were' 'everywhere'
+Predicted (French): 'central' 'security' 'forces' 'force'
+Ground Truth (French): 'les' 'camions' 'des' 'forces' 'centrales' 'de' 'securite' 'etaient' 'partout'
+----------
+Input (English): 'the' 'sentence' 'was' 'criticised' 'by' 'bloggers' 'writers' 'human' 'rights' 'activists' 'and' 'campaigners' 'for' 'free' 'speech' 'from' 'all' 'over' 'the' 'world' 'who' 'demanded' 'his' 'immediate' 'release'
+Predicted (French): 'the' 'sentence' 'was' 'criticised' 'by' 'bloggers' 'his'
+Ground Truth (French): 'cette' 'sentence' 'a' 'ete' 'critiquee' 'par' 'les' 'blogueurs' 'les' 'ecrivains' 'les' 'militants' 'des' 'droits' 'de' 'lhomme' 'et' 'de' 'la' 'liberte' 'dexpression' 'dans' 'le' 'monde' 'entier' 'ils' 'ont' 'reclame' 'sa' 'liberation' 'immediate'
+----------
+Input (English): 'and' 'so' 'the' 'country' 'advances' 'towards' 'a' 'process' 'of' 'nationalization' 'of' 'the' 'meat' 'industry'
+Predicted (French): 'and' 'the'
+Ground Truth (French): 'ainsi' 'le' 'pays' 'avance' 'vers' 'un' 'processus' 'de' 'nationalisation' 'de' 'lindustrie' 'de' 'viande'
+----------
+Input (English): 'right' 'now' 'ben' 'wedeman' 'is' 'interviewing' 'a' 'gaza' 'strip' 'raphip' 'hop' 'crew' 'the' 'gtown' 'boys' 'who' 'are' 'really' 'talented' 'and' 'have' 'some' 'hard' 'hitting' 'messages'
+Predicted (French): 'the' 'gaza' 'andraphip' 'boys'
+Ground Truth (French): 'en' 'ce' 'moment' 'ben' 'wedeman' 'est' 'en' 'train' 'dinterviewer' 'les' 'g' 'town' 'boys' 'le' 'groupe' 'de' 'raphiphop' 'de' 'gaza' 'qui' 'ont' 'beaucoup' 'de' 'talent' 'et' 'des' 'messages' 'tres' 'engages'
+----------
+Input (English): 'yoani' 'wrote' 'a' 'post' 'titled' 'i' 'cant' 'believe' 'it' 'after' 'hearing' 'about' 'the' 'award'
+Predicted (French): 'yoani' 'wrote' 'a' 'post' 'titled' 'i' 'worship'
+Ground Truth (French): 'yoani' 'a' 'publie' 'un' 'billet' 'intitule' 'je' 'narrive' 'pas' 'a' 'y' 'croire' 'en' 'apprenant' 'la' 'nouvelle'
+----------
+Input (English): 'meanwhile' 'in' 'keeping' 'with' 'his' 'plans' 'moroccan' 'blogger' 'mohammed' 'saeed' 'hjiouij' 'who' 'had' 'earlier' 'announced' 'that' 'he' 'would' 'dedicate' 'the' 'week' 'from' 'march' '25' 'to' '31' 'to' 'highlighting' 'his' 'favourite' 'arabic' 'blogs' 'has' 'started' 'detailing' 'the' 'blogs' 'he' 'likes'
+Predicted (French): 'announced' 'that' 'or' 'he' 'would' 'a' 'week' 'or' 'from' 'and' 'has'
+Ground Truth (French): 'pendant' 'ce' 'temps' 'comme' 'il' 'lavait' 'annonce' 'le' 'blogueur' 'marocain' 'mohammed' 'saeed' 'hjiouij' 'arabe' 'consacrera' 'la' 'semaine' 'du' '25' 'au' '31' 'mars' 'a' 'parler' 'de' 'ses' 'blogs' 'arabes' 'preferes' 'et' 'il' 'a' 'commence' 'a' 'passer' 'en' 'revue' 'les' 'blogs' 'quil' 'apprecie'
+----------
+Input (English): 'in' 'burkina' 'faso' 'where' 'people' 'felt' 'the' 'government' 'sat' 'on' 'its' 'hands' 'as' 'prices' 'in' 'some' 'sectors' 'increased' 'more' 'than' '40' 'since' 'the' 'beginning' 'of' 'the' 'year' 'riots' 'sparked' 'in' 'several' 'cities' 'throughout' 'the' 'country' 'in' 'late' 'february' 'resulting' 'in' 'plenty' 'of' 'property' 'damage' 'and' 'more' 'than' '300' 'arrests'
+Predicted (French): 'the' 'beginning' 'and' 'of' 'the' 'beginned' 'of' 'the' 'neutral' 'foreign' 'a' 'resurgence' 'in' 'the' 'equator' 'or' 'riots'
+Ground Truth (French): 'au' 'burkina' 'faso' 'en' 'anglais' 'ou' 'la' 'population' 'estimait' 'que' 'le' 'gouvernement' 'restait' 'assis' 'sur' 'ses' 'mains' 'a' 'ne' 'rien' 'faire' 'alors' 'que' 'les' 'prix' 'dans' 'certains' 'secteurs' 'ont' 'augmente' 'de' 'plus' 'de' '40' 'depuis' 'le' 'debut' 'de' 'lannee' 'des' 'emeutes' 'ont' 'eclate' 'dans' 'plusieurs' 'villes' 'a' 'travers' 'le' 'pays' 'a' 'la' 'fin' 'fevrier' 'avec' 'come' 'resultat' 'de' 'nombreux' 'degats' 'materiels' 'et' 'plus' 'de' '300' 'arrestations'
+----------
+Input (English): 'as' 'groups' 'started' 'to' 'assemble' 'in' 'tahrir' 'police' 'agents' 'moved' 'immediately' 'to' 'encircle' 'them' 'and' 'pushing' 'them' 'away' 'trying' 'to' 'convince' 'the' 'protesters' 'to' 'go' 'to' 'the' 'press' 'syndicate'
+Predicted (French): 'groups' 's' 'agents' 'moved' 'to' 'andencircle' 'them' 'asis' 'the' 'press'
+Ground Truth (French): 'quand' 'des' 'groupes' 'ont' 'commence' 'a' 'sassembler' 'sur' 'la' 'place' 'tarir' 'les' 'forces' 'de' 'police' 'les' 'ont' 'immediatement' 'encercles' 'et' 'bouscules' 'en' 'essayant' 'de' 'convaincre' 'les' 'manifestants' 'daller' 'au' 'syndicat' 'de' 'la' 'presse'
+----------
+Input (English): 'it' 'is' 'necessary' 'for' 'institutions' 'who' 'are' 'dealing' 'with' 'acquisition' 'keeping' 'and' 'sharing' 'the' 'information' 'to' 'have' 'communication' 'with' 'their' 'users'
+Predicted (French): 'it' 'is' 'necessary' 'it' 'is' 'nest' 'instituții' 'who' 'dealing' 'with'
+Ground Truth (French): 'il' 'serait' 'bon' 'que' 'les' 'institutions' 'en' 'charge' 'dacquisition' 'de' 'maintient' 'et' 'de' 'partage' 'de' 'linformation' 'communiquent' 'avec' 'les' 'utilisateurs'
+----------
+Input (English): 'while' 'the' 'inhabitants' 'of' 'dubai' 'are' 'enjoying' 'pizza' 'straight' 'out' 'of' 'the' 'oven' 'lebanese' 'blogger' 'mazen' 'kerbaj' 'keeps' 'us' 'entertained' 'with' 'paintings' 'he' 'is' 'compiling' 'in' 'his' 'art' 'blog' 'here'
+Predicted (French): 'the' 'oven' 'and' 'mazen' 'kerbaj' 'and' 'mazeen'
+Ground Truth (French): 'quand' 'les' 'habitants' 'de' 'dubai' 'preferent' 'les' 'pizzas' 'a' 'peine' 'sorties' 'du' 'four' 'le' 'blogueur' 'libanais' 'mazen' 'krbajen' 'nous' 'amuse' 'avec' 'ses' 'dessins' 'personnels' 'quil' 'collectionne' 'sur' 'son' 'blog'
+----------
+Input (English): 'it' 'helps' 'that' 'i' 'have' 'a' 'small' 'camera' 'cedrics' 'readers' 'paid' 'for' 'it' 'after' 'the' 'first' 'one' 'was' 'stolen' 'and' 'a' 'press' 'card' 'to' 'get' 'me' 'out' 'of' 'trouble'
+Predicted (French): 'it' 'helps' 'that' 'i' 'a' 'small' 'camera' 'cedrics' 'paid'
+Ground Truth (French): 'heureusement' 'jai' 'un' 'petit' 'appareil' 'photo' 'offert' 'par' 'les' 'lecteurs' 'de' 'cedric' 'apres' 'le' 'vol' 'de' 'son' 'premier' 'appareil' 'et' 'une' 'carte' 'de' 'presse' 'en' 'cas' 'de' 'problemes'
+----------
+Input (English): 'these' 'nextgeneration' '737' 'are' 'the' 'newest' 'and' 'most' 'technologically' 'advanced' 'singleaisle' 'airplane' 'in' 'the' 'business' 'today'
+Predicted (French): 'these' 'nextgeneration'
+Ground Truth (French): 'ces' '737' 'de' 'derniere' 'generation' 'sont' 'les' 'derniers' 'et' 'les' 'plus' 'technologiquement' 'performants' 'dans' 'le' 'business' 'aujourdhui'
+----------
+Input (English): 'i' 'know' 'a' 'lot' 'of' 'things' 'that' 'go' 'on' 'but' 'sometimes' 'i' 'cant' 'talk' 'about' 'them' 'even' 'though' 'it' 'eats' 'me' 'up' 'inside'
+Predicted (French): 'even' 'of' 'and' 'even' 'its' 'eats'
+Ground Truth (French): 'jen' 'sais' 'long' 'sur' 'ce' 'qui' 'se' 'passe' 'mais' 'parfois' 'je' 'ne' 'peux' 'pas' 'en' 'parler' 'meme' 'si' 'cela' 'me' 'ronge' 'a' 'linterieur'
+----------
+Input (English): 'these' 'actors' 'always' 'seem' 'to' 'fail' 'to' 'meet' 'requirements' 'conditions' 'criteria' 'etc' 'etc' 'the' 'language' 'instantly' 'tells' 'you' 'who' 'is' 'setting' 'the' 'conditions' 'and' 'who' 'these' 'are' 'set' 'upon'
+Predicted (French): 'the' 'criteriaetc' 'who' 'is' 'set' 'these' 'actors' 'aways' 'seem'
+Ground Truth (French): 'ces' 'protagonistes' 'semblent' 'toujours' 'echouer' 'a' 'reunir' 'les' 'conditions' 'les' 'criteres' 'etc' 'le' 'langage' 'vous' 'dit' 'instantanement' 'qui' 'pose' 'les' 'conditions' 'et' 'sur' 'qui' 'elles' 'sont' 'imposees'
+----------
+Input (English): 'it' 'is' 'a' 'great' 'loss' 'that' 'the' 'bullog' 'is' 'now' 'closed' 'down' 'as' 'it' 'has' 'hosted' 'many' 'high' 'quality' 'blogs'
+Predicted (French): 'it' 'is' 'a' 'great' 'loss' 'that' 'bullog' 'is' 'closed' 'it' 'everythingloanse' 'alevent' 'it' 'is' 'a' 'discours'
+Ground Truth (French): 'la' 'fermeture' 'de' 'bullog' 'est' 'une' 'grande' 'perte' 'car' 'de' 'nombreux' 'blogs' 'de' 'grande' 'qualite' 'y' 'etait' 'heberges'
+----------
+Input (English): 'yesterday' 'was' 'a' 'bloody' 'full' 'moon' 'day' 'and' 'today' 'is' 'bloody' 'sept27'
+Predicted (French): 'yesterday' 'was' 'yestday' 'was' 'a' 'bloody'
+Ground Truth (French): 'hier' 'a' 'ete' 'une' 'journee' 'de' 'pleine' 'lune' 'et' 'de' 'sang' 'et' 'aujourdhui' 'nous' 'somme' 'le' '27' 'septembre' 'sanglant'
+----------
+Input (English): 'if' 'sarkozy' 'and' 'le' 'pen' 'make' 'it' 'to' 'the' 'second' 'round' 'france' 'would' 'benefit'
+Predicted (French): 'if' 'sarkozy' 'and' 'lepen' 'make' 'it'
+Ground Truth (French): 'jai' 'tout' 'prevu' 'si' 'sarkozy' 'et' 'le' 'pen' 'passent' 'au' 'second' 'tour' 'jestime' 'que' 'la' 'france' 'laura' 'merite'
+----------
+Input (English): 'many' 'criticized' 'the' 'reaction' 'of' 'the' 'authorities' 'for' 'example' 'copihues' 'rojos' 'es' 'posts'
+Predicted (French): 'many' 'criticized' 'manie' 'the' 'the' 'reaction' 'noncé' 'în' 'scris' 'IT' 'a' 'lot' 'emails' 'die' 'von' 'vielen' 'kritisierten' 'vielevielerundaine' 'viel' 'viel' 'vielviel'
+Ground Truth (French): 'beaucoup' 'de' 'citoyens' 'ont' 'critique' 'la' 'reaction' 'des' 'autorites' 'comme' 'par' 'exemple' 'dans' 'ce' 'billet' 'du' 'blog' 'copihues' 'rojos' 'es'
+----------
+Input (English): 'but' 'how' 'much' 'influence' 'on' 'traditional' 'media' 'in' 'ecuador' 'have' 'blogs' 'had' 'in' 'the' 'past' 'or' 'do' 'they' 'have' 'now'
+Predicted (French): 'but' 'how' 'much' 'influenceon' 'ecuador' 'have' 'wwwequadorcom' 'a' 'a' 'a' 'b' 'but' 'but' 'how' 'munds'
+Ground Truth (French): 'mais' 'quelle' 'a' 'ete' 'linfluence' 'reelle' 'des' 'blogs' 'sur' 'les' 'medias' 'traditionnels' 'en' 'equateur' 'ou' 'quelle' 'estelle' 'maintenant'
+----------
+Input (English): 'to' 'kill' 'them' 'all' 'without' 'mercy' 'would' 'be' 'the' 'appropriate' 'means' 'of' 'recourse' 'hey' '66' 'is' 'a' 'lucky' 'number'
+Predicted (French): 'to' 'kill' 'them'
+Ground Truth (French): 'he' '66' 'est' 'un' 'chiffre' 'propice' 'estce' 'que' 'cela' 'est' 'suppose' 'signifier' 'quelque' 'chose'
+----------
+Input (English): 'may' 'be' 'i' 'am' 'afro' 'indian' 'indoafrican' 'but' 'i' 'am' 'still' 'a' 'born' 'tanzanian'
+Predicted (French): 'may' 'afro' 'anddoafrican' 'i' 'am'
+Ground Truth (French): 'peut' 'etre' 'suisje' 'afroindienne' 'indoafricaine' 'mais' 'je' 'suis' 'toujours' 'une' 'tanzanienne' 'nee'
+----------
+Input (English): 'to' 'amend' 'the' 'situation' 'the' 'former' 'awami' 'league' 'government' 'had' 'enacted' 'the' 'vested' 'property' 'repeal' 'act' 'in' '2001'
+Predicted (French): 'to' 'amend'
+Ground Truth (French): 'pour' 'retablir' 'la' 'situation' 'lancien' 'gouvernement' 'de' 'la' 'ligue' 'awami' 'avait' 'vote' 'labolition' 'de' 'la' 'loi' 'de' 'la' 'propriete' 'investie' 'en' '2001'
+----------
+Input (English): 'mouvimat' 'goes' 'onto' 'call' 'sarkozy' 'the' 'standard' 'bearer' 'fr' 'of' 'the' 'monied' 'classes' 'one' 'step' 'away' 'from' 'supreme' 'power' 'and' 'says' 'that' 'jews' 'are' 'the' 'masters' 'of' 'global' 'finance'
+Predicted (French): 'the' 'standard' 'and' 'power' 'or' 'the' 'masters' 'or' 'of'
+Ground Truth (French): 'mouvimat' 'poursuit' 'en' 'ecrivant' 'quavec' 'sarkozy' 'le' 'monde' 'de' 'largent' 'a' 'enfin' 'son' 'etendard' 'bien' 'nomme' 'qui' 'est' 'a' 'un' 'pas' 'du' 'pouvoir' 'supreme'
+----------
+Input (English): 'now' 'go' 'back' 'to' 'your' 'cave'
+Predicted (French): 'now' 'go'
+Ground Truth (French): 'maintenant' 'retournez' 'dans' 'votre' 'caverne'
+----------
+Input (English): 'for' 'one' 'they' 'were' 'manufacturers' 'of' 'miniature' 'objects' 'to' 'see' 'at' 'alasitas'
+Predicted (French): 'for' 'one' 'they' 'see' 'at' 'alasitas'
+Ground Truth (French): 'loyola' 'larico' 'relate' 'une' 'histoire' 'qui' 'lui' 'a' 'ete' 'relatee' 'par' 'son' 'grandpereespagnol'
+----------
+Input (English): 'be' 'my' 'guest'
+Predicted (French): 'my' 'guest'
+Ground Truth (French): 'libre' 'a' 'toi'
+----------
+Input (English): 'one' 'might' 'ask' 'whether' 'costa' 'ricas' 'relationship' 'with' 'taiwan' 'was' 'healthy' 'or' 'whether' 'it' 'was' 'only' 'for' 'selfinterest'
+Predicted (French): 'one' 'costa' 'and' 'healthy' 'or' 'only' 'or' 'for' 'only'
+Ground Truth (French): 'on' 'peut' 'se' 'demander' 'si' 'le' 'rapport' 'entre' 'le' 'costa' 'rica' 'et' 'taiwan' 'etait' 'sain' 'ou' 'sil' 'etait' 'pleinement' 'un' 'mariage' 'dinteret'
+----------
+Input (English): 'the' 'dry' 'spell' 'is' 'not' 'only' 'affecting' 'water' 'supply' 'it' 'also' 'has' 'a' 'negative' 'impact' 'on' 'agriculture'
+Predicted (French): 'the' 'dry'
+Ground Truth (French): 'cette' 'secheresse' 'naffectue' 'pas' 'seulement' 'lapprovisionnement' 'en' 'eau' 'elle' 'a' 'aussi' 'un' 'impact' 'negatif' 'sur' 'lagriculture'
+----------
+Input (English): 'i' 'dont' 'know' 'if' 'im' 'more' 'sorry' 'for' 'the' 'mother' 'who' 'would' 'grieve' 'for' 'her' 'younger' 'daughter' 'in' 'a' 'foreign' 'country' 'or' 'the' 'scores' 'of' 'friends' 'who' 'have' 'been' 'scrapping' 'her' 'incessantly' 'for' 'news' 'of' 'her' 'whereabouts'
+Predicted (French): 'i' 'dont' 'knowsorrymothers' 'mother' 'and' 'friends' 'ascrapping' 'for' 'scores' 'of' 'offriendcomscripsindexphp' 'i' 'don' 'hes' 'eh' 'daughter'
+Ground Truth (French): 'elle' 'qui' 'aimait' 'les' 'choses' 'bizarres' 'je' 'ne' 'sais' 'pas' 'pour' 'qui' 'je' 'suis' 'le' 'plus' 'triste' 'pour' 'sa' 'mere' 'qui' 'pleure' 'sa' 'plus' 'jeune' 'fille' 'dans' 'un' 'pays' 'etranger' 'ou' 'pour' 'ses' 'dizaines' 'damis' 'qui' 'lont' 'assaillie' 'de' 'messages' 'pour' 'savoir' 'ou' 'elle' 'etait' 'et' 'comment' 'elle' 'allait'
+----------
+Input (English): 'thats' 'the' 'iranian' 'way' 'of' 'living'
+Predicted (French): 'thats' 'the' 'that'
+Ground Truth (French): 'voila' 'lart' 'de' 'vivre' 'iranien'
+----------
+Input (English): 'some' 'bloggers' 'discussed' 'the' 'hollywoodesque' 'display' 'of' 'security' 'agents' 'how' 'protests' 'interrupted' 'their' 'activities' 'and' 'how' 'the' 'non' 'grata' 'visit' 'to' 'a' 'sacred' 'place' 'was' 'fixed' 'with' 'a' 'limpia' 'purification' 'by' 'indigenous' 'groups'
+Predicted (French): 'some' 'bloggers' 'discussed' 'thehollywoodesque' 'display'
+Ground Truth (French): 'un' 'certain' 'blogueur' 'a' 'examine' 'laffichage' 'hollywoodien' 'des' 'agents' 'de' 'securite' 'comment' 'les' 'protestations' 'ont' 'interrompu' 'leurs' 'activites' 'et' 'comment' 'la' 'visite' 'non' 'grata' 'dun' 'endroit' 'sacre' 'a' 'ete' 'suivie' 'dune' 'limpia' 'purification' 'par' 'les' 'groupes' 'indigenes'
+----------
+Input (English): 'you' 'need' 'to' 'know' 'what' 'you' 'are' 'doing'
+Predicted (French): 'you' 'need' 'to' 'you' 'necessary' 'no' 'to' 'know' 'what' 'you' 'ni' 'nö' 'zufindenadäquat' 'quieseeng' 'loyalty' 'doing'
+Ground Truth (French): 'vous' 'devez' 'savoir' 'ce' 'que' 'vous' 'faites'
+----------
+Input (English): 'the' 'politicization' 'of' 'the' 'media' 'is' 'not' 'something' 'that' 'can' 'be' 'overlooked'
+Predicted (French): 'the' 'politicization' 'of' 'politization' 'of' 'the' 'politica' 'în' 'scris' 'IT' 'theme' 'this'
+Ground Truth (French): 'la' 'politisation' 'des' 'medias' 'nest' 'pas' 'a' 'sousestimer'
+----------
+Input (English): 'me' 'what' 'was' 'what'
+Predicted (French): 'me' 'what'
+Ground Truth (French): 'maman' 'questce' 'qui' 'se' 'passe'
+----------
+Input (English): 'yet' 'in' 'essence' 'the' 'central' 'causes' 'of' 'conflict' 'in' 'the' 'subregion' 'have' 'always' 'been' 'traceable' 'to' 'bad' 'governance' 'and' 'failures' 'of' 'leadership'
+Predicted (French): 'yet' 'in' 'and' 'essence' 'the' 'central' 'causes' 'ofconflict' 'în' 'scris' 'IT' 'a' 'y'
+Ground Truth (French): 'neanmoins' 'les' 'causes' 'centrales' 'du' 'conflit' 'dans' 'cette' 'sousregion' 'sont' 'toujours' 'a' 'imputer' 'aux' 'carences' 'de' 'la' 'gestion' 'politique' 'et' 'a' 'la' 'faillite' 'des' 'gouvernants' 'en' 'place'
+----------
+Input (English): 'or' 'should' 'the' 'government' 'just' 'turn' 'a' 'blind' 'eye' 'to' 'sand' 'mining' 'from' 'beaches' 'and' 'blame' 'all' 'beach' 'erosion' 'on' 'global' 'warming' 'and' 'sea' 'level' 'rise'
+Predicted (French): 'or' 'should' 'the' 'governmentjust' 'or' 'or' 'should' 'government' 'just' 'neutralobjection' 'a' 'bombarding' 'to' 'or' 'to' 'the' 'level'
+Ground Truth (French): 'ou' 'doitil' 'juste' 'fermer' 'les' 'yeux' 'sur' 'lexploitation' 'du' 'sable' 'de' 'plage' 'et' 'imputer' 'au' 'rechauffement' 'planetaire' 'et' 'a' 'lelevation' 'du' 'niveau' 'de' 'la' 'mer' 'lerosion' 'de' 'toutes' 'les' 'plages'
+----------
+Input (English): 'around' '150200' 'people' 'attended' 'the' 'workshop' 'and' 'i' 'was' 'lucky' 'to' 'be' 'one' 'of' 'the' 'speakers'
+Predicted (French): 'around' '150200' 'people' 'attended' 'the'
+Ground Truth (French): 'entre' '150' 'et' '200' 'personnes' 'ont' 'assiste' 'a' 'latelier' 'et' 'jetais' 'chanceux' 'detre' 'lun' 'des' 'orateurs'
+----------
+Input (English): 'i' 'just' 'do' 'not' 'think' 'that' 'electing' 'a' 'priest' 'is' 'a' 'sign' 'of' 'maturity' 'in' 'our' 'political' 'processes' 'and' 'systems'
+Predicted (French): 'i' 'just' 'just' 'do' 'not' 'non' 'în' 'scris' 'IT' 'i'
+Ground Truth (French): 'je' 'pense' 'juste' 'quelire' 'un' 'pretre' 'nest' 'pas' 'un' 'signe' 'de' 'maturite' 'de' 'nos' 'processus' 'et' 'systemes' 'politiques'
+----------
+Input (English): 'my' 'aunts' 'death' 'was' 'that' 'small' 'trigger' 'my' 'mind' 'was' 'waiting' 'for' 'waiting' 'for' 'to' 'break'
+Predicted (French): 'my' 'aunts' 'that' 'to' 'was' 'my' 'aunet' 'short' 'my' 'aut' 'death' 'was' 'â' 'small' 'a' 'neutral' 'mind'
+Ground Truth (French): 'toute' 'ma' 'tristesse' 'ma' 'colere' 'mes' 'frustrations' 'jai' 'verrouille' 'la' 'porte' 'je' 'me' 'suis' 'cachee' 'dans' 'un' 'coin' 'et' 'jai' 'pleure'
+----------
+Input (English): 'rarely' 'does' 'a' 'week' 'pass' 'by' 'without' 'news' 'about' 'the' 'arrest' 'of' 'one' 'or' 'more' 'egyptian' 'bloggers'
+Predicted (French): 'rarely' 'does' 'a' 'rarement' 'daeses' 'a' 'week' 'pass' 'în' 'scris' 'ensample' 'a' 'pass' 'bywithout' 'news' 'aboutaboutthe' 'arrest' 'about' 'one' 'odera'
+Ground Truth (French): 'une' 'semaine' 'passe' 'rarement' 'sans' 'que' 'la' 'nouvelle' 'de' 'l' 'arrestation' 'dun' 'ou' 'plusieurs' 'blogueurs' 'egyptiens' 'ne' 'nous' 'parvienne'
+----------

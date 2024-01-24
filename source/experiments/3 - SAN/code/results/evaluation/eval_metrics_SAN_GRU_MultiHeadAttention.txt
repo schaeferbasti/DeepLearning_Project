@@ -1,0 +1,1 @@
+['SAN_GRU_MultiHeadAttention: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.762683779001236', 'BLEU: 0.1438131958246231', 'ROUGE: 0.26313428208231926', 'TER: 24.387596440315246', 'BERT: 0.9795817732810974']

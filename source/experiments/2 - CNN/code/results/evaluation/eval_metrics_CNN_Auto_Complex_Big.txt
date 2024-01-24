@@ -1,0 +1,1 @@
+['CNN_Auto_Complex_Big: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 0.2873278793357313', 'BLEU: 0.29808213315717874', 'ROUGE: 0.7116911699399352', 'TER: 23.779966938495637', 'BERT: 0.9907605891586632']

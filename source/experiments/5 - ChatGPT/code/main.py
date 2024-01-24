@@ -92,7 +92,7 @@ if __name__ == '__main__':
     # --- 2. We define the global variable ---
 
     BATCH_SIZE = 12
-    EPOCHS = 500
+    EPOCHS = 100
     VALIDATION_SPLIT = 0.2
     identifier = 'chatgpt_mt'
 

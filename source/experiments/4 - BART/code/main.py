@@ -90,7 +90,7 @@ if __name__ == '__main__':
     # --- 2. We define the global variable ---
 
     BATCH_SIZE = 32
-    EPOCHS = 500  #It took in total 392 to fine-tune it!
+    EPOCHS = 100  
     VALIDATION_SPLIT = 0.2
     identifier = 'marian_transformer_mt'
 

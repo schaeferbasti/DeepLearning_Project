@@ -1,0 +1,1 @@
+['t5_base_transformer_mt: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 1.2577836948633194', 'BLEU: 0.13094377482309938', 'ROUGE: 0.06789080763235689', 'TER: 20.34628031253815', 'BERT: 0.9821836352348328']

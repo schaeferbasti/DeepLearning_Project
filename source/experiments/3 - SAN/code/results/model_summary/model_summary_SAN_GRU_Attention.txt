@@ -1,0 +1,50 @@
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 121)]                0         []                            
+                                                                                                  
+ input_2 (InputLayer)        [(None, None)]               0         []                            
+                                                                                                  
+ embedding (Embedding)       (None, 121, 64)              1064320   ['input_1[0][0]']             
+                                                                                                  
+ embedding_1 (Embedding)     (None, None, 64)             1332480   ['input_2[0][0]']             
+                                                                                                  
+ gru (GRU)                   (None, 121, 32)              9408      ['embedding[0][0]']           
+                                                                                                  
+ gru_3 (GRU)                 (None, None, 32)             9408      ['embedding_1[0][0]']         
+                                                                                                  
+ dropout (Dropout)           (None, 121, 32)              0         ['gru[0][0]']                 
+                                                                                                  
+ dropout_2 (Dropout)         (None, None, 32)             0         ['gru_3[0][0]']               
+                                                                                                  
+ gru_1 (GRU)                 (None, 121, 32)              6336      ['dropout[0][0]']             
+                                                                                                  
+ gru_4 (GRU)                 (None, None, 32)             6336      ['dropout_2[0][0]']           
+                                                                                                  
+ dropout_1 (Dropout)         (None, 121, 32)              0         ['gru_1[0][0]']               
+                                                                                                  
+ dropout_3 (Dropout)         (None, None, 32)             0         ['gru_4[0][0]']               
+                                                                                                  
+ gru_2 (GRU)                 (None, 121, 32)              6336      ['dropout_1[0][0]']           
+                                                                                                  
+ gru_5 (GRU)                 (None, None, 32)             6336      ['dropout_3[0][0]']           
+                                                                                                  
+ attention (Attention)       (None, 121, 32)              1         ['gru_2[0][0]',               
+                                                                     'gru_2[0][0]']               
+                                                                                                  
+ attention_1 (Attention)     (None, None, 32)             1         ['gru_5[0][0]',               
+                                                                     'gru_5[0][0]']               
+                                                                                                  
+ concatenate (Concatenate)   (None, 121, 64)              0         ['attention[0][0]',           
+                                                                     'attention_1[0][0]']         
+                                                                                                  
+ dense (Dense)               (None, 121, 100)             6500      ['concatenate[0][0]']         
+                                                                                                  
+ dense_1 (Dense)             (None, 121, 20820)           2102820   ['dense[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 4550282 (17.36 MB)
+Trainable params: 4550282 (17.36 MB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________
