@@ -1,0 +1,1 @@
+['RNN_CNN_Attention: WER: 1(low), 0(high); BLEU: 0(low), 1(high); TER: 100%(low), 0%(high), BERT: 0(low), 1(high)\n', 'WER: 1.0178582489490509', 'BLEU: 0.1663975084014237', 'ROUGE: 0.09956847116351128', 'TER: 21.482740818738936', 'BERT: None']
