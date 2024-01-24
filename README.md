@@ -1,37 +1,84 @@
-# Deep Learning Project
+# Deep Learning II Project - 2024
 
-## Exercise:
-The objective is to extensively study the available deep learning solutions for the text to text translation problem using the french to English text dataset from the following kaggle competition:
+## Overview
 
+Welcome to the Deep Learning II Project repository. This project is part of the Master's program in Machine Learning and Data Mining at Jean Monnet University. Our team is focused on extensively study the available deep learning solutions for the text to text translation problem using the French to English text dataset from a kaggle competition.
+
+## Dataset
+
+The dataset can be obtained from the following link: https://huggingface.co/datasets/Nicolas-BZRD/Parallel_Global_Voices_English_French. Also, using the following code:
+
+```
 from datasets import load_dataset
+
 translation_dataset = load_dataset("Nicolas-BZRD/Parallel_Global_Voices_English_French", split="train").to_pandas()
 translation_dataset.head()
+```
 
-## Tasks:
-1. Exploratory data analysis of the dataset -> Look at the amount of words, most frequent ones, distribution if possible. -> A notebook explaining all insights found. (Bastian)
-2. Explore pre-processing of the data, word embedding, and data augmentation -> Bag of words, Word2Vec, TF-IDF, etc. -> A notebook explaining all the procedures done. (Gloria)
-3. Explore architectures and experiments to solve the problem (For each procedure detail architecture, metrics, tuning, results, challenges faced and extra-elements implemented for example: attention-based transformation). (Felipe)
--> For each experiment try to create a notebook explaining everything.
+## Project Description
 
-## Some ideas for experiments:
-- data processing.
-- data augmentation.
-- supervised pre-training with auto-encoders.
-- convolutional models (yes, there exists convolutions for text models).
-- attention-based (transformer) models (As the one we saw in the TP's with BERT).
-- classification methodologies.
-- generation techniques.
+The primary challenge addressed in this project is exploring different architectures in order to carry out machine translation from English to French. For this reason, the project can be decomposed in three main steps:
 
-## There are three types of models in the literature for text translation:
-- CNNs -> Bastian
-- RNNs -> Felipe
-- SANs -> Gloria
+1. **Data Pre-processing:** Find the best way to pre-process the data in order to feed them to the network architectures. 
 
-## For each experiment, we need to document the following:
-- Context
-- Experimental Settings
-- Metrics
-- Architecture
-- Problems
-- Results
-- References
+2. **Model Definition:** Design and implement different model architectures using RNNs, CNNs and SANs principles.
+
+3. **Model Comparison:** Compare the models with approved machine translation metrics such as: WER, BLEU, ROUGE, TER and BERT-Score.
+
+## Repository Contents
+
+- `source/`: Contains all source code (both code and notebooks) for the project.
+  - Analysis made throughout the project such as DEA and correlations.
+  - Experiments done with different models architectures.
+  - Preprocessing utilities.
+
+### Prerequisites
+
+- See `requirements.txt` for a list of required Python packages.
+
+## Usage
+
+In order to test a simple model in our repository you can follow the following steps. This first example uses a condensed corpus for testing purposes.
+
+1. We install the dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+2. We move the `source/preprocessing/preprocessed_data.csv` file to our desired folder, in this example we'll use the first experiment:
+
+```
+mv ./source/preprocessing/preprocessed_data.csv ./source/experiments/1 - RNN_LSTM_GRU/code/
+```
+
+3. We execute the main script.:
+```
+python ./source/experiments/1 - RNN_LSTM_GRU/code/main.py
+```
+
+This second example, generates the whole corpus and executes the first experiment.
+
+1. We install the dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+2. We generate and move the data file to the desired folder, in this example we'll use the first experiment:
+
+```
+python ./source/preprocessing/code/pre_processing.py
+
+mv ./source/preprocessing/code/preprocessed_data.csv ./source/experiments/1 - RNN_LSTM_GRU/code/
+```
+
+3. We execute the main script.:
+```
+python ./source/experiments/1 - RNN_LSTM_GRU/code/main.py
+```
+
+## Authors and Acknowledgment
+
+- Made by Felipe Jaramillo Cortes, Bastian Schäfer and Gloria Isedu.
+- Supervised by Amaury Habrard and Sri Kalidindi.
